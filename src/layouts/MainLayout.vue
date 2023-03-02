@@ -41,8 +41,8 @@
     </q-drawer>
 
     <q-page-container class="row items-center justify-evenly bg-grey-1">
-      <q-page class="q-pa-md col-md-8 col-sm-12 col-xs-12 bg-white"
-        :class="[leftDrawerOpen ? 'col-xl-7 col-lg-7' : 'col-xl-6 col-lg-6']">
+      <q-page class="q-pa-md col-sm-12 col-xs-12 bg-white"
+        :class="[ dynamic_layout ]">
         <router-view />
       </q-page>
     </q-page-container>
@@ -113,6 +113,16 @@ export default defineComponent({
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  },
+  computed: {
+    dynamic_layout() {
+      const width = this.$q.screen.width
+      if(this.leftDrawerOpen) {
+        return 'col-xl-9 col-lg-9 col-md-9'
+      } else {
+        return 'col-xl-7 col-lg-7 col-md-7'
       }
     }
   }

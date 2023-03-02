@@ -43,17 +43,32 @@
 ></vue-easy-lightbox>
 
 <!-- max-file-size="5000000" capture -->
-<input v-show="false" type="file" name="picture" accept="image/*" ref="file" id="file" @change="onFileChange">
+<input v-show="false" multiple type="file" name="picture" accept="image/*" ref="file" id="file" @change="onFileChange">
 
-<q-item>
+<div class="row q-col-gutter-y-md">
+  <div class="col-12" v-for="(item, index) in foto">
+  <q-img
+    :src="item"
+    style="height: 140px; width: 100%"
+  >
+    <div class="absolute-full bg-transparent">
+      <q-btn @click="onRemove(index)" class="absolute-top-right" flat icon="close" dense />
+      <div class="full-width full-height bg-transparent" @click="onLightBox(index)"></div>
+    </div>
+    <template v-slot:error>
+      <div class="absolute-full flex flex-center bg-negative text-white">
+        <q-btn class="absolute-top-right" flat icon="close" dense />
+        Cannot load image
+      </div>
+    </template>
+  </q-img>
+</div>
+</div>
+
+<q-item v-if="foto.length < 3">
 	<q-item-section class="text-center">
 		<q-item-label>
-			<q-avatar @click="showSingle" :size="is_mobile_size ? '150px' : '200px'">
-				<img ref="foto" style="object-fit: cover;" :src="img_checker(foto)" @error="handleError" loading="lazy" />
-			</q-avatar>
-		</q-item-label>
-		<q-item-label>
-			<q-btn @click="onDialogOption" class="q-mt-md" label="Ganti Foto" rounded unelevated color="primary" icon="photo_camera" />
+			<q-btn @click="onDialogOption" class="q-mt-md" label="Tambah Foto" rounded unelevated color="primary" icon="photo_camera" />
 		</q-item-label>
 	</q-item-section>
 </q-item>
@@ -71,16 +86,25 @@ import { mapFields } from 'vuex-map-fields'
 		// },
     data() {
       return {
-        foto:"https://secure.gravatar.com/avatar?d=wavatar",
+        foto:[],
         imgs: '',
         visible: false,
         index: 0, // default: 0,
 
         dialog_option: false,
         option: '',
+        max: 3,
       }
     },
     methods: {
+      onLightBox(val) {
+        this.index = val;
+        this.visible = true;
+      },
+      onRemove(val) {
+        this.foto.splice(val,1)
+        this.max++
+      },
       showSingle() {
         // this.imgs = this.foto // 'https://cdn.quasar.dev/img/cat.jpg'
         this.visible = true
@@ -134,28 +158,41 @@ import { mapFields } from 'vuex-map-fields'
 
 			},
 			onFileChange(event){
-		    let file = event.target.files[0];
+		    let file = event.target.files;
 
-	 	    // Preview jika mau, jadi base64
-				let reader = new FileReader();
+        // if(file.length > 0) {
+        //   this.foto = []
+        // }
 
-				if(file['size'] < 2111775) {
+        for (let i = 0; i < file.length; i++) {
+          if(this.max <= 0) return
+          this.max--
 
-				    reader.onloadend = (file) => {
-					    this.$refs.foto.src = reader.result
-              this.foto = reader.result
-              console.log('onFileChange', reader.result)
+          const element = file[i];
 
-					    // this.imgs = reader.result
-				    }
-				    reader.readAsDataURL(file);
+          // Preview jika mau, jadi base64
+          let reader = new FileReader();
 
-				}else{
-				    alert('File size can not be bigger than 2 MB')
-				    return
-				}
+          if(element['size'] < 2111775) {
 
-		    this.onSend(file)
+              reader.onloadend = (file) => {
+                // console.log('onFileChange', reader.result)
+                // this.$refs.foto.src = reader.result
+                // this.foto = reader.result
+                this.foto.push(reader.result)
+                // this.imgs = reader.result
+              }
+              reader.readAsDataURL(element);
+
+          }else{
+              alert('File size can not be bigger than 2 MB')
+              return
+          }
+
+          console.log('file', this.foto.length)
+        };
+
+		    // this.onSend(file)
 			},
 			onDialogOption() {
 				if(this.is_cordova) {

@@ -1,25 +1,25 @@
 <template>
   <q-no-ssr>
     <q-form @submit="onSubmit" class="row flex flex-center q-py-xl">
-      <div class="row col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md q-col-gutter-y-lg text-center justify-center">
+      <div
+        class="row col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md q-col-gutter-y-lg text-center justify-center">
         <div class="col-12 text-h4 q-mb-md text-bold">
-          My Biodata
+          My Karir
         </div>
 
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
-          bg-color="white" outlined label="Tempat Lahir" lazy-rules :rules="[(val) => !!val || '']"
-          error-message="wajib dilengkapi">
+        <!-- <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" bg-color="white"
+          outlined label="Tempat Lahir" lazy-rules :rules="[(val) => !!val || '']" error-message="wajib dilengkapi">
           <template v-slot:prepend>
             <q-icon name="account_circle" />
           </template>
-        </q-input>
+        </q-input> -->
 
-        <q-input @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" label="Tanggal Lahir" readonly
-          bg-color="white" outlined lazy-rules :rules="[(val) => !!val || '']"
-          error-message="wajib dilengkapi">
+        <q-input @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable
+          text-color="grey" label="Mulai Bermusik" readonly bg-color="white" outlined lazy-rules
+          :rules="[(val) => !!val || '']" error-message="wajib dilengkapi">
           <template v-slot:prepend>
             <!-- <q-icon name="date_range" /> -->
-            <q-icon name="date_range" >
+            <q-icon name="date_range">
               <q-popup-proxy ref="date" @before-show="updateProxy" cover transition-show="scale" transition-hide="scale">
                 <q-date v-model="proxyDate">
                   <div class="row items-center justify-end q-gutter-sm">
@@ -32,19 +32,46 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 100px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey"
-          bg-color="white" outlined label="Alamat" >
+        <q-field dense borderless class="q-pa-none row col-12">
+          <div class="row q-pa-sm">
+            <q-item-label class="col-12 q-pa-sm text-dark q-mb-sm" header>Genre Musik</q-item-label>
+            <template v-for="(item, i) in options">
+              <q-checkbox class="col-6 text-dark" :val="item.value" :label="item.value" v-model="group" />
+            </template>
+          </div>
+        </q-field>
+
+        <q-field dense borderless class="q-pa-none row col-12">
+          <div class="row q-pa-sm">
+            <q-item-label class="col-12 q-pa-sm text-dark q-mb-sm" header>Skill</q-item-label>
+            <template v-for="(item, i) in options">
+              <q-checkbox class="col-6 text-dark" :val="item.value" :label="item.value" v-model="group" />
+            </template>
+          </div>
+        </q-field>
+
+
+        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+          type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Kolaborasi" placeholder="Sebutkan nama musisi" hint="pisahkan dengan koma">
           <template v-slot:prepend>
-            <q-icon name="place" />
+            <q-icon name="supervisor_account" />
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 150px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey" label="Bio"
-          bg-color="white" outlined placeholder="Write about you here..." >
+        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+          type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Featuring" placeholder="Sebutkan nama musisi" hint="pisahkan dengan koma">
           <template v-slot:prepend>
-            <q-icon name="contact_page" />
+            <q-icon name="supervisor_account" />
           </template>
         </q-input>
+
+        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+          type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Ajang Festival" placeholder="Sebutkan nama acara" hint="pisahkan dengan koma">
+          <template v-slot:prepend>
+            <q-icon name="supervisor_account" />
+          </template>
+        </q-input>
+
 
 
         <div class="col-12">
@@ -76,7 +103,7 @@ export default {
   data() {
     return {
       date: ref('2019/03/01'),
-    proxyDate: ref('2019/03/01'),
+      proxyDate: ref('2019/03/01'),
       uuid: null,
       name: null,
       email: null,
@@ -96,17 +123,35 @@ export default {
           icon: 'male'
         },
       ],
+      group: ([]),
+      options: [
+        { label: 'Battery too low', value: 'bat' },
+        { label: 'Friend request', value: 'friend', color: 'green' },
+        { label: 'Picture uploaded', value: 'upload', color: 'red' },
+        { label: 'Battery too low', value: 'bat' },
+        { label: 'Friend request', value: 'friend', color: 'green' },
+        { label: 'Picture uploaded', value: 'upload', color: 'red' },
+        { label: 'Battery too low', value: 'bat' },
+        { label: 'Friend request', value: 'friend', color: 'green' },
+        { label: 'Picture uploaded', value: 'upload', color: 'red' },
+        { label: 'Battery too low', value: 'bat' },
+        { label: 'Friend request', value: 'friend', color: 'green' },
+        { label: 'Picture uploaded', value: 'upload', color: 'red' },
+        { label: 'Battery too low', value: 'bat' },
+        { label: 'Friend request', value: 'friend', color: 'green' },
+        { label: 'Picture uploaded', value: 'upload', color: 'red' },
+      ]
     }
   },
   methods: {
-    updateProxy () {
+    updateProxy() {
       this.proxyDate = this.date
-      },
+    },
 
-      save () {
-        this.date = this.proxyDate
-        this.name = this.proxyDate
-      },
+    save() {
+      this.date = this.proxyDate
+      this.name = this.proxyDate
+    },
 
     allValidate(value = this.$refs) {
       let keys = []

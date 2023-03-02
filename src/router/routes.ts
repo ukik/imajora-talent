@@ -80,10 +80,18 @@ const routes: RouteRecordRaw[] = [
           { path: 'biodata', name: 'account_biodata', component: () => import('pages/AccountBiodataPage.vue') },
           { path: 'avatar', name: 'account_avatar', component: () => import('pages/AccountAvatarPage.vue') },
           { path: 'social', name: 'account_social', component: () => import('pages/AccountSocialPage.vue') },
+          { path: 'banner', name: 'account_banner', component: () => import('pages/AccountBannerPage.vue') },
+          { path: 'carier', name: 'account_carier', component: () => import('pages/AccountCarierPage.vue') },
+          { path: 'playlist', name: 'account_playlist', component: () => import('pages/AccountCarierPage.vue') },
+          { path: 'agenda', name: 'account_agenda', component: () => import('pages/AccountCarierPage.vue') },
+          { path: 'ciptaan', name: 'account_ciptaan', component: () => import('pages/AccountCarierPage.vue') },
+          { path: 'cover', name: 'account_cover', component: () => import('pages/AccountCarierPage.vue') },
+          { path: 'rates', name: 'account_rates', component: () => import('pages/AccountCarierPage.vue') },
 
 
         ]
       },
+
     ],
 
 

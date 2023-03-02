@@ -3,3 +3,7 @@
 .button-default {
   height: 50px !important;
 }
+
+.q-field--outlined.q-field--readonly .q-field__control:before {
+  border-style: solid;
+}

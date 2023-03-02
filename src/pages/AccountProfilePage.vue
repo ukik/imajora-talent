@@ -30,7 +30,7 @@
           bg-color="white" outlined label="Username" lazy-rules :rules="[(val) => !!val || '']"
           error-message="wajib dilengkapi">
           <template v-slot:prepend>
-            <q-icon name="account_circle" />
+            <q-icon name="admin_panel_settings" />
           </template>
         </q-input>
 
@@ -54,15 +54,7 @@
           text-color="grey" error-message="wajib dilengkapi" bg-color="white" outlined label="phone" lazy-rules
           :rules="[val => !!val || 'Password is not matched']">
           <template v-slot:prepend>
-            <q-icon name="lock" />
-          </template>
-        </q-input>
-
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
-          bg-color="white" outlined label="Website" lazy-rules :rules="[(val) => !!val || '']"
-          error-message="wajib dilengkapi">
-          <template v-slot:prepend>
-            <q-icon name="account_circle" />
+            <q-icon name="phone" />
           </template>
         </q-input>
 

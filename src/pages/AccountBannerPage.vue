@@ -3,49 +3,12 @@
     <q-form @submit="onSubmit" class="row flex flex-center q-py-xl">
       <div class="row col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md q-col-gutter-y-lg text-center justify-center">
         <div class="col-12 text-h4 q-mb-md text-bold">
-          My Biodata
+          My Banner
         </div>
 
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
-          bg-color="white" outlined label="Tempat Lahir" lazy-rules :rules="[(val) => !!val || '']"
-          error-message="wajib dilengkapi">
-          <template v-slot:prepend>
-            <q-icon name="account_circle" />
-          </template>
-        </q-input>
-
-        <q-input @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" label="Tanggal Lahir" readonly
-          bg-color="white" outlined lazy-rules :rules="[(val) => !!val || '']"
-          error-message="wajib dilengkapi">
-          <template v-slot:prepend>
-            <!-- <q-icon name="date_range" /> -->
-            <q-icon name="date_range" >
-              <q-popup-proxy ref="date" @before-show="updateProxy" cover transition-show="scale" transition-hide="scale">
-                <q-date v-model="proxyDate">
-                  <div class="row items-center justify-end q-gutter-sm">
-                    <q-btn label="Cancel" color="primary" flat v-close-popup />
-                    <q-btn label="OK" color="primary" flat @click="save" v-close-popup />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 100px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey"
-          bg-color="white" outlined label="Alamat" >
-          <template v-slot:prepend>
-            <q-icon name="place" />
-          </template>
-        </q-input>
-
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 150px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey" label="Bio"
-          bg-color="white" outlined placeholder="Write about you here..." >
-          <template v-slot:prepend>
-            <q-icon name="contact_page" />
-          </template>
-        </q-input>
-
+        <div class="col-12">
+          <Form_Banner />
+        </div>
 
         <div class="col-12">
           <q-btn class="button-default full-width full-height text-subtitle2" type="submit" icon-right="check_circle"
@@ -59,8 +22,7 @@
 
 <script>
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
-import { ref } from 'vue'
+import Form_Banner from './profile/Form_Banner.vue'
 export default {
   // computed: {
   //   ...mapFields({
@@ -71,12 +33,10 @@ export default {
   //   }),
   // },
   components: {
-    Form_Foto
+    Form_Banner
   },
   data() {
     return {
-      date: ref('2019/03/01'),
-    proxyDate: ref('2019/03/01'),
       uuid: null,
       name: null,
       email: null,
@@ -99,15 +59,6 @@ export default {
     }
   },
   methods: {
-    updateProxy () {
-      this.proxyDate = this.date
-      },
-
-      save () {
-        this.date = this.proxyDate
-        this.name = this.proxyDate
-      },
-
     allValidate(value = this.$refs) {
       let keys = []
       setTimeout(() => {
