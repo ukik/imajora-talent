@@ -5,7 +5,7 @@
     <q-tab @click="init = true" name="2" icon="fa-regular fa-calendar">&nbsp;&nbsp;Agenda</q-tab>
     <q-tab @click="init = true" name="3" icon="fa-solid fa-location">&nbsp;&nbsp;Lokasi</q-tab>
   </q-tabs>
-  <q-tab-panels class="col-12" v-model="tab" animated>
+  <q-tab-panels class="col-12 q-mt-sm" v-model="tab" animated>
     <q-tab-panel name="1" class="q-pa-none" style="height: calc(100vh - 150px);">
       <TabContent :init="init"/>
     </q-tab-panel>
