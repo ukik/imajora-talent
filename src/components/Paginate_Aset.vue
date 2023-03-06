@@ -3,7 +3,7 @@
 <div v-if="last_page > 1" class="q-pt-lg q-mb-md text-center flex flex-center bg-white">
 
     <q-pagination v-if="!is_mobile_size" round size="16px" outline
-		:model-value="current_page" color="blue-4"
+		:model-value="current_page" color="blue-4" flat
 		:max="last_page" unelevated
 		:max-pages="3"
 		@update:model-value="onUpdate"
@@ -14,7 +14,7 @@
 		active-text-color="white"
     />
 
-    <q-pagination v-else round outline
+    <q-pagination v-else round outline flat
 		:model-value="current_page" color="blue-4"
 		:max="last_page" unelevated
 		:max-pages="3"

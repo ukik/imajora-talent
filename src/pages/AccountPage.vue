@@ -16,7 +16,7 @@
         <q-item-section>Playlist</q-item-section>
       </q-item>
 
-      <q-item dense clickable v-ripple :active="route_name === 'account_ciptaan'" :to="{ name:'account_ciptaan' }" active-class="my-menu-link">
+      <q-item dense clickable v-ripple :active="route_name === 'account_original'" :to="{ name:'account_original' }" active-class="my-menu-link">
         <q-item-section>Original</q-item-section>
       </q-item>
 
@@ -24,7 +24,7 @@
         <q-item-section>Cover</q-item-section>
       </q-item>
 
-      <q-item dense clickable v-ripple :active="route_name === 'account_cover'" :to="{ name:'account_cover' }" active-class="my-menu-link">
+      <q-item dense clickable v-ripple :active="route_name === 'account_perform'" :to="{ name:'account_perform' }" active-class="my-menu-link">
         <q-item-section>Perform</q-item-section>
       </q-item>
 
@@ -34,11 +34,11 @@
         <q-item-section>Rates</q-item-section>
       </q-item>
 
-      <q-item dense clickable v-ripple :active="route_name === 'account_carier'" :to="{ name:'account_carier' }" active-class="my-menu-link">
+      <q-item dense clickable v-ripple :active="route_name === 'account_bank'" :to="{ name:'account_bank' }" active-class="my-menu-link">
         <q-item-section>Bank</q-item-section>
       </q-item>
 
-      <q-item dense clickable v-ripple :active="route_name === 'account_carier'" :to="{ name:'account_carier' }" active-class="my-menu-link">
+      <q-item dense clickable v-ripple :active="route_name === 'account_wallet'" :to="{ name:'account_wallet' }" active-class="my-menu-link">
         <q-item-section>E-Wallet</q-item-section>
       </q-item>
 
@@ -48,8 +48,8 @@
         <q-item-section>Avatar</q-item-section>
       </q-item>
 
-      <q-item dense clickable v-ripple :active="route_name === 'account_avatar'" :to="{ name:'account_avatar' }" active-class="my-menu-link">
-        <q-item-section>Video</q-item-section>
+      <q-item dense clickable v-ripple :active="route_name === 'account_preview'" :to="{ name:'account_preview' }" active-class="my-menu-link">
+        <q-item-section>Preview</q-item-section>
       </q-item>
 
       <q-item dense clickable v-ripple :active="route_name === 'account_banner'" :to="{ name:'account_banner' }" active-class="my-menu-link">
@@ -74,7 +74,7 @@
 
     </q-list>
     <q-list separator bordered class="col">
-      <router-view />
+      <router-view id="children_account" />
     </q-list>
   </div>
 </template>

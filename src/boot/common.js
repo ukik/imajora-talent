@@ -17,6 +17,19 @@ import { boot } from "quasar/wrappers";
 import { mapGetters } from "vuex";
 
 export default boot(async ({ app, ssrContext, router, store }) => {
+
+
+  app.config.globalProperties.$is_mobile_size = () => Screen.width <= 425;
+  app.config.globalProperties.$is_higher_mobile_size = () => Screen.width > 425;
+  app.config.globalProperties.$is_higher_ipad_size = () => Screen.width > 768;
+  app.config.globalProperties.$is_ipad_size = () => Screen.width <= 768 && Screen.width >= 425;
+  app.config.globalProperties.$is_lower_ipad_size = () => Screen.width <= 768;
+  app.config.globalProperties.$is_lower_laptop_size = () => Screen.width <= 1024;
+  app.config.globalProperties.$is_higher_ipad_size_route = () => Screen.width > 768 ? "" : "";
+  app.config.globalProperties.$is_mobile_size_route = () => Screen.width <= 425 ? "" : "";
+  app.config.globalProperties.$is_higher_desktop_size = () => Screen.width > 1440;
+  app.config.globalProperties.$is_cordova = () => { if (process.env.CLIENT) return Platform.is.cordova }
+
   app.mixin({
     data() {
       return {

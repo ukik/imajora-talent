@@ -6,7 +6,7 @@
           My Biodata
         </div>
 
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
+        <q-input class="col-12" hide-bottom-space v-model="name" ref="name" unmasked-value clearable text-color="grey"
           bg-color="white" outlined label="Tempat Lahir" lazy-rules :rules="[(val) => !!val || '']"
           error-message="wajib dilengkapi">
           <template v-slot:prepend>
@@ -14,7 +14,7 @@
           </template>
         </q-input>
 
-        <q-input @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" label="Tanggal Lahir" readonly
+        <q-input hide-bottom-space @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" label="Tanggal Lahir" readonly
           bg-color="white" outlined lazy-rules :rules="[(val) => !!val || '']"
           error-message="wajib dilengkapi">
           <template v-slot:prepend>
@@ -32,14 +32,14 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 100px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey"
+        <q-input hide-bottom-space class="col-12" maxlength="200" counter input-style="min-height: 100px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey"
           bg-color="white" outlined label="Alamat" >
           <template v-slot:prepend>
             <q-icon name="place" />
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="200" counter input-style="min-height: 150px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey" label="Bio"
+        <q-input hide-bottom-space class="col-12" maxlength="200" counter input-style="min-height: 150px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey" label="Bio"
           bg-color="white" outlined placeholder="Write about you here..." >
           <template v-slot:prepend>
             <q-icon name="contact_page" />
@@ -58,8 +58,11 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
+import Form_Foto from './accounts/Form_Foto.vue'
 import { ref } from 'vue'
 export default {
   // computed: {
@@ -98,6 +101,16 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
+  },
+
   methods: {
     updateProxy () {
       this.proxyDate = this.date

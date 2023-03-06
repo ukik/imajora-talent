@@ -5,28 +5,9 @@
         <div class="col-12 text-h4 q-mb-md text-bold">
           My Profile
         </div>
-        <!-- <div class="col-12 q-my-xl">
-          <img
-            loading="lazy"
-            style="min-width: 100px; max-width: 150px"
-            :src="img_register"
-          />
-        </div> -->
 
-        <!-- <CountryCode
-          ref="country_selected"
-          @onBubbleEvent="country_selected = $event"
-          class="col-4 q-py-none q-pb-md"
-        /> -->
-        <!-- <q-input class="col-8" v-model="phone"  ref="phone" :mask="`(${country_selected})  #################`"
-          unmasked-value clearable text-color="grey" bg-color="white" outlined label="phone (WA)" lazy-rules
-          :rules="[(val) => (val && val.length > 0) || '']">
-        </q-input> -->
-        <!-- <div class="col-12">
-          <Form_Foto />
-        </div> -->
 
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
+        <q-input hide-bottom-space class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
           bg-color="white" outlined label="Username" lazy-rules :rules="[(val) => !!val || '']"
           error-message="wajib dilengkapi">
           <template v-slot:prepend>
@@ -34,7 +15,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
+        <q-input hide-bottom-space class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey"
           bg-color="white" outlined label="Nama Lengkap" lazy-rules :rules="[(val) => !!val || '']"
           error-message="wajib dilengkapi">
           <template v-slot:prepend>
@@ -42,7 +23,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" v-model="email" ref="email" type="email" error-message="wajib dilengkapi"
+        <q-input hide-bottom-space class="col-12" v-model="email" ref="email" type="email" error-message="wajib dilengkapi"
           unmasked-value clearable text-color="grey" bg-color="white" outlined label="Email" lazy-rules
           :rules="[(val, rules) => rules.email(val) || 'Please enter a valid email address']">
           <template v-slot:prepend>
@@ -50,7 +31,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="phone" v-model="phone" clearable mask="(+62) ##### ##########" unmasked-value
+        <q-input hide-bottom-space class="col-12" ref="phone" v-model="phone" clearable mask="(+62) ##### ##########" unmasked-value
           text-color="grey" error-message="wajib dilengkapi" bg-color="white" outlined label="phone" lazy-rules
           :rules="[val => !!val || 'Password is not matched']">
           <template v-slot:prepend>
@@ -58,7 +39,7 @@
           </template>
         </q-input>
 
-        <q-select emit-value map-options options-selected-class="text-deep-orange" class="col-12"
+        <q-select hide-bottom-space emit-value map-options options-selected-class="text-deep-orange" class="col-12"
           v-model="gender" clearable :options="options" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Gender" lazy-rules
           :rules="[val => !!val || 'wajib dilengkapi']">
@@ -101,8 +82,11 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
+import Form_Foto from './accounts/Form_Foto.vue'
 export default {
   // computed: {
   //   ...mapFields({
@@ -138,6 +122,16 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
+  },
+
   methods: {
     allValidate(value = this.$refs) {
       let keys = []

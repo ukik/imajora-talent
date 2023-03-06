@@ -6,13 +6,6 @@
           My Biodata
         </div>
 
-        <!-- <q-input class="col-12" maxlength="200" counter input-style="min-height: 150px;" v-model="name" ref="name" type="textarea" autogrow clearable text-color="grey"
-          bg-color="white" outlined placeholder="Write about you here..." >
-          <template v-slot:prepend>
-            <q-icon name="account_circle" />
-          </template>
-        </q-input> -->
-
         <div class="col-12">
           <Form_Foto />
         </div>
@@ -28,8 +21,11 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
+import Form_Foto from './accounts/Form_Foto.vue'
 export default {
   // computed: {
   //   ...mapFields({
@@ -65,6 +61,16 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
+  },
+
   methods: {
     allValidate(value = this.$refs) {
       let keys = []

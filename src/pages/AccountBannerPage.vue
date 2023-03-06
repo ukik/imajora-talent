@@ -21,8 +21,11 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
-import Form_Banner from './profile/Form_Banner.vue'
+import Form_Banner from './accounts/Form_Banner.vue'
 export default {
   // computed: {
   //   ...mapFields({
@@ -58,6 +61,16 @@ export default {
       ],
     }
   },
+  mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
+  },
+
   methods: {
     allValidate(value = this.$refs) {
       let keys = []

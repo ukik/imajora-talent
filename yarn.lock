@@ -1734,6 +1734,11 @@ less@^4.1.3:
     needle "^3.1.0"
     source-map "~0.6.0"
 
+lodash-es@^4.17.21:
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
+
 lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
@@ -1776,6 +1781,11 @@ log-symbols@^4.1.0:
   dependencies:
     chalk "^4.1.0"
     is-unicode-supported "^0.1.0"
+
+lottie-web@^5.8.1:
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/lottie-web/-/lottie-web-5.10.2.tgz#a1c952b6734759fcd369eba73b6b7e3d9a76ce0b"
+  integrity sha512-d0PFIGiwuMsJYaF4uPo+qG8dEorlI+xFI2zrrFtE1bGO4WoLIz+NjremxEq1swpR7juR10aeOtmNh3d6G3ub0A==
 
 lower-case@^1.1.1:
   version "1.1.4"
@@ -2656,6 +2666,14 @@ vue-virtual-scroll-grid@^1.10.1:
     "@vueuse/core" "^9.1.1"
     ramda ">=0.28.0"
     rxjs "^7.5.1"
+
+vue3-lottie@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/vue3-lottie/-/vue3-lottie-2.5.0.tgz#0bfa8bffa19235b8593d719b125f9ae0b31c603b"
+  integrity sha512-JwlTzykr4ofPnSXsTAPt571RDrtQNy66H8w/zYBVHNgrCRG4RINI30c/oJx3Dj+XpxuktpKzgfI08tv1FjYkAQ==
+  dependencies:
+    lodash-es "^4.17.21"
+    lottie-web "^5.8.1"
 
 vue3-observe-visibility2@^0.0.3:
   version "0.0.3"

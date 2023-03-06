@@ -7,7 +7,7 @@
           Sign In
         </div>
 
-        <q-input class="col-8" v-model="email" ref="email" type="email" error-message="wajib dilengkapi" unmasked-value
+        <q-input hide-bottom-space class="col-8" v-model="email" ref="email" type="email" error-message="wajib dilengkapi" unmasked-value
           clearable text-color="grey" bg-color="white" outlined label="Email" lazy-rules
           :rules="[(val, rules) => rules.email(val) || 'Please enter a valid email address']">
           <template v-slot:prepend>
@@ -15,7 +15,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12 col-md-6" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12 col-md-6" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="password" lazy-rules
           :rules="[(val) => !!val || '']">
           <template v-slot:prepend>
@@ -30,7 +30,7 @@
         </div>
 
         <div class="col-12">
-          <q-btn class="button-default full-width full-height text-subtitle2" type="submit" icon-right="login" unelevated
+          <q-btn :to="{ name:'profile' }" class="button-default full-width full-height text-subtitle2" type="submit" icon-right="login" unelevated
             color="primary" label="Login"></q-btn>
         </div>
 

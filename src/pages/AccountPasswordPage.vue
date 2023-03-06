@@ -7,7 +7,7 @@
           My Password
         </div>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="New Password" lazy-rules
           :rules="[val => (!!val) || 'Password is not matched']">
           <template v-slot:prepend>
@@ -15,7 +15,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Password" lazy-rules
           :rules="[val => (!!val && val == password_confirmation) || 'Password is not matched']">
           <template v-slot:prepend>
@@ -23,7 +23,7 @@
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password_confirmation" v-model="password_confirmation" clearable
+        <q-input hide-bottom-space class="col-12" ref="password_confirmation" v-model="password_confirmation" clearable
           error-message="wajib dilengkapi" type="password" text-color="grey" bg-color="white" outlined @update:model-value="$refs.password.validate();$refs.password_confirmation.validate();"
           label="Password Confirmation" lazy-rules :rules="[val => (!!val && val == password) || 'Password is not matched']">
           <template v-slot:prepend>
@@ -49,6 +49,9 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
 
 export default {
@@ -90,6 +93,16 @@ data() {
     ],
   }
 },
+mounted() {
+  this.$nextTick(() => {
+    const el = document.getElementById("children_account");
+    const target = getScrollTarget(el)
+    const offset = el.offsetTop
+    const duration = 500
+    setVerticalScrollPosition(target, offset, duration)
+  })
+},
+
 methods: {
   allValidate(value = this.$refs) {
     let keys = []

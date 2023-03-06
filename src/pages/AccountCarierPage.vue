@@ -7,14 +7,7 @@
           My Karir
         </div>
 
-        <!-- <q-input class="col-12" v-model="name" ref="name" unmasked-value clearable text-color="grey" bg-color="white"
-          outlined label="Tempat Lahir" lazy-rules :rules="[(val) => !!val || '']" error-message="wajib dilengkapi">
-          <template v-slot:prepend>
-            <q-icon name="account_circle" />
-          </template>
-        </q-input> -->
-
-        <q-input @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable
+        <q-input hide-bottom-space @click="$refs.date.show()" class="col-12" v-model="name" ref="name" unmasked-value clearable
           text-color="grey" label="Mulai Bermusik" readonly bg-color="white" outlined lazy-rules
           :rules="[(val) => !!val || '']" error-message="wajib dilengkapi">
           <template v-slot:prepend>
@@ -32,7 +25,7 @@
           </template>
         </q-input>
 
-        <q-field dense borderless class="q-pa-none row col-12">
+        <q-field hide-bottom-space dense borderless class="q-pa-none row col-12 q-mt-md">
           <div class="row q-pa-sm">
             <q-item-label class="col-12 q-pa-sm text-dark q-mb-sm" header>Genre Musik</q-item-label>
             <template v-for="(item, i) in options">
@@ -41,7 +34,7 @@
           </div>
         </q-field>
 
-        <q-field dense borderless class="q-pa-none row col-12">
+        <q-field hide-bottom-space dense borderless class="q-pa-none row col-12">
           <div class="row q-pa-sm">
             <q-item-label class="col-12 q-pa-sm text-dark q-mb-sm" header>Skill</q-item-label>
             <template v-for="(item, i) in options">
@@ -51,21 +44,21 @@
         </q-field>
 
 
-        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+        <q-input hide-bottom-space class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
           type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Kolaborasi" placeholder="Sebutkan nama musisi" hint="pisahkan dengan koma">
           <template v-slot:prepend>
             <q-icon name="supervisor_account" />
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+        <q-input hide-bottom-space class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
           type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Featuring" placeholder="Sebutkan nama musisi" hint="pisahkan dengan koma">
           <template v-slot:prepend>
             <q-icon name="supervisor_account" />
           </template>
         </q-input>
 
-        <q-input class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
+        <q-input hide-bottom-space class="col-12" maxlength="250" counter input-style="min-height: 150px;" v-model="name" ref="name"
           type="textarea" autogrow clearable text-color="grey" bg-color="white" outlined label="Ajang Festival" placeholder="Sebutkan nama acara" hint="pisahkan dengan koma">
           <template v-slot:prepend>
             <q-icon name="supervisor_account" />
@@ -85,8 +78,11 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
+import Form_Foto from './accounts/Form_Foto.vue'
 import { ref } from 'vue'
 export default {
   // computed: {
@@ -142,6 +138,15 @@ export default {
         { label: 'Picture uploaded', value: 'upload', color: 'red' },
       ]
     }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
   },
   methods: {
     updateProxy() {

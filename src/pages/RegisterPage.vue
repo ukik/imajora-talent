@@ -25,7 +25,7 @@
         </q-input> -->
 
 
-          <q-input class="col-12 col-md-6" v-model="name" ref="name" unmasked-value clearable text-color="grey"
+          <q-input hide-bottom-space class="col-12 col-md-6" v-model="name" ref="name" unmasked-value clearable text-color="grey"
             bg-color="white" outlined label="Nama Lengkap" lazy-rules :rules="[(val) => !!val || '']"
             error-message="wajib dilengkapi">
             <template v-slot:prepend>
@@ -33,7 +33,7 @@
             </template>
           </q-input>
 
-          <q-input class="col-12 col-md-6" v-model="email" ref="email" type="email" error-message="wajib dilengkapi"
+          <q-input hide-bottom-space class="col-12 col-md-6" v-model="email" ref="email" type="email" error-message="wajib dilengkapi"
             unmasked-value clearable text-color="grey" bg-color="white" outlined label="Email" lazy-rules
             :rules="[(val, rules) => rules.email(val) || 'Please enter a valid email address']">
             <template v-slot:prepend>
@@ -41,7 +41,7 @@
             </template>
           </q-input>
 
-          <q-select emit-value map-options options-selected-class="text-deep-orange" class="col-12 col-md-6"
+          <q-select hide-bottom-space emit-value map-options options-selected-class="text-deep-orange" class="col-12 col-md-6"
             v-model="gender" clearable :options="options" text-color="grey" hint="Pilih jenis kelamin"
             error-message="wajib dilengkapi" bg-color="white" outlined label="Gender" lazy-rules
             :rules="[val => !!val || 'wajib dilengkapi']">
@@ -65,7 +65,7 @@
             </template>
           </q-select>
 
-          <q-input class="col-12 col-md-6" ref="password" v-model="password" clearable type="password" text-color="grey"
+          <q-input hide-bottom-space class="col-12 col-md-6" ref="password" v-model="password" clearable type="password" text-color="grey"
             error-message="wajib dilengkapi" bg-color="white" outlined label="password" lazy-rules
             :rules="[val => (!!val && val == password_confirmation) || 'Password is not matched']">
             <template v-slot:prepend>
@@ -73,7 +73,7 @@
             </template>
           </q-input>
 
-          <q-input class="col-12 col-md-6" ref="password_confirmation" v-model="password_confirmation" clearable
+          <q-input hide-bottom-space class="col-12 col-md-6" ref="password_confirmation" v-model="password_confirmation" clearable
             error-message="wajib dilengkapi" type="password" text-color="grey" bg-color="white" outlined @update:model-value="$refs.password.validate();$refs.password_confirmation.validate();"
             label="password confirmation" lazy-rules :rules="[val => (!!val && val == password) || 'Password is not matched']">
             <template v-slot:prepend>
@@ -100,7 +100,7 @@
           </div>
 
           <div class="col-12 col-md-6 text-left">
-            <q-field borderless dense v-model="accept" lazy-rules no-error-icon :rules="[val => !!val || 'Field is required']">
+            <q-field hide-bottom-space borderless dense v-model="accept" lazy-rules no-error-icon :rules="[val => !!val || 'Field is required']">
               <template v-slot:control>
                 <q-list bordered separator>
 
@@ -122,7 +122,7 @@
           </div>
 
           <div class="col-12 col-md-6">
-            <q-btn class="button-default full-width full-height text-subtitle2" type="submit" icon-right="check_circle"
+            <q-btn :to="{ name:'profile' }" class="button-default full-width full-height text-subtitle2" type="submit" icon-right="check_circle"
               unelevated color="primary" label="Daftar"></q-btn>
           </div>
 

@@ -2,54 +2,54 @@
 
   <q-no-ssr>
     <q-form @submit="onSubmit" class="row flex flex-center q-py-xl">
-      <div class="row col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-col-gutter-md q-col-gutter-y-xl text-center justify-center">
+      <div class="row col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 q-col-gutter-lg text-center justify-center">
         <div class="col-12 text-h4 q-mb-md text-bold">
           My Social
         </div>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Facebook">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-facebook" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Tiktok">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-tiktok" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Youtube">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-youtube" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Twitter">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-twitter" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Instagram">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-instagram" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Pinterest">
           <template v-slot:prepend>
             <q-icon name="fa-brands fa-pinterest" />
           </template>
         </q-input>
 
-        <q-input class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
+        <q-input hide-bottom-space class="col-12" ref="password" v-model="password" clearable type="password" text-color="grey"
           error-message="wajib dilengkapi" bg-color="white" outlined label="Website">
           <template v-slot:prepend>
             <q-icon name="fa-solid fa-globe" />
@@ -69,6 +69,9 @@
 
 
 <script>
+import { scroll } from 'quasar'
+const { getScrollTarget, setVerticalScrollPosition } = scroll
+
 import { mapFields } from "vuex-map-fields";
 
 export default {
@@ -110,6 +113,16 @@ data() {
     ],
   }
 },
+mounted() {
+    this.$nextTick(() => {
+      const el = document.getElementById("children_account");
+      const target = getScrollTarget(el)
+      const offset = el.offsetTop
+      const duration = 500
+      setVerticalScrollPosition(target, offset, duration)
+    })
+  },
+
 methods: {
   allValidate(value = this.$refs) {
     let keys = []

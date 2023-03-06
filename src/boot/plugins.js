@@ -29,17 +29,17 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 	})
   app.use(MasonryWall)
 
-	app.component('review',
-		defineAsyncComponent(() => import('src/components/review.vue'))
-	)
+	// app.component('review',
+	// 	defineAsyncComponent(() => import('src/components/review.vue'))
+	// )
 
-	app.component('VirtualCollection',
-		defineAsyncComponent(() => import("vue-virtual-collection/src/VirtualCollection.vue"))
-	)
+	// app.component('VirtualCollection',
+	// 	defineAsyncComponent(() => import("vue-virtual-collection/src/VirtualCollection.vue"))
+	// )
 
-	app.component('BadgeCartUnit',
-		defineAsyncComponent(() => import('src/components/widgets/badge_cart_unit.vue'))
-	)
+	// app.component('BadgeCartUnit',
+	// 	defineAsyncComponent(() => import('src/components/widgets/badge_cart_unit.vue'))
+	// )
 
   // app.component('RecycleScroller', RecycleScroller)
   app.use(VueVirtualScroller)

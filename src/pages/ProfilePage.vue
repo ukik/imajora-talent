@@ -76,7 +76,7 @@
 
 
         <div class="col-12">
-          <q-btn class="button-default full-width full-height text-subtitle2" type="submit" icon-right="check_circle"
+          <q-btn :to="{ name:'profile' }" class="button-default full-width full-height text-subtitle2" type="submit" icon-right="check_circle"
             unelevated color="primary" label="Simpan"></q-btn>
         </div>
 
@@ -93,7 +93,7 @@
 
 <script>
 import { mapFields } from "vuex-map-fields";
-import Form_Foto from './profile/Form_Foto.vue'
+import Form_Foto from './profiles/Form_Foto.vue'
 export default {
   // computed: {
   //   ...mapFields({

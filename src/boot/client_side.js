@@ -155,72 +155,72 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 	app.use(Vue3Tour)
 	// app.use(VueEasyLightbox)
 
-	app.component('Banner',
-		defineAsyncComponent(() => import('src/components/Banner.vue'))
-	)
+	// app.component('Banner',
+	// 	defineAsyncComponent(() => import('src/components/Banner.vue'))
+	// )
 
-	app.component('Regency',
-		defineAsyncComponent(() => import('src/components/Regency.vue'))
-	)
+	// app.component('Regency',
+	// 	defineAsyncComponent(() => import('src/components/Regency.vue'))
+	// )
 
-	app.component('Paginate_Bookmark',
-		defineAsyncComponent(() => import('src/components/Paginate_Bookmark.vue'))
-	)
+	// app.component('Paginate_Bookmark',
+	// 	defineAsyncComponent(() => import('src/components/Paginate_Bookmark.vue'))
+	// )
 
-	app.component('Paginate_Aset',
-		defineAsyncComponent(() => import('src/components/Paginate_Aset.vue'))
-	)
+	// app.component('Paginate_Aset',
+	// 	defineAsyncComponent(() => import('src/components/Paginate_Aset.vue'))
+	// )
 
-	app.component('Paginate_Pencarian',
-		defineAsyncComponent(() => import('src/components/Paginate_Pencarian.vue'))
-	)
+	// app.component('Paginate_Pencarian',
+	// 	defineAsyncComponent(() => import('src/components/Paginate_Pencarian.vue'))
+	// )
 
-	app.component('Paginate_Riwayat',
-		defineAsyncComponent(() => import('src/components/Paginate_Riwayat.vue'))
-	)
+	// app.component('Paginate_Riwayat',
+	// 	defineAsyncComponent(() => import('src/components/Paginate_Riwayat.vue'))
+	// )
 
-	app.component('Top_Left_Ribbon',
-		defineAsyncComponent(() => import('src/components/Top_Left_Ribbon.vue'))
-	)
+	// app.component('Top_Left_Ribbon',
+	// 	defineAsyncComponent(() => import('src/components/Top_Left_Ribbon.vue'))
+	// )
 
-	app.component('SearchTune',
-		defineAsyncComponent(() => import('src/layouts/components/SearchTune.vue'))
-	)
+	// app.component('SearchTune',
+	// 	defineAsyncComponent(() => import('src/layouts/components/SearchTune.vue'))
+	// )
 
-	app.component('Tab_Riwayat',
-		defineAsyncComponent(() => import('src/components/Tab_Riwayat.vue'))
-	)
+	// app.component('Tab_Riwayat',
+	// 	defineAsyncComponent(() => import('src/components/Tab_Riwayat.vue'))
+	// )
 
-	app.component('Tab_Formulir',
-		defineAsyncComponent(() => import('src/components/Tab_Formulir.vue'))
-	)
+	// app.component('Tab_Formulir',
+	// 	defineAsyncComponent(() => import('src/components/Tab_Formulir.vue'))
+	// )
 
-	app.component('Tab_Tentang',
-		defineAsyncComponent(() => import('src/components/Tab_Tentang.vue'))
-	)
+	// app.component('Tab_Tentang',
+	// 	defineAsyncComponent(() => import('src/components/Tab_Tentang.vue'))
+	// )
 
-	app.component('Tab_Aset',
-		defineAsyncComponent(() => import('src/components/Tab_Aset.vue'))
-	)
+	// app.component('Tab_Aset',
+	// 	defineAsyncComponent(() => import('src/components/Tab_Aset.vue'))
+	// )
 
-	app.component('Empty',
-		defineAsyncComponent(() => import('src/components/Empty.vue'))
-	)
+	// app.component('Empty',
+	// 	defineAsyncComponent(() => import('src/components/Empty.vue'))
+	// )
 
-	app.component('Empty_Mini',
-		defineAsyncComponent(() => import('src/components/Empty_Mini.vue'))
-	)
+	// app.component('Empty_Mini',
+	// 	defineAsyncComponent(() => import('src/components/Empty_Mini.vue'))
+	// )
 
-	app.component('onBoarding',
-		defineAsyncComponent(() => import('src/components/onBoarding.vue'))
-	)
+	// app.component('onBoarding',
+	// 	defineAsyncComponent(() => import('src/components/onBoarding.vue'))
+	// )
 
-	app.component('OwnedLabel',
-		defineAsyncComponent(() => import('src/components/Owned.vue'))
-	)
+	// app.component('OwnedLabel',
+	// 	defineAsyncComponent(() => import('src/components/Owned.vue'))
+	// )
 
-	app.component('CountryCode',
-		defineAsyncComponent(() => import('src/components/CountryCode.vue'))
-	)
+	// app.component('CountryCode',
+	// 	defineAsyncComponent(() => import('src/components/CountryCode.vue'))
+	// )
 
 })

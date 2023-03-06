@@ -12,15 +12,22 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title @click="$router.push({name:'profile'})">
+          IMAJORA
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <q-btn :to="{ name:'profile' }"
+          flat
+          dense
+          round
+          icon="fas fa-user"
+          aria-label="Menu"
+        />
+
       </q-toolbar>
     </q-header>
 
-    <q-drawer behavior="desktop"
+    <q-drawer :behavior="dynamic_drawer"
       v-model="leftDrawerOpen"
       show-if-above
       bordered
@@ -121,8 +128,18 @@ export default defineComponent({
       const width = this.$q.screen.width
       if(this.leftDrawerOpen) {
         return 'col-xl-9 col-lg-9 col-md-9'
+      } else if(width <= 1024) {
+        return 'col-xl-9 col-lg-9 col-md-9'
       } else {
         return 'col-xl-7 col-lg-7 col-md-7'
+      }
+    },
+    dynamic_drawer() {
+      const width = this.$q.screen.width
+      if(width <= 1024) {
+        return 'mobile'
+      } else {
+        return 'desktop'
       }
     }
   }
