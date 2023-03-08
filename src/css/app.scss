@@ -12,3 +12,11 @@ h3.q-timeline__heading-title {
   font-size: 24px;
   padding: 10px 0;
 }
+
+
+.fade-global-enter-active, .fade-global-leave-active {
+  transition: opacity .25s;
+}
+.fade-global-enter, .fade-global-leave-to {
+  opacity: 0;
+}

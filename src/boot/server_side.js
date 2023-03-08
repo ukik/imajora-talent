@@ -22,7 +22,7 @@ import Wrapper from 'src/components/Wrapper.vue'
 
 // import { GoogleMap, Marker } from 'vue3-google-map'
 
-import SkeletonTwitch from 'src/components/SkeletonTwitch.vue'
+// import SkeletonTwitch from 'src/components/SkeletonTwitch.vue'
 
 export default boot( async ({ app, ssrContext, router, store }) => {
 
@@ -42,7 +42,7 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 
 	app.component('Wrapper', Wrapper)
 
-	app.component('SkeletonTwitch', SkeletonTwitch)	
+	// app.component('SkeletonTwitch', SkeletonTwitch)
 
 	// app.component('QCurrencyInput', QCurrencyInput)
 

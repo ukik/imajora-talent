@@ -16,7 +16,7 @@
           <!-- <q-item :key="index+'A'" dense clickable>
             <q-item-section> -->
               <div :key="index+'A'" class="row q-col-gutter-xs q-mb-xs">
-                <div v-for="i in item.inner" class="col-4">
+                <div v-for="i in item.inner" class="col-6">
                   <q-card flat bordered square>
                     <img style="min-height:100px;" src="https://cdn.quasar.dev/img/parallax2.jpg">
 

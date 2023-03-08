@@ -105,9 +105,9 @@
   integrity sha512-nWlGg+aMfQDhGYa5FtBhZwldeo2MtdjHdxmEQvhBXEnxgD5IhIYl0PHvex8SdwyN7qcSoMykMWdjyAX7ZxkpMw==
 
 "@quasar/app-vite@^1.0.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.2.0.tgz#cbe04e300fc396b5e9a3518b6c66f6edc2902916"
-  integrity sha512-MlscKt3XbNAxmyVDtVSp7WlVOnr9TWIVDLP4D8EWu1c+xsLIWIj/H1qL6l8SrCrs208uaVqWofJK2w5x9V4EmQ==
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@quasar/app-vite/-/app-vite-1.2.1.tgz#23a634e16c74b28a38cf1ad1b3633388a220f97f"
+  integrity sha512-iKvpucrnt5pQuuQxqkLLWuI7Wm9Xx9fcBK1miMHWBgdcbHOXhc/OrlxeLvRwxm7GMd91cp3nhslo5j3a+zMCOg==
   dependencies:
     "@quasar/fastclick" "1.1.5"
     "@quasar/vite-plugin" "^1.3.0"
@@ -266,9 +266,9 @@
   integrity sha512-Y4XFY5VJAuw0FgAqPNd6NNoV44jbq9Bz2L7Rh/J6jLTiHBSBJa9fxqQIvkIld4GsoDOcCbvzOUAbLPsSKKg+uA==
 
 "@types/node@*":
-  version "18.14.1"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.14.1.tgz#90dad8476f1e42797c49d6f8b69aaf9f876fc69f"
-  integrity sha512-QH+37Qds3E0eDlReeboBxfHbX9omAcBCXEzswCu6jySP642jiM3cYSIkU/REqwhCUqXdonHFuBfJDiAJxMNhaQ==
+  version "18.14.6"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.14.6.tgz#ae1973dd2b1eeb1825695bb11ebfb746d27e3e93"
+  integrity sha512-93+VvleD3mXwlLI/xASjw0FzKcwzl3OdTCzm1LaRfqgS21gfFtK3zDXM5Op9TeeMsJVOaJ2VRDpT9q4Y3d0AvA==
 
 "@types/node@^12.20.21":
   version "12.20.55"
@@ -421,9 +421,9 @@
     vue-demi "*"
 
 "@yeger/vue-masonry-wall@^3.4.3":
-  version "3.4.3"
-  resolved "https://registry.yarnpkg.com/@yeger/vue-masonry-wall/-/vue-masonry-wall-3.4.3.tgz#4551f5f82963631beab5de89419948c80e4c75f9"
-  integrity sha512-ZbLhLmvwmTkzKJt5n5qns96FkxNoCOMV+CAPTKItfPS2p0e29QkEQi8Uq4KR0XdAwXc0rH+2a0xnkeYgUnI7Qw==
+  version "3.4.4"
+  resolved "https://registry.yarnpkg.com/@yeger/vue-masonry-wall/-/vue-masonry-wall-3.4.4.tgz#c81a4f13b39cbf2db4df16f54783a5b5125d97cc"
+  integrity sha512-LSQmLVsntTNTdc2N79dpkuUySYGZUnj/hvFTXPEuNG3eLwy1EKgd2otllVmX5eQeXEp3NVV0HKaRf8y+TsglIw==
 
 accepts@~1.3.5, accepts@~1.3.8:
   version "1.3.8"
@@ -662,9 +662,9 @@ camel-case@^3.0.0:
     upper-case "^1.1.1"
 
 caniuse-lite@^1.0.30001426, caniuse-lite@^1.0.30001449:
-  version "1.0.30001457"
-  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001457.tgz#6af34bb5d720074e2099432aa522c21555a18301"
-  integrity sha512-SDIV6bgE1aVbK6XyxdURbUE89zY7+k1BBBaOwYwkNCglXlel/E7mELiHC64HQ+W0xSKlqWhV9Wh7iHxUjMs4fA==
+  version "1.0.30001462"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001462.tgz#b2e801e37536d453731286857c8520d3dcee15fe"
+  integrity sha512-PDd20WuOBPiasZ7KbFnmQRyuLE7cFXW2PVd7dmALzbkUXEP46upAuCDm9eY9vho8fgNMGmbAX92QBZHzcnWIqw==
 
 chalk@^4.0.2, chalk@^4.1.0, chalk@^4.1.1:
   version "4.1.2"
@@ -922,9 +922,9 @@ ejs@^3.1.7:
     jake "^10.8.5"
 
 electron-to-chromium@^1.4.284:
-  version "1.4.311"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.311.tgz#953bc9a4767f5ce8ec125f9a1ad8e00e8f67e479"
-  integrity sha512-RoDlZufvrtr2Nx3Yx5MB8jX3aHIxm8nRWPJm3yVvyHmyKaRvn90RjzB6hNnt0AkhS3IInJdyRfQb4mWhPvUjVw==
+  version "1.4.324"
+  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.324.tgz#0cff81794e6c48efbb0b029224968621230d8ace"
+  integrity sha512-m+eBs/kh3TXnCuqDF6aHLLRwLK2U471JAbZ1KYigf0TM96fZglxv0/ZFBvyIxnLKsIWUoDiVnHTA2mhYz1fqdA==
 
 elementtree@0.1.7:
   version "0.1.7"
@@ -2071,10 +2071,10 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
-pinia@^2.0.11:
-  version "2.0.32"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.32.tgz#93a12df4416566c1bb49225a078fe20b982350be"
-  integrity sha512-8Tw4OrpCSJ028UUyp0gYPP/wyjigLoEceuO/x1G+FlHVf73337e5vLm4uDmrRIoBG1hvaed/eSHnrCFjOc4nkA==
+pinia@^2.0.33:
+  version "2.0.33"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.33.tgz#b70065be697874d5824e9792f59bd5d87ddb5e7d"
+  integrity sha512-HOj1yVV2itw6rNIrR2f7+MirGNxhORjrULL8GWgRwXsGSvEqIQ+SE0MYt6cwtpegzCda3i+rVTZM+AM7CG+kRg==
   dependencies:
     "@vue/devtools-api" "^6.5.0"
     vue-demi "*"
@@ -2124,9 +2124,9 @@ qs@6.11.0:
     side-channel "^1.0.4"
 
 quasar@^2.6.0:
-  version "2.11.6"
-  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.11.6.tgz#9d200a0de44dc235915fee3ea3ff5673045fdcbc"
-  integrity sha512-jJniWqTtfLHDuAT1YNx6ZZdZU7nM8vwscyM7IxmijaHq+fDpgjaujDQUlJWgn5ZMkqe3Yvg93MgSxjcL71oJIw==
+  version "2.11.7"
+  resolved "https://registry.yarnpkg.com/quasar/-/quasar-2.11.7.tgz#0371d2cbe299305a0949332d2a3fc6929a70e2f6"
+  integrity sha512-OzDwYfoSwZbwqfNWz9Bfn1mhGE8YMxpTLhPvVkQU87ePF6qFj4aWttcTUifXITKldOAZziN1Mmv8VLQyITHwiw==
 
 queue-microtask@^1.2.2:
   version "1.2.3"
@@ -2479,9 +2479,9 @@ supports-preserve-symlinks-flag@^1.0.0:
   integrity sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==
 
 sweetalert2@11.x:
-  version "11.7.2"
-  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.7.2.tgz#a9a5e7323beeb3283e1dd03af0e1cf460c5af112"
-  integrity sha512-atPjDa3fv/4xwZpiAt7FZUgAhR5VAASiLP2hu7HUeVDXx+v4/9nD1W0u8xal1e9f2/qGh0DwTxPXPV9XoZIBvg==
+  version "11.7.3"
+  resolved "https://registry.yarnpkg.com/sweetalert2/-/sweetalert2-11.7.3.tgz#e81ad273903a644b60d1ee0359626cc4c4ac860d"
+  integrity sha512-fUN/fyVSBZNtY4Rr/Qtxn7tNNnlRAbUhQxTQ9uOo0xVMIHBmqq4/9pau5N9dB2pvkB353XL/ywRAycscLoYU3w==
 
 table@^6.8.0:
   version "6.8.1"
@@ -2625,9 +2625,9 @@ vue-demi@*:
   integrity sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==
 
 vue-easy-lightbox@^1.13.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/vue-easy-lightbox/-/vue-easy-lightbox-1.13.0.tgz#06c8b7519c4fba669ad91c3a23ca6d2423b34f7a"
-  integrity sha512-of11963wjTzDhy7aCnKpyl0hMBOQgooKDWpAes0eUVo3VzZenbhuystfgWHlKOQbzdtv8c6vVz6dT4kY1SYygA==
+  version "1.14.0"
+  resolved "https://registry.yarnpkg.com/vue-easy-lightbox/-/vue-easy-lightbox-1.14.0.tgz#9eb59e449b0b38bc12590d71bddb9553325a70a8"
+  integrity sha512-qjkUCT7qkd5ekqEnLzL+VFAXNVLxhE5XnSz+/RNk0VNpoudL6fVOw9UKMSi9VbeIbhmIdoH1FIscoJzCwm15Rw==
 
 vue-i18n@^9.2.2:
   version "9.2.2"

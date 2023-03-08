@@ -1,6 +1,6 @@
 <template>
   <!-- <q-layout view="lHh Lpr lFf" > -->
-  <q-layout view="lHr LpR lfr">
+  <q-layout view="hHr lpR lFr">
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -47,17 +47,43 @@
       </q-list>
     </q-drawer>
 
+    <q-dialog seamless v-model="dialog" position="bottom">
+      <q-card style="width: 350px">
+        <!-- <q-linear-progress :value="0.6" color="pink" /> -->
+        <q-btn flat round icon="fast_rewind" v-close-popup />
+        <q-card-section class="row items-center no-wrap">
+          <audio id="audio" ref="audio" style="height:40px;" class="full-width" controls :src="audio"></audio>
+          <!-- <div>
+            <div class="text-weight-bold">The Walker</div>
+            <div class="text-grey">Fitz & The Tantrums</div>
+          </div>
+
+          <q-space />
+
+          <q-btn flat round icon="fast_rewind" />
+          <q-btn flat round icon="pause" />
+          <q-btn flat round icon="fast_forward" /> -->
+        </q-card-section>
+      </q-card>
+    </q-dialog>
+
     <q-page-container class="row items-center justify-evenly bg-grey-1">
+      <!-- {{ get_komentar }} -->
       <q-page class="q-pa-md col-sm-12 col-xs-12 bg-white"
         :class="[ dynamic_layout ]">
         <router-view />
       </q-page>
+      <!-- <q-item v-for="(item, index) in get_komentar">
+        <q-item-section>
+          {{ item.konten }}
+        </q-item-section>
+      </q-item> -->
     </q-page-container>
   </q-layout>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent, onServerPrefetch, ref } from 'vue';
 import EssentialLink from 'components/EssentialLink.vue';
 
 const linksList = [
@@ -105,25 +131,31 @@ const linksList = [
   }
 ];
 
+import { mapState, mapWritableState, mapActions } from 'pinia'
+import { useKomentarStore } from 'src/stores/komentar-store.js'
+
 export default defineComponent({
   name: 'MainLayout',
-
-  components: {
-    EssentialLink
-  },
-
-  setup () {
-    const leftDrawerOpen = ref(false)
-
-    return {
-      essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
+  async preFetch({ store }) {
+    // store.dispatch('koment/GET')
+    // const mystore = useKomentarStore()
+    // return mystore.action_payload()
+    // console.log(mystore.komentar, '333333333333')
   },
   computed: {
+    ...mapState(useKomentarStore, {
+      reset_prefetch: "reset_prefetch",
+      komentar: "komentar",
+      konten: "komentar",
+      paginate: "paginate",
+      loading: "loading",
+      last_id: "last_id",
+      init: "init",
+      get_komentar: "get_komentar",
+      // getPageHeight: 'getPageHeight',
+      // get_is_navigate: 'get_is_navigate',
+      // get_bottomsheet_index_list_comment: 'get_bottomsheet_index_list_comment',
+    }),
     dynamic_layout() {
       const width = this.$q.screen.width
       if(this.leftDrawerOpen) {
@@ -142,6 +174,50 @@ export default defineComponent({
         return 'desktop'
       }
     }
-  }
+  },
+
+  components: {
+    EssentialLink
+  },
+  data() {
+    return {
+      dialog: false,
+      audio: '',
+    }
+  },
+  watch: {
+    audio(val) {
+      if(!val) return
+    }
+  },
+  mounted() {
+    console.log(this.komentar, 'xxxxxxxxxxx')
+    this.$global.$on('audioplayer', (event) => {
+      this.dialog = true;
+      this.audio = event
+      this.$nextTick(() => {
+        this.$refs.audio.src = event
+        this.$refs.audio.play()
+      })
+    });
+  },
+  setup () {
+    const leftDrawerOpen = ref(false)
+
+    // const mystore = useKomentarStore()
+    // onServerPrefetch(async () => {
+    //   // ✅ this will work
+    //   await mystore.action_payload()
+    // })
+
+    return {
+      essentialLinks: linksList,
+      leftDrawerOpen,
+      toggleLeftDrawer () {
+        leftDrawerOpen.value = !leftDrawerOpen.value
+      }
+    }
+  },
+
 });
 </script>

@@ -24,7 +24,7 @@ declare module 'pinia' {
 
 export default store((/* { ssrContext } */) => {
   const pinia = createPinia()
-
+  console.log('MY PINIA')
   // You can add Pinia plugins here
   // pinia.use(SomePiniaPlugin)
 

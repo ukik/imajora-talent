@@ -198,9 +198,15 @@ export default boot(async ({ app, ssrContext, router, store }) => {
       random_boolean() {
         return Math.round(Math.random() * 10) < 5 ? true : false;
       },
-      onEmit(payload) {
-        this.$global.$emit(this.route_name, payload);
+
+      async onGotoBack() {
+        // const set_route = this.$route.name
+        await this.$router.back()
       },
+
+      // onEmit(payload) {
+      //   this.$global.$emit(this.route_name, payload);
+      // },
       onOrder() {
         const num = this.whatsapp;
         const msg =

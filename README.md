@@ -1,4 +1,4 @@
-# Quasar App (com.imajora.app)
+# imajora (com.imajora.app)
 
 A Quasar Project
 

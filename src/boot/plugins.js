@@ -15,7 +15,28 @@ import VueVirtualScroller from 'vue3-virtual-scroller'
 
 import MasonryWall from '@yeger/vue-masonry-wall'
 
+
+// import 'src/components/list-item';
+// import 'src/components/profile';
+// import 'src/components/toolbar';
+// import 'src/components/blank';
+// import 'src/components/skeleton';
+// import 'src/components/widgets';
+
 export default boot( async ({ app, ssrContext, router, store }) => {
+
+  app.component("SkeletonTwitch", () => import('src/components/skeleton/skeleton-twitch.vue'))
+  app.component("SkeletonTwitter", () => import('src/components/skeleton/skeleton-twitter.vue'))
+
+  app.component("BlankArtikel", () => import('src/components/blank/artikel.vue'))
+  app.component("BlankCari", () => import('src/components/blank/cari.vue'))
+  app.component("BlankFavorit", () => import('src/components/blank/favorit.vue'))
+  app.component("BlankKomentar", () => import('src/components/blank/komentar.vue'))
+  app.component("BlankProfil", () => import('src/components/blank/profil.vue'))
+  app.component("BlankSuka", () => import('src/components/blank/suka.vue'))
+
+  app.component("SpinnerOrbit", () => import('src/components/widgets/spinner_orbit.vue'))
+  app.component("ActionbarMenu", () => import('src/components/widgets/Actionbar_Menu.vue'))
 
 	app.mixin({
 		data() {

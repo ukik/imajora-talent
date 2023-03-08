@@ -17,20 +17,20 @@ module.exports = configure(function (/* ctx */) {
 
 
     // https://v2.quasar.dev/quasar-cli-vite/prefetch-feature
-    // preFetch: true,
+    preFetch: true,
 
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
+      'pinia',
       "i18n",
       "plugins",
-      'pinia',
 
-      'axios',
+      // 'axios',
       'common',
       'server_side',
-      // 'router',
+      // 'router', // WAJIB ADA SSR (gak tau kenapa tapi PENTING)
       'event_bus',
       'filter',
       'directive',
@@ -136,6 +136,9 @@ module.exports = configure(function (/* ctx */) {
     // ],
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#sourcefiles
+    sourceFiles: {
+      // store: 'src/store/index',
+    },
     // sourceFiles: {
     //   rootComponent: 'src/App.vue',
     //   router: 'src/router/index',
@@ -148,11 +151,30 @@ module.exports = configure(function (/* ctx */) {
     // },
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-ssr/configuring-ssr
-    ssr: {
-      // ssrPwaHtmlFilename: 'offline.html', // do NOT use index.html as name!
-                                          // will mess up SSR
+    // ssr: {
+    //   // ssrPwaHtmlFilename: 'offline.html', // do NOT use index.html as name!
+    //                                       // will mess up SSR
 
-      // extendSSRWebserverConf (esbuildConf) {},
+    //   // extendSSRWebserverConf (esbuildConf) {},
+    //   // extendPackageJson (json) {},
+
+    //   pwa: false,
+
+    //   // manualStoreHydration: true,
+    //   // manualPostHydrationTrigger: true,
+
+    //   prodPort: 3000, // The default port that the production server should use
+    //                   // (gets superseded if process.env.PORT is specified at runtime)
+
+    //   middlewares: [
+    //     'render' // keep this as last one
+    //   ]
+    // },
+    ssr: {
+      ssrPwaHtmlFilename: 'offline.html', // do NOT use index.html as name!
+      // will mess up SSR
+
+      extendSSRWebserverConf (esbuildConf) {},
       // extendPackageJson (json) {},
 
       pwa: false,
@@ -161,12 +183,14 @@ module.exports = configure(function (/* ctx */) {
       // manualPostHydrationTrigger: true,
 
       prodPort: 3000, // The default port that the production server should use
-                      // (gets superseded if process.env.PORT is specified at runtime)
+      // (gets superseded if process.env.PORT is specified at runtime)
 
       middlewares: [
-        'render' // keep this as last one
-      ]
+        "render", // keep this as last one
+      ],
     },
+
+
 
     // https://v2.quasar.dev/quasar-cli-vite/developing-pwa/configuring-pwa
     pwa: {

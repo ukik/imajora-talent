@@ -5,7 +5,7 @@
       </q-card>
     </q-dialog>
 
-  <q-virtual-scroll @virtual-scroll="onVirtualScroll" class="full-height" :items="heavyList" separator>
+  <q-virtual-scroll @virtual-scroll="onVirtualScroll"  class="full-height" :items="heavyList" separator>
     <template v-slot="{ item, index }">
 
       <q-banner inline-actions v-if="index <= 0" class="bg-grey-1 text-left flex items-bottom">
@@ -47,7 +47,7 @@
 </template>
 
 <script>
-const maxSize = 10000
+const maxSize = 100
 const heavyList = []
 
 for (let i = 0; i < maxSize; i++) {
@@ -74,8 +74,17 @@ export default {
   },
   methods: {
     onVirtualScroll() {
-    },
+    this.stopSound()
   },
+  stopSound() {
+    var audios = document.getElementsByTagName('audio');
+    if(!audios) return
+    for(var i = 0, len = audios.length; i < len;i++){
+      audios[i].pause();
+
+    }
+  }
+},
   mounted() {
     if (!this.init) return
     this.$nextTick(() => {

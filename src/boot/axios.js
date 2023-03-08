@@ -61,14 +61,14 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
       ? Cookies.parseSSR(ssrContext)
       : Cookies // otherwise we're on client
 
-    token = cookies.get('cubix_token_2')
-    csrf = store.getters['auth/auth_csrf'] // cookies.get('cubix_csrf') // 
-    type = cookies.get('cubix_type')
+    // token = cookies.get('cubix_token_2')
+    // csrf = store.getters['auth/auth_csrf'] // cookies.get('cubix_csrf') //
+    // type = cookies.get('cubix_type')
 
-    axios.defaults.params = { 'csrf': csrf };
+    // axios.defaults.params = { 'csrf': csrf };
 
-    config.headers.common['Authorization'] = `${type} ${token}` 
-    config.headers.common['cubix_csrf'] = csrf 
+    // config.headers.common['Authorization'] = `${type} ${token}`
+    // config.headers.common['cubix_csrf'] = csrf
 
     config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     config.headers.post['Content-Type'] = 'multipart/form-data'
@@ -86,8 +86,10 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
     return Promise.reject(error)
   })
 
-  
+
   axios.interceptors.response.use(async function (response) {
+
+    return response
     Loading.hide()
 
     console.log('axios.interceptors.response response status', response?.data?.meta?.status)
@@ -124,24 +126,24 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
     if(status == 'init') {
       console.log('axios.interceptors.response response init', response.data)
-      
+
       await cookies.set('cubix_csrf', response.data.payload.csrf, is_cookie_secure)
       await cookies.set('cubix_token_2', response.data.payload.token, is_cookie_secure)
       await cookies.set('cubix_type', response.data.payload.type, is_cookie_secure)
 
       console.log('init')
 
-      await store.commit('auth/auth', {
-        payload: response.data.payload
-      })  
-    
-      await store.commit('profile/user', {
-        payload: response.data.payload.user
-      })  
-    
-      await store.commit('order/form_profile', {
-        payload: response.data.payload.user
-      })  
+      // await store.commit('auth/auth', {
+      //   payload: response.data.payload
+      // })
+
+      // await store.commit('profile/user', {
+      //   payload: response.data.payload.user
+      // })
+
+      // await store.commit('order/form_profile', {
+      //   payload: response.data.payload.user
+      // })
 
       return response
     }
@@ -152,25 +154,25 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
       await cookies.set('cubix_token_2', response.data.payload.token, is_cookie_secure)
       await cookies.set('cubix_type', response.data.payload.type, is_cookie_secure)
 
-      if(store.state.auth.dialog) {
-        await store.commit('auth/dialog', false)       
-      } else {
-        router.replace({ name: 'profile', params: { id: response.data.payload.user.id }, })
-      }
+      // if(store.state.auth.dialog) {
+      //   await store.commit('auth/dialog', false)
+      // } else {
+      //   router.replace({ name: 'profile', params: { id: response.data.payload.user.id }, })
+      // }
 
-      console.log('login')
+      // console.log('login')
 
-      await store.commit('auth/auth', {
-        payload: response.data.payload
-      })  
-    
-      await store.commit('profile/user', {
-        payload: response.data.payload.user
-      })  
-    
-      await store.commit('order/form_profile', {
-        payload: response.data.payload.user
-      })  
+      // await store.commit('auth/auth', {
+      //   payload: response.data.payload
+      // })
+
+      // await store.commit('profile/user', {
+      //   payload: response.data.payload.user
+      // })
+
+      // await store.commit('order/form_profile', {
+      //   payload: response.data.payload.user
+      // })
 
       return response
     }
@@ -190,7 +192,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
       cookies.remove('cubix_token_2', is_cookie_secure)
       cookies.remove('cubix_type', is_cookie_secure)
 
-      const route = store.$router.currentRoute.value
+      // const route = store.$router.currentRoute.value
 
       if(route.meta.requiresAuth) {
         router.push({ name:'main' })
@@ -218,8 +220,8 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
       case "logout":
       case "unauthorized":
         // cookies.remove('cubix_token_2')
-        // cookies.remove('cubix_csrf')          
-        // cookies.remove('cubix_type')          
+        // cookies.remove('cubix_csrf')
+        // cookies.remove('cubix_type')
         // console.log('unauthorized', store.$router.currentRoute.value)
 
         cookies.remove('cubix_csrf', is_cookie_secure)
@@ -240,7 +242,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
         cookies.set('cubix_type', response.data.payload.type, is_cookie_secure)
 
         if(store.state.auth.dialog) {
-          store.commit('auth/dialog', false)       
+          store.commit('auth/dialog', false)
         } else {
           router.replace({ name: 'profile', params: { id: response.data.payload.user.id }, })
         }
@@ -249,31 +251,31 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
         store.commit('auth/auth', {
           payload: response.data.payload
-        })  
-      
+        })
+
         store.commit('profile/user', {
           payload: response.data.payload.user
-        })  
-      
+        })
+
         store.commit('order/form_profile', {
           payload: response.data.payload.user
-        })  
+        })
 
-        break        
-    }    
+        break
+    }
 
     return response
     */
   })
 
-  
+
 }, function (error) {
   Loading.hide()
   console.log('axios.interceptors.response error2', error.response)
 
   try {
     if(error.response.data) {
-  
+
     }
   } catch (err) {
 

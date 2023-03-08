@@ -1,6 +1,10 @@
 import { RouteRecordRaw } from 'vue-router';
 
 const routes: RouteRecordRaw[] = [
+
+
+  { path: '/pinia', component: () => import('pages/pinia.vue') },
+
   {
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
@@ -9,14 +13,15 @@ const routes: RouteRecordRaw[] = [
       // { path: '/DynamicScroller', component: () => import('pages/DynamicScroller.vue') },
       // { path: '/MansoryGridWall', component: () => import('pages/MansoryGridWall.vue') },
       // { path: '/VirtualScrollGrid', component: () => import('pages/VirtualScrollGrid.vue') },
-
       {
         path: "",
         name: "RegisterPage",
         meta: {
           ssr: true,
           title: 'RegisterPage',
-        }, component: () => import("pages/RegisterPage.vue")
+        // }, component: () => import("pages/RegisterPage.vue")
+        }, component: () => import("pages/komentar/index.vue")
+
       },
 
       {
@@ -67,6 +72,57 @@ const routes: RouteRecordRaw[] = [
           title: 'RequestPage',
         }, component: () => import("pages/RequestPage.vue")
       },
+
+      {
+        path: "/DetailVideo",
+        name: "DetailVideo",
+        meta: {
+          ssr: true,
+          title: 'DetailVideo',
+        }, component: () => import("pages/lists/DetailVideo.vue")
+      },
+      {
+        path: "/DetailYoutube",
+        name: "DetailYoutube",
+        meta: {
+          ssr: true,
+          title: 'DetailYoutube',
+        }, component: () => import("pages/lists/DetailYoutube.vue")
+      },
+      {
+        path: "/DetailImage",
+        name: "DetailImage",
+        meta: {
+          ssr: true,
+          title: 'DetailImage',
+        }, component: () => import("pages/lists/DetailImage.vue")
+      },
+      {
+        path: "/DetailAudio",
+        name: "DetailAudio",
+        meta: {
+          ssr: true,
+          title: 'DetailAudio',
+        }, component: () => import("pages/lists/DetailAudio.vue")
+      },
+      {
+        path: "/komentar",
+        name: "komentar",
+        meta: {
+          ssr: true,
+          title: 'komentar',
+        }, component: () => import("pages/komentar/index.vue")
+      },
+
+      {
+        path: "/komentar-balasan/:id?",
+        name: "komentar-balasan",
+        meta: {
+          ssr: true,
+          title: 'komentar-balasan',
+        }, component: () => import("pages/komentar-balasan/index.vue")
+      },
+
       {
         path: "/account",
         name: "account",
