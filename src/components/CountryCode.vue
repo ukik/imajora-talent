@@ -56,7 +56,7 @@
 
 
 <script type="text/javascript">
-import { mapFields } from "vuex-map-fields";
+//
 
 const country = [
   {
@@ -1273,12 +1273,12 @@ const country = [
 
 export default {
   computed: {
-    ...mapFields({
-      // init: 'layout.regency.meta.init',
-      // data: 'layout.regency.data.payload.data',
-      // country_selected: 'layout.local.regency',
-      // kategori_tab: 'beranda.local.kategori_tab',
-    }),
+    // ...mapFields({
+    //   // init: 'layout.regency.meta.init',
+    //   // data: 'layout.regency.data.payload.data',
+    //   // country_selected: 'layout.local.regency',
+    //   // kategori_tab: 'beranda.local.kategori_tab',
+    // }),
   },
   props: {
     dense: {

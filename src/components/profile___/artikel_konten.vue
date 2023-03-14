@@ -2,7 +2,7 @@
   <q-toolbar v-ripple="{color:'grey'}" class="relative-position q-pa-sm bg-white">
     <q-item-section  avatar style="padding:0px;">
         <q-avatar size="xl">
-          <img loading="lazy" :src="img_checker(user.foto)" @error="handleError" v-lazy-src="img_checker(user.foto)">  
+          <img loading="lazy" :src="img_checker(user.foto)" @error="handleError" v-lazy-src="img_checker(user.foto)">
           <q-icon name="star" style="font-size:14px; padding:1.5px;" color="white" class="absolute-top-left bg-green rounded-borders" />
         </q-avatar>
     </q-item-section>
@@ -17,24 +17,24 @@
     </q-item-section>
     <q-item-section side v-else>
       <q-btn @click="onSubmit" outline class="flex flex-center" icon="person" size="sm" color="red" no-caps rounded unelevated />
-    </q-item-section>  
+    </q-item-section>
 
-  </q-toolbar>	
+  </q-toolbar>
 </template>
 
 
 <script type="text/javascript">
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
   computed: {
-    ...mapFields({
-      user: "artikel_detail.data_1.user", 
-      mengikuti: "artikel_detail.data_1.mengikuti", 
-    }),
+    // ...mapFields({
+    //   user: "artikel_detail.data_1.user",
+    //   mengikuti: "artikel_detail.data_1.mengikuti",
+    // }),
   },
-  methods: {   
+  methods: {
     async onSubmit() {
 
       const form = {
@@ -42,9 +42,9 @@ export default {
       }
 
       const request = await this.dispatchVuex('aggregator/set_teman', form)
-      this.dispatchVuex('artikel_detail/set_mengikuti', request.data)      
+      this.dispatchVuex('artikel_detail/set_mengikuti', request.data)
       console.log(request)
-    } 
+    }
   }
 };
 </script>

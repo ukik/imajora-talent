@@ -1,5 +1,5 @@
 <template>
-  <q-tabs align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !$is_cordova" dense inline-label
+  <q-tabs align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !is_cordova" dense inline-label
     v-model="tab" :breakpoint="0" class="text-primary col-12 text-weight-regular">
     <q-tab @click="init = true" name="1" icon="home">&nbsp;&nbsp;Detail</q-tab>
     <q-tab @click="init = true" name="2" icon="fa-regular fa-calendar">&nbsp;&nbsp;Agenda</q-tab>

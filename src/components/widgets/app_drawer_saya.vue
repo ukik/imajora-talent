@@ -5,7 +5,7 @@
 
   <div v-if='logged'>
 
-    <q-item :to="{ 
+    <q-item :to="{
       name: 'profile',
       params: {
         id: get_authentication_user.id
@@ -20,7 +20,7 @@
       <q-item-section>
         <q-item-label line="1" class="text-subtitle1"> {{ get_authentication_user.nama | capitalize }} </q-item-label>
         <q-item-label caption> {{ get_authentication_user.email }} </q-item-label>
-      </q-item-section>    
+      </q-item-section>
     </q-item>
 
     <q-item v-if="!get_emailVerified" dense>
@@ -28,7 +28,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-btn @click="onChangeStep(2)" :to="{ 
+        <q-btn @click="onChangeStep(2)" :to="{
           name: 'authentication_wajib',
           query: {
             id: 2
@@ -48,7 +48,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-btn @click="onChangeStep(3)" :to="{ 
+        <q-btn @click="onChangeStep(3)" :to="{
           name: 'authentication_wajib',
           query: {
             id: 3
@@ -68,7 +68,7 @@
       </q-item-section>
 
       <q-item-section>
-        <q-btn @click="onChangeStep(4)" :to="{ 
+        <q-btn @click="onChangeStep(4)" :to="{
           name: 'authentication_wajib',
           query: {
             id: 4
@@ -85,7 +85,7 @@
     </q-item>
   </div>
 
-  <q-item clickable v-ripple :to="{ 
+  <q-item clickable v-ripple :to="{
     name: 'pengaturan_profile'
   }">
     <q-item-section avatar top>
@@ -96,7 +96,7 @@
       <q-item-label lines="1" class="weight-500">Biodata</q-item-label>
       <q-item-label caption>Isi informasi diri saya</q-item-label>
     </q-item-section>
-  </q-item> 
+  </q-item>
 
   <q-item clickable v-ripple :to="get_qrcode">
     <q-item-section avatar top>
@@ -108,7 +108,7 @@
       <q-item-label caption>Status penukaran koin</q-item-label>
     </q-item-section>
   </q-item>
-  
+
 </fragment>
 
 </template>
@@ -116,39 +116,39 @@
 <script type="text/javascript">
 
 import { mapGetters } from "vuex";
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
   computed: {
-    ...mapFields({
-      lokasi: "authentication.lokasi",
-      user: "authentication.user",
-      step: 'authentication.step',
-    }),
+    // ...mapFields({
+    //   lokasi: "authentication.lokasi",
+    //   user: "authentication.user",
+    //   step: 'authentication.step',
+    // }),
     ...mapGetters({
       logged: 'authentication/get_user_logged',
     }),
     get_qrcode() {
-      let to; 
+      let to;
       if(this.get_user_logged) {
-        to = { 
+        to = {
           name: 'profile_qrcode',
           params: {
             id: this.get_authentication_user.id
           }
-        }  
-                      
-        return to      
-      } 
+        }
+
+        return to
+      }
       to = {
         name: 'login'
       }
-      return to      
+      return to
     }
   },
   methods: {
     onChangeStep(step) {
-      this.dispatchVuex('authentication/step', step)      
+      this.dispatchVuex('authentication/step', step)
     }
   }
 };

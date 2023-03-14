@@ -1,6 +1,7 @@
 <template>
   <!-- <q-layout view="lHh Lpr lFf" > -->
   <q-layout view="hHr lpR lFr">
+    <q-no-ssr>
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -26,7 +27,9 @@
 
       </q-toolbar>
     </q-header>
+  </q-no-ssr>
 
+  <q-no-ssr>
     <q-drawer :behavior="dynamic_drawer"
       v-model="leftDrawerOpen"
       show-if-above
@@ -66,10 +69,11 @@
         </q-card-section>
       </q-card>
     </q-dialog>
+  </q-no-ssr>
 
-    <q-page-container class="row items-center justify-evenly bg-grey-1">
+    <q-page-container class="items-center justify-evenly bg-grey-1">
       <!-- {{ get_komentar }} -->
-      <q-page class="q-pa-md col-sm-12 col-xs-12 bg-white"
+      <q-page class="col-12 row flex justify-center"
         :class="[ dynamic_layout ]">
         <router-view />
       </q-page>
@@ -144,7 +148,6 @@ export default defineComponent({
   },
   computed: {
     ...mapState(useKomentarStore, {
-      reset_prefetch: "reset_prefetch",
       komentar: "komentar",
       konten: "komentar",
       paginate: "paginate",

@@ -91,16 +91,16 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields'
+
 
 export default {
   computed: {
-    ...mapFields({
-      // init: 'beranda.index.meta.init',
-      // loading: 'beranda.index.meta.loading',
+    // ...mapFields({
+    //   // init: 'beranda.index.meta.init',
+    //   // loading: 'beranda.index.meta.loading',
 
-      // penawaran: 'beranda.index.data.payload.penawaran',
-    }),
+    //   // penawaran: 'beranda.index.data.payload.penawaran',
+    // }),
   },
   data() {
     return {

@@ -24,7 +24,7 @@
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
-import { mapFields } from "vuex-map-fields";
+
 import Form_Banner from './accounts/Form_Banner.vue'
 export default {
   // computed: {

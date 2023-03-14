@@ -25,7 +25,7 @@
 // import { menyukai } from "src/mixins/menyukai"
 // import { favorit } from "src/mixins/favorit"
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 
 const menyukai = {
@@ -36,7 +36,7 @@ const menyukai = {
     }
   },
   props: ['form_menyukai','menyukai'],
-  mounted() {   
+  mounted() {
     this.status_suka = this.get_menyukai
     this.total_suka = this.get_total('suka')
   },
@@ -48,7 +48,7 @@ const menyukai = {
       this.total_suka = request.data.total
       this.status_suka = request.value > 0 ? true : false
 
-      // await this.dispatchVuex('cari_detail/action_update', { payload: request.data, alias: this.current_tab })      
+      // await this.dispatchVuex('cari_detail/action_update', { payload: request.data, alias: this.current_tab })
     },
   },
   computed: {
@@ -79,7 +79,7 @@ const favorit = {
     }
   },
   props: ['form_favorit','favorit'],
-  mounted() {   
+  mounted() {
     this.status_favorit = this.get_favorit
   },
   methods: {
@@ -99,13 +99,13 @@ const favorit = {
     },
   }
 }
-  
+
 
 export default {
     computed: {
-      ...mapFields({
-        current_tab: "cari_detail.current_tab",
-      }),
+      // ...mapFields({
+      //   current_tab: "cari_detail.current_tab",
+      // }),
       get_komentar() {
           if(this.prop_total.length <= 0) return 0
 
@@ -116,8 +116,8 @@ export default {
           }
 
           return 0
-      }      
-    },  
+      }
+    },
     mixins: [menyukai, favorit],
     props: {
       index: {
@@ -131,7 +131,7 @@ export default {
       },
       prop_data: {
         default: () => ({})
-      },         
+      },
 
     },
 };

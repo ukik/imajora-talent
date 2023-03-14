@@ -2,7 +2,7 @@
 .q-drawer__content.fit.scroll {
   background: #eeeeee !important;
   overflow: hidden;
-}  
+}
 </style>
 
 <style type="text/css" scoped>
@@ -10,14 +10,14 @@
   .is_sticky {
     z-index:8000;
     position: sticky;
-    top: 50px; 
+    top: 50px;
   }
-} 
+}
 @supports (position: sticky) {
   .is_sticky_drawer_beranda {
     z-index:8000;
     position: sticky;
-    top: 0px; 
+    top: 0px;
   }
 }
 </style>
@@ -34,9 +34,9 @@
   <!-- stuff you put here will be scrollable. You can adjust the max-height depending on your components -->
 
     <!-- <q-scroll-area style="height: calc(100% - 50px); margin-top: 50px; border-right: 1px solid #ddd"> -->
-    <q-scroll-area v-show="left_drawer" class=" bg-grey-3 " :class="[ screen_width > 1014 ? 'is_sticky' : '' ]" :style="height"> 
+    <q-scroll-area v-show="left_drawer" class=" bg-grey-3 " :class="[ screen_width > 1014 ? 'is_sticky' : '' ]" :style="height">
       <q-list>
-        <q-item clickable class="bg-white is_sticky_drawer_beranda" v-ripple :to="({ 
+        <q-item clickable class="bg-white is_sticky_drawer_beranda" v-ripple :to="({
           name: 'main',
         })">
           <q-item-section avatar top>
@@ -115,7 +115,7 @@
 
         <!-- LAINNYA -->
         <Lainnya />
-        
+
         <!-- <slot /> -->
         <div style="margin-bottom:20px;" />
       </q-list>
@@ -123,20 +123,20 @@
  <!-- </div> -->
 <!-- </div> -->
     </q-no-ssr>
-  </q-drawer>	
+  </q-drawer>
 </template>
 
 <script type="text/javascript">
-import { mapFields } from "vuex-map-fields";
+
 
 export default {
   computed: {
-    ...mapFields({
-      left_drawer: "drawer.left_drawer",
-      ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
-      ayat_player_display: "alquran_index.ayat_player_display",
-      is_not_player_real_closed: "alquran_index.is_not_player_real_closed", 
-    })
+    // ...mapFields({
+    //   left_drawer: "drawer.left_drawer",
+    //   ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
+    //   ayat_player_display: "alquran_index.ayat_player_display",
+    //   is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
+    // })
   },
   data() {
     return {
@@ -177,7 +177,7 @@ export default {
       if(val) {
         // this.$store.dispatch('drawer', { key: 'left_drawer', value: this.screen_width > 1024 })
       }
-    }    
+    }
   },
   components: {
     Kanal: () => import("src/pages/saluran"),

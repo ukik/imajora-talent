@@ -4,15 +4,15 @@
   .is_sticky {
     z-index:9;
     position: sticky;
-    top: 50px; 
+    top: 50px;
   }
 
   .is_sticky_B {
     z-index:9;
     position: sticky;
-    top: 82px; 
-  }  
-} 
+    top: 82px;
+  }
+}
 </style>
 
 <template>
@@ -20,7 +20,7 @@
 	<q-tabs
 		id="tab"
 		:value="tab"
-		:class="[ !is_not_player_real_closed ? 'is_sticky_B' : 'is_sticky' ]" 
+		:class="[ !is_not_player_real_closed ? 'is_sticky_B' : 'is_sticky' ]"
 		no-caps
 		class="text-grey bg-white"
 		active-color="primary"
@@ -30,7 +30,7 @@
 		:breakpoint="0"
 		>
 			<q-tab :disable="isDisableSwiper" @click="() => onChangeTab(item, index)" class="q-pa-none q-px-md" v-for="(item, index) in tab_items" :key="index+'tab_items'" :name="item.value" :label="item.label" />
-	</q-tabs> 
+	</q-tabs>
 
 	<!-- v-if="$q.platform.is.mobile"  -->
 
@@ -86,7 +86,7 @@
           	<SkeletonTwitter v-if="tab == 'tab4' || tab == 'tab6'" />
 
         </div>
-<!-- 
+<!--
 		<div class="swiper-slide" :style="'min-height:'+($q.screen.height-height_toolbar-height_tab)+'px;'">
 
           	<SkeletonTwitter v-if="tab == 'tab5'" />
@@ -96,18 +96,18 @@
         </div> -->
 
 <!--         <div class="swiper-slide" v-for="(item, index) in tab_items" :key="index+'q-tab-panel'">
-          
+
           <component :is="'Tab'+item.id" :prop_viewport="'max-height:'+($q.screen.height-height_toolbar-height_tab)+'px;'" :prop_tab="item.value" :prop_active="tab" :prop_ready="prop_ready(item.id)" />
 
           <SkeletonTwitter v-if="get_profile_konten_beranda.length <= 0 && tab == 'tab1'" />
 
         </div>
- -->        
+ -->
 	  </div>
 	</div>
 
     <!-- <q-tab-panels v-model="tab" v-if="false"
-      animated 
+      animated
       v-else
       :swipeable="true"
       :keep-alive="false"
@@ -116,7 +116,7 @@
 
       <q-tab-panel  v-for="(item, index) in tab_items" :key="index+'q-tab-panel'" :name="item.value" class="q-pa-none">
           <component :is="'Tab'+item.id" :prop_viewport="'max-height:'+($q.screen.height-height_toolbar-height_tab)+'px;'" :prop_tab="item.value" :prop_active="tab" :prop_ready="prop_ready(item.id)" />
-      </q-tab-panel>        
+      </q-tab-panel>
     </q-tab-panels>   	 -->
 </div>
 </template>
@@ -131,16 +131,16 @@ const Tab4 = () => import("./tabs/konsultasi.vue")
 const Tab5 = () => import("./tabs/jawaban_konsultasi.vue")
 // const Tab6 = () => import("./tabs/live.vue")
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
 		computed: {
-			...mapFields({
-			      loading: "profile.loading",   
-			      current_tab: "profile.current_tab",  
-			      is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
-			}),
-		}, 
+			// ...mapFields({
+			//       loading: "profile.loading",
+			//       current_tab: "profile.current_tab",
+			//       is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
+			// }),
+		},
 		components: {
 		    Tab0,
 		    Tab1,
@@ -152,7 +152,7 @@ export default {
 		},
 		created() {
 			this.tabWatch('tab0')
-		},		
+		},
 		watch: {
 			loading(val) {
 				if(!val) {
@@ -160,7 +160,7 @@ export default {
 			        	this.isDelaySwiper = false
 			        }, 500)
 				}
-			},				
+			},
 			// "$q.screen.width": {
 			// 	deep: true,
 			// 	handler(val) {
@@ -170,7 +170,7 @@ export default {
 			// 		}, 500)
 			// 	}
 			// }
-		},		
+		},
 		beforeDestroy(){
 			// if(this.is_cordova) {
 			// 	// this.dispatchVuex('profile/action_clean_tab')
@@ -188,14 +188,14 @@ export default {
 		      if (this.el_tab !== null) {
 		        await this.scrollToElement(this.el_tab, 50, 0);
 		      }
-		    },    			
+		    },
 			async onRefreshTab() {
 				if(this.el_tab !== null) {
 					this.scrollTopTab()
 				}
 
 				await this.dispatchVuex('beranda/action_kanal_refresh', { page: 1, alias: this.current_tab })
-			},			
+			},
 		    // onBubbleEvent_MOUNTED(event) {
 		    // 	console.log('onBubbleEvent_MOUNTED',event)
 		    // 	// this.MOUNTED = event
@@ -204,14 +204,14 @@ export default {
 		    // 	} else {
 		    // 		this.isDisableSwiper = true
 		    // 	}
-		    // },			
+		    // },
 			onSwiper() {
 				const vm = this
 
 				const mySwiper = new Swiper( '.swiper-container', {
 					centeredSlides: true,
-					// zoom : true, 
-					watchOverflow: true,				 
+					// zoom : true,
+					watchOverflow: true,
 					// When enabled Swiper will be disabled and hide navigation buttons on case there are not enough slides for sliding
 				});
 
@@ -221,24 +221,24 @@ export default {
 				// //   	// console.log('slide changed', vm.mySwiper.activeIndex);
 				// //   	vm.tab = "tab"+(vm.mySwiper.activeIndex)
 				// // 	// vm.tabWatch(('tab'+(vm.mySwiper.activeIndex + 1)))
-				// // });				
+				// // });
 
 
 				// vm.mySwiper.on('slideChangeTransitionStart', function () {
 				// 	vm.isDisableSwiper = true
-				// });				
+				// });
 
-				
+
 				// vm.mySwiper.on('slideChangeTransitionEnd', function () {
 				//   	// console.log('slide changed', vm.mySwiper.activeIndex);
 				//   	vm.tab = "tab"+(vm.mySwiper.activeIndex)
   		// 			vm.tabWatch('tab'+vm.mySwiper.activeIndex)
 
-				// });						
+				// });
 			},
 		    // prop_ready(value) {
 		    //   return this['tab_'+value+'_ready']
-		    // },			
+		    // },
 			async onChangeTab(item, index){
 
 				if(this.isDelaySwiper) return
@@ -260,7 +260,7 @@ export default {
 
 				this.mySwiper.slideTo(item.id);
 
-			},     
+			},
 		    tabWatch(val) {
 		      this.scrollTopTab()
 
@@ -271,7 +271,7 @@ export default {
 		      this.tab_4_ready = false
 		      this.tab_5_ready = false
 		    //   this.tab_6_ready = false
-		      
+
 		      // if(this.el_tab !== null) {
 		      // 	this.scrollToElement(this.el_tab, 48, 0)
 		      // }
@@ -311,7 +311,7 @@ export default {
 		        }
 		      }, 0)
 
-		    },				 
+		    },
 		},
 		async mounted() {
 			// alert(this.$q.platform.is.mobile)
@@ -335,7 +335,7 @@ export default {
 			// 	this.tab = 'tab2'
 			// }, 2000)
 
-		},  
+		},
 		props: {
 			isSwipeableTab: {
 				default: false,
@@ -349,11 +349,11 @@ export default {
 				mySwiper: null,
 
 				height_toolbar: 0,
-				height_tab: 0,  
+				height_tab: 0,
 				text: '',
-				tab: 'tab0', // 
+				tab: 'tab0', //
 
-				el_tab: null, 
+				el_tab: null,
 
 				tab_0_ready: false,
 				tab_1_ready: false,
@@ -371,7 +371,7 @@ export default {
 					{ id:"4", value: "tab4", label: "Konsultasi"},
 					{ id:"5", value: "tab5", label: "Menjawab"},
 					// { id:"6", value: "tab6", label: "Live"},
-				]      
+				]
 			}
 		},
 	};

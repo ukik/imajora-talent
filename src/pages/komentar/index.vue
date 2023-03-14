@@ -1,6 +1,7 @@
 <template>
 
-  <!-- <q-page-container> -->
+
+
   <q-pull-to-refresh @refresh="refresh">
 
     <!-- <div v-if="konten.length <= 0 && loading" class="text-center" :style="'min-height' + ($q.screen.height - 50) + 'px'">
@@ -19,7 +20,13 @@
       <template v-for="(item, index) in get_comments" :key="index">
         <Komentar :item="item" />
 
-        <q-item class="q-px-sm" v-for="(item2, index2) in item.childs" clickable v-ripple>
+        <q-item :to="{
+          name:'komentar-balasan',
+          params: {
+            parent_id: 1,
+            id: 1,
+          }
+        }" class="q-px-sm" v-for="(item2, index2) in item.childs" v-ripple clickable>
           <q-item-section class="q-mx-none" avatar></q-item-section>
           <q-item-section>
             <q-item-label class="text-caption"><span class="text-bold">@123 Likes: </span> <span>{{ item2.konten }}</span></q-item-label>
@@ -27,7 +34,7 @@
         </q-item>
 
         <div class="row flex justify-end q-my-md">
-          <q-item clickable dense>
+          <q-item :to="{ name:'komentar-semua', params: { id: 1 } }" clickable dense>
             <q-item-section>
               <q-item-label caption lines="1">View all {{ item.childs_count }} comments</q-item-label>
             </q-item-section>
@@ -49,16 +56,13 @@
     </q-list>
   </q-pull-to-refresh>
 
-  <!-- </q-page-container> -->
-
-
   <q-header bordered unelevated class="bg-white text-black text-center">
     <q-toolbar>
       <q-btn flat dense round @click="onGotoBack" color="blue" icon="arrow_back_ios" />
       <q-toolbar-title>
         Komentar
         <q-badge align="top" color="cyan">
-          {{ get_reply_paginate_total }}
+          {{ get_total }}
         </q-badge>
 
       </q-toolbar-title>
@@ -66,8 +70,6 @@
       <!-- <ActionbarMenu /> -->
     </q-toolbar>
   </q-header>
-
-
 
   <transition name="fade-global" >
     <q-footer class="bg-transparent text-black row flex flex-center">
@@ -85,7 +87,8 @@
     </q-footer>
   </transition>
 
-  <!-- <q-dialog v-model="dialog" v-if="MOUNTED" position="bottom" class="q-pa-sm" full-width maximized>
+  <!--
+  <q-dialog v-model="dialog" v-if="MOUNTED" position="bottom" class="q-pa-sm" full-width maximized>
 
     <q-list class="bg-white">
       <q-item>
@@ -111,35 +114,47 @@
       </q-item>
     </q-list>
 
-  </q-dialog> -->
+  </q-dialog>
+  -->
 
 </template>
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
+// ;
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useKomentarBalasanStore } from 'src/stores/komentar-balasan-store.js'
+import { useKomentarStore } from 'src/stores/komentar-store.js'
 
-import Toolbar from "./components/Toolbar.vue"
 import Komentar from "./components/Komentar.vue"
 
+import { preFetch } from 'quasar/wrappers';
 
 export default {
   computed: {
-    ...mapFields({
-      get_comments:'komentar.comments.data',
-      get_paginate_total:'komentar.comments.total',
-      get_loading:'komentar.loading',
+    ...mapState(useKomentarStore, {
+      get_comments: 'get_comments',
+      get_total: 'get_total',
+      loading: 'loading',
+      init: 'init',
     }),
+    ...mapWritableState(useKomentarStore, [
+      // "reset_prefetch",
+      // "komentar",
+      // "paginate",
+      // "loading",
+      // "last_id",
+      // "init",
+    ]),
   },
-  async preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
-    return store.dispatch('komentar/request')
-  },
+  // async preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
+  //   return store.dispatch('komentar/request')
+  // },
+  preFetch: preFetch(async ({ store }) => {
+    const mystore = useKomentarStore(store);
+    await mystore.request();
+  }),
   components: {
-    Toolbar,
     Komentar,
-
   },
   data() {
     return {

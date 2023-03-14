@@ -5,7 +5,7 @@
 
 			<q-btn class="q-ml-sm" dense unelevated size="10px" color="teal" text-color="white" round icon="play_arrow" @click="onDialog('audio')"/>
 
-			<q-toolbar-title class="q-pa-none" />       
+			<q-toolbar-title class="q-pa-none" />
 
 			<q-btn @click="onSubmitFavorit" dense flat size="14px" color="grey-5" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />
 
@@ -21,7 +21,7 @@
 
 			<q-checkbox class="q-mr-sm" size="34px" v-model="tajweed"></q-checkbox>
 
-		</q-toolbar>  
+		</q-toolbar>
 
 
 		<!-- <q-separator /> -->
@@ -62,7 +62,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields';
+;
 
 const favorit = {
   data() {
@@ -70,7 +70,7 @@ const favorit = {
       status_favorit: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_favorit = this.prop_data.favorit ? true : false
   },
   methods: {
@@ -79,7 +79,7 @@ const favorit = {
           id_pemilik_postingan: this.prop_data.id_user,
           id_postingan: this.prop_data.id,
           type: 'Alquran_Ayat_Model',
-          label: 'alquran',             
+          label: 'alquran',
         }
 
       const request = await this.dispatchVuex('aggregator/set_favorit', form)
@@ -104,11 +104,11 @@ export default {
 	// 	}
 	// },
   	computed: {
-		...mapFields({
-			loading: "alquran_cari_detail.loading", 
-		    // loading: "aggregator.loading",
-    	}),
-  	},  
+		// ...mapFields({
+		// 	loading: "alquran_cari_detail.loading",
+		//     // loading: "aggregator.loading",
+    // 	}),
+  	// },
   	mixins: [favorit],
 	props: {
 		prop_data: {
@@ -123,7 +123,7 @@ export default {
 	methods: {
 	    onDialog(label) {
 	    	this.$emit('onBubbleEvent_Dialog', { alias: label })
-	    },   			
+	    },
 	}
 };
 </script>

@@ -3,9 +3,9 @@
   .is_sticky {
     z-index:8000;
     position: sticky;
-    top: 50px; 
+    top: 50px;
   }
-} 
+}
 </style>
 
 <template>
@@ -17,7 +17,7 @@
     	</q-no-ssr>
 
     	<q-no-ssr>
-    	<q-scroll-area v-show="right_drawer" class="content bg-grey-3 q-mr-xs" :class="[ screen_width > 1014 ? 'is_sticky' : '' ]" :style="height"> 
+    	<q-scroll-area v-show="right_drawer" class="content bg-grey-3 q-mr-xs" :class="[ screen_width > 1014 ? 'is_sticky' : '' ]" :style="height">
 
 		<!-- <q-scroll-area style="height: calc(100% - 50px); margin-top: 50px; border-right: 1px solid #ddd"> -->
     	<!-- <q-scroll-area class="content bg-grey-3 is_sticky q-mr-xs" :style="'height:'+(height - ayat_player)+'px; min-height:'+(height - ayat_player)+'px;'"> -->
@@ -27,18 +27,18 @@
 		  	<Sponsor data-v-step="0" />
 		  	<AlquranGuest v-if="!ayat_terakhir_dibaca.id" class="q-mt-md " data-v-step="1" />
 		  	<AlquranPlayer data-v-step="2" />
-	
+
 		  	<div v-if="logged">
 			  	<AyatTerakhirDibaca v-if="ayat_terakhir_dibaca.id" data-v-step="1" />
-			  	<router-link class="unlink" :to="({ 
+			  	<router-link class="unlink" :to="({
 				    name: 'koin_dompet',
 					params: {
 						id: get_authentication_user.id
-					}			    
+					}
 				  })">
 			  		<Dompet data-v-step="3" />
 			  	</router-link>
-			  	<router-link v-if="lokasi.latitude && lokasi.longitude"  class="unlink" :to="({ 
+			  	<router-link v-if="lokasi.latitude && lokasi.longitude"  class="unlink" :to="({
 				    name: 'sholat',
 				  })">
 				  	<Absensi data-v-step="4" />
@@ -58,26 +58,26 @@
 		</q-scroll-area>
     	</q-no-ssr>
 
-    </q-drawer>	
+    </q-drawer>
 </template>
 
 <script type="text/javascript">
-import { mapFields } from "vuex-map-fields";
+
 import { mapGetters } from "vuex";
 
 
 
 export default {
   	computed: {
-    	...mapFields({
-    		right_drawer: "drawer.right_drawer",
-			ayat_player_display: "alquran_index.ayat_player_display",
-			ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
-		    is_not_player_real_closed: "alquran_index.is_not_player_real_closed", 			
+    // 	...mapFields({
+    // 		right_drawer: "drawer.right_drawer",
+		// 	ayat_player_display: "alquran_index.ayat_player_display",
+		// 	ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
+		//     is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
 
-			lokasi: 'authentication.lokasi',
+		// 	lokasi: 'authentication.lokasi',
 
-		}),
+		// }),
 		...mapGetters({
 			logged: 'authentication/get_user_logged',
 		})
@@ -85,7 +85,7 @@ export default {
 	data() {
 		return {
 			// drawer: true,
-			ayat_player: 0,		
+			ayat_player: 0,
 			height: '',
 			add_height: 51,
 
@@ -143,8 +143,8 @@ export default {
 			    content: 'Terimakasih',
 			    params: {
 			      placement: 'top' // Any valid Popper.js placement. See https://popper.js.org/popper-documentation.html#Popper.placements
-			    }			    
-			  },			  
+			    }
+			  },
 			]
 
 		}

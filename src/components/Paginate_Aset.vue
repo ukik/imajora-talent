@@ -32,7 +32,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields'
+//
 
 export default {
   computed: {

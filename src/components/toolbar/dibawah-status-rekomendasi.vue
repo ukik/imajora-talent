@@ -6,8 +6,8 @@
     </q-avatar>
 
     <div class="q-ml-sm text-grey-6">{{ get_total('suka') }} Suka</div>
-    
-    <q-toolbar-title class="q-pa-none"></q-toolbar-title>       
+
+    <q-toolbar-title class="q-pa-none"></q-toolbar-title>
 
     <!-- <q-btn flat color="grey-7" round icon="favorite_border" /> -->
     <q-btn @click="onSubmitMenyukai" flat color="pink" round :icon="status_suka ? 'favorite' : 'favorite_border'" />
@@ -16,12 +16,12 @@
 
     <q-btn flat color="grey-7" round icon="chat_bubble_outline">
       <q-badge color="red-5" style="font-size:14px;" floating v-if="get_komentar">{{ get_komentar }}</q-badge>
-    </q-btn>    
+    </q-btn>
 
     <q-btn @click="onSubmitFavorit" flat color="grey-7" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />
 
     <q-btn flat color="grey-7" round icon="share" />
-  </q-toolbar>  
+  </q-toolbar>
 </template>
 
 
@@ -30,7 +30,7 @@
 // import { menyukai } from "src/mixins/menyukai"
 // import { favorit } from "src/mixins/favorit"
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 
 const menyukai = {
@@ -41,7 +41,7 @@ const menyukai = {
     }
   },
   props: ['form_menyukai','menyukai'],
-  mounted() {   
+  mounted() {
     this.status_suka = this.get_menyukai
     this.total_suka = this.get_total('suka')
   },
@@ -84,7 +84,7 @@ const favorit = {
     }
   },
   props: ['form_favorit','favorit'],
-  mounted() {   
+  mounted() {
     this.status_favorit = this.get_favorit
   },
   methods: {
@@ -104,13 +104,13 @@ const favorit = {
     },
   }
 }
-  
+
 
 export default {
     computed: {
-      ...mapFields({
-        // data_1: "status_detail.data_1",
-      }),
+      // ...mapFields({
+      //   // data_1: "status_detail.data_1",
+      // }),
       // komentar() {
       //   if(this.komentar_count == null) return 0
       //   return this.komentar_count >= 99 ? '+99' : this.komentar_count
@@ -126,8 +126,8 @@ export default {
           }
 
           return 0
-      }      
-    },  
+      }
+    },
     mixins: [menyukai, favorit],
     methods: {
       // async onSubmitMenyukaiStatus() {
@@ -137,9 +137,9 @@ export default {
       //   // this.total_suka += request.value
       //   this.total_suka = request.data.total
       //   this.status_suka = request.value > 0 ? true : false
-        
+
       //   await this.dispatchVuex('status_detail/action_update_2', { payload: request.data, index: this.index })
-      // },    
+      // },
     },
     props: {
       index: {
@@ -150,7 +150,7 @@ export default {
       },
       prop_data: {
         default: () => ({})
-      },         
+      },
       // suka_count: {
       //   default: 0,
       // },

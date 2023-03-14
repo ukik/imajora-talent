@@ -39,7 +39,7 @@
 // import Tab1 from './riwayat/Screen_Konsultasi'
 // import Tab1 from './riwayat/Screen_Dibeli'
 
-import { mapFields } from 'vuex-map-fields'
+
 
 import { riwayat } from 'src/api/prefetch'
 

@@ -17,19 +17,19 @@
 
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields'
+
 
 export default {
   computed: {
-    ...mapFields({
+    // ...mapFields({
 
-      // page: 'pencarian.index.data.payload.current_page',
-      // keyword: 'pencarian.local.keyword',
-      // min: 'pencarian.local.min',
-      // max: 'pencarian.local.max',
-      // regencies: 'layout.local.regency',
-      // kategori: 'pencarian.local.kategori',
-    }),
+    //   // page: 'pencarian.index.data.payload.current_page',
+    //   // keyword: 'pencarian.local.keyword',
+    //   // min: 'pencarian.local.min',
+    //   // max: 'pencarian.local.max',
+    //   // regencies: 'layout.local.regency',
+    //   // kategori: 'pencarian.local.kategori',
+    // }),
   },
   emits: ["onBubbleEvent"], // wajib agar gak warning
   watch: {

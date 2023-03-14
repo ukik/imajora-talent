@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia';
 import axios from 'axios'
-// import { BlogDetailInterface } from 'src/models/blog';
 
-const paginate = {
+const comments = {
 	current_page: null,
+  data:[],
 	first_page_url: null,
 	from: null,
 	last_page: null,
@@ -17,92 +17,32 @@ const paginate = {
 	total: null,
 }
 
-
-// interface AddressItem {
-//   id:number,
-//   first_name:string,
-//   last_name:string,
-//   email:string,
-//   phone_number:string,
-//   company:string,
-//   address_1:string,
-//   address_2:string,
-//   country:string,
-//   region:string,
-//   kota_asal:string,
-//   kode_pos:number | null | undefined,
-// }
-
-// interface AddressInterface extends Array<AddressItem>{}
-
 export const useKomentarStore = defineStore('komentar', {
   state: () => ({
-    reset_prefetch: 0,
-    komentar: [],
-    paginate,
+    comments: comments,
     loading: false,
-    last_id: null,
     init: false,
-
-    // alamat: <AddressInterface> [
-    //   {
-    //     id:0,
-    //     first_name:'xxx',
-    //     last_name:'xxxx',
-    //     email:'xxxxxx',
-    //     phone_number:'xxxx',
-    //     company:'xxxx',
-    //     address_1:'xxxx',
-    //     address_2:'xxxx',
-    //     country:'xxxx',
-    //     region:'xxxx',
-    //     kota_asal:'xxxx',
-    //     kode_pos:1245,
-    //   }
-    // ],
   }),
   getters: {
     // get_items: (state) => state.alamat,
-    get_reset_prefetch (state) {
-      return state.reset_prefetch
+    // get_reset_prefetch (state) {
+    //   return state.reset_prefetch
+    // },
+
+    get_comments (state) {
+      return state.comments.data
     },
 
-    get_komentar (state) {
-      return state.komentar
+    get_total (state) {
+      return state.comments.total
     },
 
-    get_paginate (state) {
-      return state.paginate
-    },
-
-    get_loading (state) {
-      return state.loading
-    },
-
-
+    // get_loading (state) {
+    //   return state.loading
+    // },
   },
   actions: {
-    async set_komentar(val) {
-      this.komentar = val
-      console.log('set_komentar')
-    },
-    async action_payload () {
-
-      // Reset data hasil prefetch
-      // if(!pull_refresh) {
-      //   if(state.reset_prefetch > 0) {
-      //     let reset_prefetch = state.reset_prefetch
-
-      //     reset_prefetch--
-
-      //     await commit('reset_prefetch', reset_prefetch)
-      //     return
-      //   }
-      // }
-
-      // default options
-      // Loading.show()
-
+    async request (payload = null) {
       if(this.loading) return
 
       this.loading = true
@@ -112,31 +52,7 @@ export const useKomentarStore = defineStore('komentar', {
       this.init = true
       if(!results) return
 
-      const response = results.data.payload
-
-      const paginate = {
-        current_page: response.current_page,
-        first_page_url: response.first_page_url,
-        from: response.from,
-        last_page: response.last_page,
-        last_page_url: response.last_page_url,
-        links: response.links,
-        next_page_url: response.next_page_url,
-        path: response.path,
-        per_page: response.per_page,
-        prev_page_url: response.prev_page_url,
-        to: response.to,
-        total: response.total,
-      }
-
-      // this.last_id = id
-      this.komentar = response.data
-      this.paginate = paginate
-      // this.reset_prefetch = prefetch_refresh
-
-      console.log('xxxxxxxxxxxx')
-      // console.log('xxxxxxxxx', this.komentar)
-      // Loading.hide()
+      this.comments = results.data.payload.comments
     },
 
     async action_payload_more ({ page, segment, id, tag }) {

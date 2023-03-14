@@ -4,6 +4,7 @@ const routes: RouteRecordRaw[] = [
 
 
   { path: '/pinia', component: () => import('pages/pinia.vue') },
+  { path: '/SlideItem', component: () => import('pages/SlideItem.vue') },
 
   {
     path: '/',
@@ -19,8 +20,8 @@ const routes: RouteRecordRaw[] = [
         meta: {
           ssr: true,
           title: 'RegisterPage',
-        // }, component: () => import("pages/RegisterPage.vue")
-        }, component: () => import("pages/komentar/index.vue")
+        }, component: () => import("pages/RegisterPage.vue")
+        // }, component: () => import("pages/komentar/index.vue")
 
       },
 
@@ -105,6 +106,11 @@ const routes: RouteRecordRaw[] = [
           title: 'DetailAudio',
         }, component: () => import("pages/lists/DetailAudio.vue")
       },
+
+
+
+
+
       {
         path: "/komentar",
         name: "komentar",
@@ -113,15 +119,49 @@ const routes: RouteRecordRaw[] = [
           title: 'komentar',
         }, component: () => import("pages/komentar/index.vue")
       },
-
       {
-        path: "/komentar-balasan/:id?",
+        path: "/komentar-semua/:id?",
+        name: "komentar-semua",
+        meta: {
+          ssr: true,
+          title: 'komentar-semua',
+        }, component: () => import("pages/komentar-semua/index.vue")
+      },
+      {
+        path: "/komentar-balasan/:post_id/:parent_id?",
         name: "komentar-balasan",
         meta: {
           ssr: true,
           title: 'komentar-balasan',
         }, component: () => import("pages/komentar-balasan/index.vue")
       },
+
+      {
+        path: "/video-list/:page?",
+        name: "video-list",
+        meta: {
+          ssr: true,
+          title: 'video-list',
+        }, component: () => import("pages/video/list/index.vue")
+      },
+      {
+        path: "/video-komentar-semua/:id?",
+        name: "video-komentar-semua",
+        meta: {
+          ssr: true,
+          title: 'video-komentar-semua',
+        }, component: () => import("pages/video/komentar-semua/index.vue")
+      },
+      {
+        path: "/video-komentar-balasan/:post_id/:parent_id?",
+        name: "video-komentar-balasan",
+        meta: {
+          ssr: true,
+          title: 'video-komentar-balasan',
+        }, component: () => import("pages/video/komentar-balasan/index.vue")
+      },
+
+
 
       {
         path: "/account",

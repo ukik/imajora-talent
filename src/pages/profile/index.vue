@@ -184,7 +184,7 @@
         <TabStudio v-if="tab_category == 'studio'" />
         <TabVenue v-if="tab_category == 'venue'" />
 
-        <!-- <q-tabs v-if="tab_category == 'musisi'" no-caps outside-arrows :mobile-arrows="is_mobile_size && !$is_cordova" dense v-model="tab"
+        <!-- <q-tabs v-if="tab_category == 'musisi'" no-caps outside-arrows :mobile-arrows="is_mobile_size && !is_cordova" dense v-model="tab"
           class="text-pink col-12 text-weight-regular">
           <q-tab name="1"><q-icon size="sm" name="fa fa-drum" class="q-mb-xs"></q-icon>Perform</q-tab>
           <q-tab name="2"><q-icon size="sm" name="fa-solid fa-microphone-lines" class="q-mb-xs"></q-icon>Karir</q-tab>
@@ -195,14 +195,14 @@
         </q-tabs>
 
 
-        <q-tabs v-if="tab_category == 'studio'" align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !$is_cordova" dense inline-label v-model="tab" :breakpoint="0"
+        <q-tabs v-if="tab_category == 'studio'" align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !is_cordova" dense inline-label v-model="tab" :breakpoint="0"
           class="text-teal col-12 text-weight-regular">
           <q-tab name="2" icon="home">&nbsp;&nbsp;Detail</q-tab>
           <q-tab name="3" icon="fa-regular fa-calendar">&nbsp;&nbsp;Agenda</q-tab>
           <q-tab name="4" icon="fa-solid fa-location">&nbsp;&nbsp;Lokasi</q-tab>
         </q-tabs>
 
-        <q-tabs v-if="tab_category == 'venue'" align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !$is_cordova" dense inline-label v-model="tab" :breakpoint="0"
+        <q-tabs v-if="tab_category == 'venue'" align="center" no-caps outside-arrows :mobile-arrows="is_mobile_size && !is_cordova" dense inline-label v-model="tab" :breakpoint="0"
           class="text-primary col-12 text-weight-regular">
           <q-tab name="2" icon="home">&nbsp;&nbsp;Detail</q-tab>
           <q-tab name="3" icon="fa-regular fa-calendar">&nbsp;&nbsp;Agenda</q-tab>
@@ -216,7 +216,7 @@
 
 
 <script>
-import { mapFields } from "vuex-map-fields";
+
 // import Form_Foto from './Form_Foto.vue'
 import Biodata from './biodata.vue'
 // import Social from './Penawaran_Terbaik.vue'

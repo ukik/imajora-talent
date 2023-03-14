@@ -111,7 +111,7 @@
                  :rules="[  ]">
         </q-input>
 
-          
+
         <div class="q-px-md q-mt-md">
           <div class="text-caption q-mb-xs">Ruang Tamu</div>
           <div class="q-col-gutter-sm row" align="left">
@@ -559,54 +559,54 @@
 
 import { reactive, computed } from 'vue'
 
-import { mapFields } from 'vuex-map-fields'
+
 
 export default {
   computed: {
-    ...mapFields({
-      rightDrawerOpen: 'layout.local.rightDrawerOpen',
+    // ...mapFields({
+    //   rightDrawerOpen: 'layout.local.rightDrawerOpen',
 
-      // pencarian
-      page: 'pencarian.index.data.payload.current_page',
-      keyword: 'pencarian.local.keyword',
-      min: 'pencarian.local.min',
-      max: 'pencarian.local.max',
-      regencies: 'layout.local.regency',
-      kategori: 'pencarian.local.kategori',
+    //   // pencarian
+    //   page: 'pencarian.index.data.payload.current_page',
+    //   keyword: 'pencarian.local.keyword',
+    //   min: 'pencarian.local.min',
+    //   max: 'pencarian.local.max',
+    //   regencies: 'layout.local.regency',
+    //   kategori: 'pencarian.local.kategori',
 
-      min_ruang_tamu :'pencarian.local.min_ruang_tamu',
-      max_ruang_tamu :'pencarian.local.max_ruang_tamu',
+    //   min_ruang_tamu :'pencarian.local.min_ruang_tamu',
+    //   max_ruang_tamu :'pencarian.local.max_ruang_tamu',
 
-      min_kamar_mandi :'pencarian.local.min_kamar_mandi',
-      max_kamar_mandi :'pencarian.local.max_kamar_mandi',
+    //   min_kamar_mandi :'pencarian.local.min_kamar_mandi',
+    //   max_kamar_mandi :'pencarian.local.max_kamar_mandi',
 
-      min_kamar_tidur :'pencarian.local.min_kamar_tidur',
-      max_kamar_tidur :'pencarian.local.max_kamar_tidur',
+    //   min_kamar_tidur :'pencarian.local.min_kamar_tidur',
+    //   max_kamar_tidur :'pencarian.local.max_kamar_tidur',
 
-      min_gudang :'pencarian.local.min_gudang',
-      max_gudang :'pencarian.local.max_gudang',
+    //   min_gudang :'pencarian.local.min_gudang',
+    //   max_gudang :'pencarian.local.max_gudang',
 
-      min_lantai :'pencarian.local.min_lantai',
-      max_lantai :'pencarian.local.max_lantai',
+    //   min_lantai :'pencarian.local.min_lantai',
+    //   max_lantai :'pencarian.local.max_lantai',
 
-      min_teras :'pencarian.local.min_teras',
-      max_teras :'pencarian.local.max_teras',
+    //   min_teras :'pencarian.local.min_teras',
+    //   max_teras :'pencarian.local.max_teras',
 
-      min_pintu :'pencarian.local.min_pintu',
-      max_pintu :'pencarian.local.max_pintu',
+    //   min_pintu :'pencarian.local.min_pintu',
+    //   max_pintu :'pencarian.local.max_pintu',
 
-      min_jendela :'pencarian.local.min_jendela',
-      max_jendela :'pencarian.local.max_jendela',
+    //   min_jendela :'pencarian.local.min_jendela',
+    //   max_jendela :'pencarian.local.max_jendela',
 
-      min_ventilasi :'pencarian.local.min_ventilasi',
-      max_ventilasi :'pencarian.local.max_ventilasi',
+    //   min_ventilasi :'pencarian.local.min_ventilasi',
+    //   max_ventilasi :'pencarian.local.max_ventilasi',
 
-      min_taman :'pencarian.local.min_taman',
-      max_taman :'pencarian.local.max_taman',
+    //   min_taman :'pencarian.local.min_taman',
+    //   max_taman :'pencarian.local.max_taman',
 
-      listrik :'pencarian.local.listrik',
-      air :'pencarian.local.air',
-    }),  
+    //   listrik :'pencarian.local.listrik',
+    //   air :'pencarian.local.air',
+    // }),
   },
   watch: {
     // selection(val) {
@@ -647,7 +647,7 @@ export default {
       for (var i = 0; i < kategori.length; i++) {
         // kategori[i]
         this.desert[kategori[i]] = true
-      }    
+      }
     },
     onBubbleEvent() {
       this.$emit('onBubbleEvent')
@@ -655,9 +655,9 @@ export default {
     onProses() {
       this.$store.commit('pencarian/kategori', this.selection)
 
-      this.$router.replace({ name: 'pencarian', 
-        params: { 
-          page: this.page 
+      this.$router.replace({ name: 'pencarian',
+        params: {
+          page: this.page
         },
         query: {
           keyword: this.keyword,
@@ -668,40 +668,40 @@ export default {
 
           min_ruang_tamu :this.min_ruang_tamu,
           max_ruang_tamu :this.max_ruang_tamu,
-        
+
           min_kamar_mandi :this.min_kamar_mandi,
           max_kamar_mandi :this.max_kamar_mandi,
-        
+
           min_kamar_tidur :this.min_kamar_tidur,
           max_kamar_tidur :this.max_kamar_tidur,
-        
+
           min_gudang :this.min_gudang,
           max_gudang :this.max_gudang,
-        
+
           min_lantai :this.min_lantai,
           max_lantai :this.max_lantai,
-        
+
           min_teras :this.min_teras,
           max_teras :this.max_teras,
-        
+
           min_pintu :this.min_pintu,
           max_pintu :this.max_pintu,
-        
+
           min_jendela :this.min_jendela,
           max_jendela :this.max_jendela,
-        
+
           min_ventilasi :this.min_ventilasi,
           max_ventilasi :this.max_ventilasi,
-        
+
           min_taman :this.min_taman,
           max_taman :this.max_taman,
-        
+
           listrik :this.listrik,
           air :this.air,
-                  
-        } 
-      })      
-    }   
+
+        }
+      })
+    }
   }
 };
 </script>

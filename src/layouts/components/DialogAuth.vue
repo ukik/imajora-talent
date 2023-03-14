@@ -38,13 +38,13 @@
 import Login from 'src/pages/LoginPage'
 import Register from 'src/pages/RegisterPage'
 
-import { mapFields } from 'vuex-map-fields'
+
 
 export default {
 	computed: {
-		...mapFields({
-		}),  
-	},  
+		// ...mapFields({
+		// }),
+	},
 	data() {
 		return {
 			tab: '1',

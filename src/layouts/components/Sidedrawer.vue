@@ -28,7 +28,7 @@
       <!-- <q-separator v-if="is_logged" style="margin-top:62px;" color="white" /> -->
 
       <!-- GCM -->
-      <!-- 
+      <!--
     <q-item dense
             clickable
             v-ripple
@@ -239,7 +239,7 @@
         clickable
         v-ripple
         class="my-menu-link"
-        :class="[ route_name == 'bantuan' || route_name == 'bantuan_detail' ? 'my-menu-link-active' : '' ]"        
+        :class="[ route_name == 'bantuan' || route_name == 'bantuan_detail' ? 'my-menu-link-active' : '' ]"
       >
         <q-item-section avatar>
           <q-icon name="help_outline" />
@@ -421,27 +421,27 @@
 <script>
 import { ref } from "vue";
 
-import { mapFields } from "vuex-map-fields";
+
 
 export default {
   computed: {
-    ...mapFields({
-      bookmark_page: "bookmark.index.data.payload.current_page",
-      riwayat_page: "riwayat.index.data.payload.current_page",
+    // ...mapFields({
+    //   bookmark_page: "bookmark.index.data.payload.current_page",
+    //   riwayat_page: "riwayat.index.data.payload.current_page",
 
-      aset: "aset",
-      aset_tab: "aset.tab",
+    //   aset: "aset",
+    //   aset_tab: "aset.tab",
 
-      form_id: "formulir.param_id",
+    //   form_id: "formulir.param_id",
 
-      // pencarian
-      pencarian_page: "pencarian.index.data.payload.current_page",
-      pencarian_keyword: "pencarian.local.keyword",
-      pencarian_min: "pencarian.local.min",
-      pencarian_max: "pencarian.local.max",
-      pencarian_regencies: "layout.local.regency",
-      pencarian_kategori: "pencarian.local.kategori",
-    }),
+    //   // pencarian
+    //   pencarian_page: "pencarian.index.data.payload.current_page",
+    //   pencarian_keyword: "pencarian.local.keyword",
+    //   pencarian_min: "pencarian.local.min",
+    //   pencarian_max: "pencarian.local.max",
+    //   pencarian_regencies: "layout.local.regency",
+    //   pencarian_kategori: "pencarian.local.kategori",
+    // }),
     aset_page() {
       return this.aset[this.aset_tab].data.payload.current_page;
     },

@@ -2,11 +2,11 @@
 <div>
 	<q-page v-if="!loading && konten.length <= 0 && MOUNTED" class="flex flex-center">
 		<BlankArtikel />
-	</q-page>   
+	</q-page>
 
 	<SpinnerOrbit v-if="loading" />
 
-	<!-- <transition name="fade-global">		
+	<!-- <transition name="fade-global">
 		<div v-if="MOUNTED && konten.length > 0">
 			<div v-for="(item, index) in konten" :key="index" >
 				<ProfileUtama class="q-px-sm q-pt-sm q-pb-sm" />
@@ -15,54 +15,54 @@
 
 				<q-separator />
 			</div>
-		</div>	  
+		</div>
 	</transition> -->
 
     <div v-if="konten.length > 0" v-for="(item, index) in konten" :key="index" >
       <div>
         <Profile :prop_data="item.user" class="q-px-sm q-py-sm" />
 
-        <!-- <ItemProfileLayoutGambar 
+        <!-- <ItemProfileLayoutGambar
           :index="index"
           :form="{
                 id_pemilik_postingan: item.id_user,
                 id_postingan: item.id,
                 type: 'Gambar_Model',
-                label: 'gambar',                 
+                label: 'gambar',
           }"
           :prop_total="item.user_totals"
           :created_at="item.created_at"
           :menyukai="item.menyukai"
-          :prop_content="item.judul" 
-          prop_content_tambahan="" 
+          :prop_content="item.judul"
+          prop_content_tambahan=""
           :prop_gambar="item.user_gambars"
           prop_tipe="Gambar_Model" /> -->
 
-		<Item 
+		<Item
 			:form="{
 			    id_pemilik_postingan: item.id_user,
 			    id_postingan: item.id,
 			    type: item.tipe,
-			    label: onLabelModel(item.tipe),   					
+			    label: onLabelModel(item.tipe),
 			}"
 			:prop_route="{
 				name: onDetailRoute(item.tipe),
 				params: {
 					id: item.id
 				}
-			}"				
+			}"
 			:prop_total="item.user_totals"
 			:created_at="item.created_at"
 			:menyukai="item.menyukai"
-			:prop_content="item.judul" 
-			prop_content_tambahan="" 
+			:prop_content="item.judul"
+			prop_content_tambahan=""
 			:prop_gambar="item.user_gambars"
 			:prop_tipe="item.tipe" />
 
 
-      </div>      
+      </div>
       <q-separator />
-    </div>  
+    </div>
 
 
 </div>
@@ -70,17 +70,17 @@
 
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
 	computed: {
-		...mapFields({
-		      konten: "profile.konten_gambar",
-		      paginate: "profile.paginate_gambar",
-		      loading: "profile.loading",     
-		      current_tab: "profile.current_tab",  
-		}),
-	}, 
+		// ...mapFields({
+		//       konten: "profile.konten_gambar",
+		//       paginate: "profile.paginate_gambar",
+		//       loading: "profile.loading",
+		//       current_tab: "profile.current_tab",
+		// }),
+	},
 	data() {
 		return {
 			MOUNTED: false,
@@ -90,7 +90,7 @@ export default {
 	components: {
 		Profile: () => import("../components/Profile"),
 		Item: () => import("../components/Gambar"),
-	},	
+	},
 	watch: {
 		loading(val) {
 			if(!val) {
@@ -113,7 +113,7 @@ export default {
 	    }, 1000)
 
 		this.height = "min-height:" + Number(this.$q.screen.height - 50 - 48) + "px"
-	},			
-	
+	},
+
 };
 </script>

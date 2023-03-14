@@ -139,7 +139,7 @@
 
 
 <script>
-import { mapFields } from "vuex-map-fields";
+
 
 export default {
   props: {

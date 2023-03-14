@@ -6,7 +6,7 @@
 
 <!--     <div class="q-mr-sm">
         <q-btn flat color="grey" size="12px" round icon="content_paste" />
-        <span style="font-size:12px;">{{ data_1.count_jawaban }}</span> 
+        <span style="font-size:12px;">{{ data_1.count_jawaban }}</span>
     </div >
  -->
     <div class="q-mr-sm">
@@ -23,14 +23,14 @@
 
     <q-btn flat color="grey-5" round icon="chat_bubble_outline">
       <q-badge color="red" v-if="total_komentar" floating> {{ total_komentar }} </q-badge>
-    </q-btn>    
+    </q-btn>
 
     <!-- <q-btn flat color="grey-5" round icon="turned_in_not" /> -->
-    <q-btn @click="onSubmitFavorit" flat color="grey-7" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />    
+    <q-btn @click="onSubmitFavorit" flat color="grey-7" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />
 
     <q-btn flat color="grey-5" round icon="share" />
 
-  </q-toolbar>  
+  </q-toolbar>
 </template>
 
 
@@ -39,7 +39,7 @@
 // import { menyukai } from "src/mixins/menyukai"
 // import { favorit } from "src/mixins/favorit"
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 const menyukai = {
   data() {
@@ -48,7 +48,7 @@ const menyukai = {
       status_suka: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_suka = this.get_menyukai
     this.total_suka = this.get_total('suka')
   },
@@ -62,7 +62,7 @@ const menyukai = {
         id_pemilik_postingan: this.data_1.id_user,
         id_postingan: this.data_1.id,
         type: 'Jawaban_Konsultasi_Model',
-        label: 'jawaban_konsultasi',            
+        label: 'jawaban_konsultasi',
       }
 
       console.log(this.data_1)
@@ -101,7 +101,7 @@ const menyukai = {
 //   computed: {
 //     get_komentar() {
 //       if(this.get_total('komentar') == null) return 0
-//       return this.get_total('komentar') >= 99 ? '+99' : this.get_total('komentar') 
+//       return this.get_total('komentar') >= 99 ? '+99' : this.get_total('komentar')
 //     },
 //   }
 // }
@@ -112,7 +112,7 @@ const favorit = {
       status_favorit: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_favorit = this.get_favorit
   },
   methods: {
@@ -121,7 +121,7 @@ const favorit = {
         id_pemilik_postingan: this.data_1.id_user,
         id_postingan: this.data_1.id,
         type: 'Jawaban_Konsultasi_Model',
-        label: 'jawaban_konsultasi',             
+        label: 'jawaban_konsultasi',
       }
 
       const request = await this.dispatchVuex('aggregator/set_favorit', form)
@@ -137,7 +137,7 @@ const favorit = {
     },
   }
 }
-  
+
 
 const dukungan = {
   data() {
@@ -146,9 +146,9 @@ const dukungan = {
       status_dukungan: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_dukungan = this.get_dukungan
-    this.total_dukungan = this.get_total('dukungan') 
+    this.total_dukungan = this.get_total('dukungan')
   },
   methods: {
     async onSubmitDukungan() {
@@ -156,7 +156,7 @@ const dukungan = {
         id_pemilik_postingan: this.data_1.id_user,
         id_postingan: this.data_1.id,
         type: 'Jawaban_Konsultasi_Model',
-        label: 'jawaban_konsultasi',             
+        label: 'jawaban_konsultasi',
       }
 
       const request = await this.dispatchVuex('aggregator/set_dukungan', form)
@@ -200,11 +200,11 @@ const komentar = {
         //   }
 
         //   return 0
-        // }         
-    },      
-}  
+        // }
+    },
+}
 
-  
+
 // const jawaban = {
 //     computed: {
 //         get_jawaban() {
@@ -217,28 +217,28 @@ const komentar = {
 //           }
 
 //           return 0
-//         }         
-//     },      
-// }  
+//         }
+//     },
+// }
 
 export default {
     computed: {
-      ...mapFields({
-          dialog: "konsultasi_jawaban_detail.dialog",
+      // ...mapFields({
+      //     dialog: "konsultasi_jawaban_detail.dialog",
 
-          total_komentar: "konsultasi_jawaban_detail.total_komentar",
+      //     total_komentar: "konsultasi_jawaban_detail.total_komentar",
 
-          id_pemilik_postingan: "konsultasi_jawaban_detail.id_pemilik_postingan",
-          id_komentar: "konsultasi_jawaban_detail.id_komentar",
-          text_komentar: "konsultasi_jawaban_detail.text_komentar",    
-          sumber_aksi: "konsultasi_jawaban_detail.sumber_aksi",  
+      //     id_pemilik_postingan: "konsultasi_jawaban_detail.id_pemilik_postingan",
+      //     id_komentar: "konsultasi_jawaban_detail.id_komentar",
+      //     text_komentar: "konsultasi_jawaban_detail.text_komentar",
+      //     sumber_aksi: "konsultasi_jawaban_detail.sumber_aksi",
 
-          data_1: "konsultasi_jawaban_detail.data_1",
-          user_totals: "konsultasi_jawaban_detail.data_1.user_totals",
-          menyukai: "konsultasi_jawaban_detail.data_1.menyukai",
-          favorit: "konsultasi_jawaban_detail.data_1.favorit",
-          dukungan: "konsultasi_jawaban_detail.data_1.dukungan",
-      }),
+      //     data_1: "konsultasi_jawaban_detail.data_1",
+      //     user_totals: "konsultasi_jawaban_detail.data_1.user_totals",
+      //     menyukai: "konsultasi_jawaban_detail.data_1.menyukai",
+      //     favorit: "konsultasi_jawaban_detail.data_1.favorit",
+      //     dukungan: "konsultasi_jawaban_detail.data_1.dukungan",
+      // }),
       get_komentar() {
           if(this.user_totals.length <= 0) return 0
 
@@ -249,7 +249,7 @@ export default {
           }
 
           return 0
-      }         
+      }
       // komentar() {
       //   if(this.data_1.komentar_count == null) return 0
       //   return this.data_1.komentar_count >= 99 ? '+99' : this.data_1.komentar_count
@@ -258,7 +258,7 @@ export default {
       //   if(this.data_1.suka_count == null) return 0
       //   return this.data_1.suka_count >= 99 ? '+99' : this.data_1.suka_count
       // }
-    },  
+    },
     mixins: [menyukai, favorit, dukungan, komentar],
 };
 </script>

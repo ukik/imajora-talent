@@ -78,18 +78,18 @@
 </template>
 
 <script>
-import { mapFields } from "vuex-map-fields";
+
 
 export default {
   computed: {
-    ...mapFields({
-      // uuid: 'profile.index.data.payload.uuid',
-      nama: "profile.index.data.payload.nama",
-      email: "profile.index.data.payload.email",
-      country_selected: "profile.index.data.payload.country_selected",
-      telepon: "profile.index.data.payload.telepon",
-      alamat: "profile.index.data.payload.alamat",
-    }),
+    // ...mapFields({
+    //   // uuid: 'profile.index.data.payload.uuid',
+    //   nama: "profile.index.data.payload.nama",
+    //   email: "profile.index.data.payload.email",
+    //   country_selected: "profile.index.data.payload.country_selected",
+    //   telepon: "profile.index.data.payload.telepon",
+    //   alamat: "profile.index.data.payload.alamat",
+    // }),
   },
   methods: {
     async onSubmit() {

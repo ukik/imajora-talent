@@ -23,7 +23,7 @@
         </q-item-section>
 
         <q-item-section side>
-          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>              
+          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>
           <q-icon :name="item.status == 'maksimal' ? 'check_circle_outline' : 'history'" :color="item.status == 'tutup' ? 'red-3' : 'light-blue-3'" />
         </q-item-section>
       </q-item>
@@ -45,7 +45,7 @@
         </q-item-section>
 
         <q-item-section side>
-          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>              
+          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>
           <q-icon :name="item.status == 'maksimal' ? 'check_circle_outline' : 'history'" :color="item.status == 'tutup' ? 'red-3' : 'light-blue-3'" />
         </q-item-section>
       </q-item>
@@ -68,16 +68,16 @@
         </q-item-section>
 
         <q-item-section side>
-          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>              
+          <q-item-label>{{ item.target }}/{{ item.batas }}</q-item-label>
           <q-icon :name="item.status == 'maksimal' ? 'check_circle_outline' : 'history'" :color="item.status == 'tutup' ? 'red-3' : 'light-blue-3'" />
         </q-item-section>
       </q-item>
 
       <div class="text-center">
-        <q-btn color="blue-5" dense label="Selengkapnya" flat :to="({ 
+        <q-btn color="blue-5" dense label="Selengkapnya" flat :to="({
           name: 'koin',
         })"/>
-      </div>      
+      </div>
     </q-list>
 
 </div>
@@ -85,28 +85,28 @@
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 const vuex = {
   computed: {
-    ...mapFields({
-      koin_banner: "koin.koin_banner",
-      user: "koin.user",
-    })
-  },  
+    // ...mapFields({
+    //   koin_banner: "koin.koin_banner",
+    //   user: "koin.user",
+    // })
+  },
 }
 
 export default {
   mixins: [vuex],
   mounted() {
-    this.$store.dispatch('koin/action_payload')    
+    this.$store.dispatch('koin/action_payload')
   },
   data() {
     return {
       slide: 0,
       autoplay: true
     }
-  },     
+  },
   computed: {
     computed_get_koin_bonus_harian_target_membaca_condition() {
       let total = 0
@@ -128,7 +128,7 @@ export default {
         total += this.get_koin_bonus_harian_target_menjawab_condition[i]['koin']
       }
       return total
-    }            
+    }
   },
   methods: {
     async refresh (done) {
@@ -141,8 +141,8 @@ export default {
 
 <style type="text/css" scoped>
 .gradient-2 {
-  background-image: linear-gradient(to bottom right, rgb(0, 223, 142), rgb(0,210,181) , rgb(0,193,234)); 
-}    
+  background-image: linear-gradient(to bottom right, rgb(0, 223, 142), rgb(0,210,181) , rgb(0,193,234));
+}
 
 
 .zoom {

@@ -1,5 +1,5 @@
 <template>
-  <q-tabs no-caps outside-arrows :mobile-arrows="is_mobile_size && !$is_cordova" dense v-model="tab"
+  <q-tabs no-caps outside-arrows :mobile-arrows="is_mobile_size && !is_cordova" dense v-model="tab"
     class="text-pink col-12 text-weight-regular">
     <q-tab @click="init = true" name="4"><q-icon size="sm" name="fa-solid fa-list"
         class="q-mb-xs"></q-icon>Playlist</q-tab>

@@ -295,7 +295,7 @@
 
 
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 
 const mixin_paginate = {
@@ -341,48 +341,48 @@ const mixin_paginate = {
 export default {
   mixins: [mixin_paginate],
   computed: {
-    ...mapFields({
-      // paginate_beranda: "profile.paginate_beranda",
-      // paginate_live: "profile.paginate_live",
-      // paginate_gambar: "profile.paginate_gambar",
-      // paginate_video: "profile.paginate_video",
-      // paginate_konsultasi: "profile.paginate_konsultasi",
-      // paginate_jawaban_konsultasi: "profile.paginate_jawaban_konsultasi",
-      // paginate_artikel: "profile.paginate_artikel",
+    // ...mapFields({
+    //   // paginate_beranda: "profile.paginate_beranda",
+    //   // paginate_live: "profile.paginate_live",
+    //   // paginate_gambar: "profile.paginate_gambar",
+    //   // paginate_video: "profile.paginate_video",
+    //   // paginate_konsultasi: "profile.paginate_konsultasi",
+    //   // paginate_jawaban_konsultasi: "profile.paginate_jawaban_konsultasi",
+    //   // paginate_artikel: "profile.paginate_artikel",
 
-      konten_beranda: "profile.konten_beranda",
-      paginate_beranda: "profile.paginate_beranda",
-      paginate_beranda_current_page: "profile.paginate_beranda.current_page",
+    //   konten_beranda: "profile.konten_beranda",
+    //   paginate_beranda: "profile.paginate_beranda",
+    //   paginate_beranda_current_page: "profile.paginate_beranda.current_page",
 
-      konten_artikel: "profile.konten_artikel",
-      paginate_artikel: "profile.paginate_artikel",
-      paginate_artikel_current_page: "profile.paginate_artikel.current_page",
+    //   konten_artikel: "profile.konten_artikel",
+    //   paginate_artikel: "profile.paginate_artikel",
+    //   paginate_artikel_current_page: "profile.paginate_artikel.current_page",
 
-      konten_gambar: "profile.konten_gambar",
-      paginate_gambar: "profile.paginate_gambar",
-      paginate_gambar_current_page: "profile.paginate_gambar.current_page",
+    //   konten_gambar: "profile.konten_gambar",
+    //   paginate_gambar: "profile.paginate_gambar",
+    //   paginate_gambar_current_page: "profile.paginate_gambar.current_page",
 
-      konten_jawaban_konsultasi: "profile.konten_jawaban_konsultasi",
-      paginate_jawaban_konsultasi: "profile.paginate_jawaban_konsultasi",
-      paginate_jawaban_konsultasi_current_page: "profile.paginate_jawaban_konsultasi.current_page",
+    //   konten_jawaban_konsultasi: "profile.konten_jawaban_konsultasi",
+    //   paginate_jawaban_konsultasi: "profile.paginate_jawaban_konsultasi",
+    //   paginate_jawaban_konsultasi_current_page: "profile.paginate_jawaban_konsultasi.current_page",
 
-      konten_konsultasi: "profile.konten_artikel",
-      paginate_konsultasi: "profile.paginate_konsultasi",
-      paginate_konsultasi_current_page: "profile.paginate_konsultasi.current_page",
+    //   konten_konsultasi: "profile.konten_artikel",
+    //   paginate_konsultasi: "profile.paginate_konsultasi",
+    //   paginate_konsultasi_current_page: "profile.paginate_konsultasi.current_page",
 
-      konten_live: "profile.konten_live",
-      paginate_live: "profile.paginate_live",
-      paginate_live_current_page: "profile.paginate_live.current_page",
+    //   konten_live: "profile.konten_live",
+    //   paginate_live: "profile.paginate_live",
+    //   paginate_live_current_page: "profile.paginate_live.current_page",
 
-      konten_video: "profile.konten_video",
-      paginate_video: "profile.paginate_video",
-      paginate_video_current_page: "profile.paginate_video.current_page",
+    //   konten_video: "profile.konten_video",
+    //   paginate_video: "profile.paginate_video",
+    //   paginate_video_current_page: "profile.paginate_video.current_page",
 
-      profile: "profile.profile",
-      // paginate: "profile.paginate",
-      current_tab: "profile.current_tab",
-      loading: "aggregator.loading",
-    }),
+    //   profile: "profile.profile",
+    //   // paginate: "profile.paginate",
+    //   current_tab: "profile.current_tab",
+    //   loading: "aggregator.loading",
+    // }),
     total_favorit() {
       return Math.round(
         this.get_null_checker(this.profile.view_total_5, 'total_favorit_artikel') +

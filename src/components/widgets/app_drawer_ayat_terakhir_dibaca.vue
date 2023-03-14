@@ -1,11 +1,11 @@
 <style scoped>
 
 .gradient-1 {
-  background-image: linear-gradient(to right, rgb(220, 99, 255), rgb(165,120,255) , rgb(88,151,255));  
+  background-image: linear-gradient(to right, rgb(220, 99, 255), rgb(165,120,255) , rgb(88,151,255));
 }
 
 .gradient-2 {
-  background-image: linear-gradient(to left, rgb(0, 223, 142), rgb(0,210,181) , rgb(0,193,234), rgb(88,151,255), rgb(88,151,255)); 
+  background-image: linear-gradient(to left, rgb(0, 223, 142), rgb(0,210,181) , rgb(0,193,234), rgb(88,151,255), rgb(88,151,255));
 }
 
 
@@ -13,15 +13,15 @@
 
 <template>
 
-<div class="q-mt-md rounded-borders"> 
-	<div v-if="ayat_terakhir_dibaca.id" class="flex flex-center row text-white">  
+<div class="q-mt-md rounded-borders">
+	<div v-if="ayat_terakhir_dibaca.id" class="flex flex-center row text-white">
 
 		<q-btn rounded :to="goto_ayat" unelevated no-caps class="q-my-sm text-left col gradient-2">
 			  <q-toolbar>
 
 			    <div class="text-left">
 			      <span v-if="ayat_terakhir_dibaca.ayat" class="weight-500" style="font-size:14px;">
-			        {{ ayat_terakhir_dibaca.ayat.surat.nama_id }}: 
+			        {{ ayat_terakhir_dibaca.ayat.surat.nama_id }}:
 			        <span class="q-ml-sm text-body2">{{ ayat_terakhir_dibaca.ayat.ayat_urutan }} </span>
 			      </span>
 			      <div class="text-caption" style="margin-top:-4px;">Terakhir Dibaca</div>
@@ -37,21 +37,21 @@
 		</q-btn>
 	</div>
 </div>
-	
+
 </template>
 
 <script type="text/javascript">
-import { mapFields } from "vuex-map-fields";
+
 import { mapGetters } from "vuex";
 
 export default {
-  	computed: {
-    	...mapFields({
-			ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
-		}),
+  	// computed: {
+    // 	...mapFields({
+		// 	ayat_terakhir_dibaca: "alquran.ayat_terakhir_dibaca",
+		// }),
 		...mapGetters({
 			logged: 'authentication/get_user_logged',
-		}),		
+		}),
 		get_null_checker() {
 			return function(val, key) {
 				if(val == undefined || val == null) return
@@ -60,9 +60,9 @@ export default {
 		},
 		goto_ayat() {
 			if(!this.logged) {
-				return ({ 
-				  name: 'alquran_detail', 
-				  params: { 
+				return ({
+				  name: 'alquran_detail',
+				  params: {
 				    id: 1,
 				  },
 				  // query: {
@@ -70,7 +70,7 @@ export default {
 				  // 	page: ayat.pagination_page,
 				  // 	current_index: ayat.current_index,
 				  // 	// tipe: ayat.tipe,
-				  // } 
+				  // }
 				})
 			}
 
@@ -78,9 +78,9 @@ export default {
 			const ayat = this.ayat_terakhir_dibaca
 			switch(ayat.tipe) {
 				case "surat":
-					return ({ 
-					  name: 'alquran_detail', 
-					  params: { 
+					return ({
+					  name: 'alquran_detail',
+					  params: {
 					    id: ayat.last_ayat_or_juz,
 					  },
 					  query: {
@@ -88,13 +88,13 @@ export default {
 					  	page: ayat.pagination_page,
 					  	current_index: ayat.current_index,
 					  	// tipe: ayat.tipe,
-					  } 
+					  }
 					})
-					
+
 				case "juz":
-					return ({ 
-					  name: 'alquran_detail_juz', 
-					  params: { 
+					return ({
+					  name: 'alquran_detail_juz',
+					  params: {
 					    id: ayat.last_ayat_or_juz,
 					  },
 					  query: {
@@ -102,19 +102,19 @@ export default {
 					  	page: ayat.pagination_page,
 					  	current_index: ayat.current_index,
 					  	// tipe: ayat.tipe,
-					  } 
+					  }
 					})
-			}		
+			}
 		}
 	},
 	watch: {
 		ayat_terakhir_dibaca(val) {
 			console.log(val)
 		},
-		async logged(val) { 
+		async logged(val) {
 			if(val) {
 				setTimeout(async () => {
-					const results = await this.$axios.get('api/page/alquran_ayat_terakhir_dibaca') 
+					const results = await this.$axios.get('api/page/alquran_ayat_terakhir_dibaca')
 					// if(!results) return
 					// if(!results.data) return
 					// if(!results.data.data_1) return
@@ -130,7 +130,7 @@ export default {
 	async beforeMount() {
 		if(this.logged) {
 			setTimeout(async () => {
-				const results = await this.$axios.get('api/page/alquran_ayat_terakhir_dibaca') 
+				const results = await this.$axios.get('api/page/alquran_ayat_terakhir_dibaca')
 				console.log('beforeMount', results)
 				try {
 					this.dispatchVuex('alquran/ayat_terakhir_dibaca', results.data.data_1)

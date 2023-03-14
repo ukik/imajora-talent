@@ -31,7 +31,7 @@
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
-import { mapFields } from "vuex-map-fields";
+
 import Form_Foto from './accounts/Form_Foto.vue'
 import { ref } from 'vue'
 export default {

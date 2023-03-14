@@ -31,11 +31,12 @@
 
       <q-item-label class="row">
 
-        <q-item class="q-pa-none col-auto" clickable dense v-ripple>
+        <!-- <q-item class="q-pa-none col-auto" clickable dense v-ripple>
           <q-item-section>
             <q-item-label caption>{{ item.created_at }}</q-item-label>
           </q-item-section>
-        </q-item>
+        </q-item> -->
+        <q-btn icon="replay" class="q-mt-sm" flat size="sm" label="Balas" dense></q-btn>
 
       </q-item-label>
     </q-item-section>

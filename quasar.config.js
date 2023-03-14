@@ -23,14 +23,13 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli-vite/boot-files
     boot: [
-      'pinia',
       "i18n",
       "plugins",
 
       // 'axios',
       'common',
       'server_side',
-      // 'router', // WAJIB ADA SSR (gak tau kenapa tapi PENTING)
+      'router',
       'event_bus',
       'filter',
       'directive',
@@ -118,7 +117,9 @@ module.exports = configure(function (/* ctx */) {
       // you can manually specify Quasar components/directives to be available everywhere:
       //
       // components: [],
-      // directives: [],
+      directives: [
+        'TouchHold'
+      ],
 
       // Quasar plugins
       plugins: [

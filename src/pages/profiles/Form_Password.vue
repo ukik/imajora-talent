@@ -64,15 +64,15 @@
 </template>
 
 <script>
-import { mapFields } from "vuex-map-fields";
+
 
 export default {
   computed: {
-    ...mapFields({
-      old_sandi: "profile.form_sandi.old_sandi",
-      new_sandi: "profile.form_sandi.new_sandi",
-      new_sandi_konfirmasi: "profile.form_sandi.new_sandi_konfirmasi",
-    }),
+    // ...mapFields({
+    //   old_sandi: "profile.form_sandi.old_sandi",
+    //   new_sandi: "profile.form_sandi.new_sandi",
+    //   new_sandi_konfirmasi: "profile.form_sandi.new_sandi_konfirmasi",
+    // }),
   },
   methods: {
     rule_konfirmasi(val) {

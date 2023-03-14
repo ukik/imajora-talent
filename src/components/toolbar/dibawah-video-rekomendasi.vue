@@ -4,19 +4,19 @@
 
     <q-btn @click="onSubmitMenyukai" unelevated color="grey-1" text-color="red-4" size="md" class="col q-pa-xs q-mx-xs" round :icon="status_suka ? 'favorite' : 'favorite_border'">
       <q-badge color="pink-4" style="font-size:14px;" v-if="total_suka" floating>{{ total_suka }}</q-badge>
-    </q-btn>    
+    </q-btn>
 
     <q-btn unelevated color="grey-1" text-color="grey" size="md" class="q-pa-xs q-mx-xs" round icon="chat_bubble_outline">
       <q-badge color="light-blue-4" style="font-size:14px;" v-if="get_komentar" floating>{{ get_komentar }}</q-badge>
     </q-btn>
 
-    <q-btn @click="onSubmitFavorit" unelevated color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'"></q-btn>    
+    <q-btn @click="onSubmitFavorit" unelevated color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'"></q-btn>
 
     <q-btn unelevated color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round icon="share"></q-btn>
 
-    <q-btn v-if="is_cordova" unelevated color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round icon="fullscreen"></q-btn> 
+    <q-btn v-if="is_cordova" unelevated color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round icon="fullscreen"></q-btn>
 
-    <q-btn unelevated @click="$emit('onBubbleEvent_ResetVideo')" color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round icon="refresh"></q-btn>    
+    <q-btn unelevated @click="$emit('onBubbleEvent_ResetVideo')" color="grey-1" text-color="grey" class="q-pa-xs q-mx-xs" size="md" round icon="refresh"></q-btn>
 
     <q-separator class="q-mt-sm" />
   </div>
@@ -27,7 +27,7 @@
 
 
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 
 const menyukai = {
@@ -38,7 +38,7 @@ const menyukai = {
     }
   },
   props: ['form_menyukai', 'menyukai'],
-  mounted() {   
+  mounted() {
     this.status_suka = this.get_menyukai
     this.total_suka = this.get_total('suka')
   },
@@ -50,7 +50,7 @@ const menyukai = {
       this.total_suka = request.data.total
       this.status_suka = request.value > 0 ? true : false
 
-      await this.dispatchVuex('video_detail/action_update', request.data)      
+      await this.dispatchVuex('video_detail/action_update', request.data)
     },
   },
   computed: {
@@ -83,7 +83,7 @@ const favorit = {
     }
   },
   props: ['form_favorit','favorit'],
-  mounted() {   
+  mounted() {
     this.status_favorit = this.get_favorit
   },
   methods: {
@@ -114,9 +114,9 @@ export default {
       },
       // prop_data: {
       //   default: () => ([])
-      // },         
+      // },
 
-    },  
+    },
     computed: {
       get_komentar() {
           if(this.prop_total.length <= 0) return 0
@@ -128,7 +128,7 @@ export default {
           }
 
           return 0
-      }         
-    }, 
+      }
+    },
 };
 </script>

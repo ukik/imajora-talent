@@ -1,8 +1,8 @@
 <style type="text/css">
   .gradient-2 {
     /*background-image: linear-gradient(to top right, rgb(0, 223, 142), rgb(0,210,181) , rgb(0,193,234), rgb(88,151,255), rgb(88,151,255)); */
-    background-image: linear-gradient(to bottom right, rgb(0, 223, 142), rgb(88,151,255)); 
-  }    
+    background-image: linear-gradient(to bottom right, rgb(0, 223, 142), rgb(88,151,255));
+  }
 </style>
 <template>
   <q-header id="ayat_header" unelevated :class="[ayat_pilih_display ? 'shadow-0' : '']" class="text-black bg-white" >
@@ -25,7 +25,7 @@
 
         <q-btn size="13px" color="white" @click="pilihan_ayat_player = false" flat round icon="close" />
 
-      </q-item>    
+      </q-item>
     </q-toolbar>
 
     <q-toolbar v-if="ayat_pilih_display" class="q-px-none bg-white">
@@ -81,10 +81,10 @@
 
     </q-toolbar>
 
-<!-- 
+<!--
                 <q-chip outline color="primary" text-color="white">
                   Ayat {{ item.ayat_urutan }}
-                </q-chip>                
+                </q-chip>
                 <q-space />
                 <q-chip outline color="teal-5" text-color="white">
                   {{ data_1[current_index].surat.nama_id }}
@@ -98,40 +98,40 @@
       </q-list>
 
     </q-scroll-area> -->
-  </q-header>  
+  </q-header>
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields';
+;
 
 import { scroll } from 'quasar'
 const { getScrollTarget, setScrollPosition } = scroll
 
 export default {
   computed: {
-    ...mapFields({
-      expanded_items: "alquran_index.expanded_items", //"alquran_detail.data_1", 
-      lengkap: "alquran_detail.lengkap",
-      ayat_deskripsi_dialog: "alquran_index.ayat_deskripsi_dialog",
-      data_1: "alquran_index.ayat", //"alquran_detail.data_1", 
-      ayat_dialog: "alquran_index.ayat_dialog", 
-      current_index: "alquran_index.current_index", 
-      ayat_player_display: "alquran_index.ayat_player_display", 
-      ayat_pilih_display: "alquran_index.ayat_pilih_display", 
-      paginate: "alquran_index.paginate", 
-      current_muratal: "alquran_index.current_muratal", 
-      current_page: "alquran_index.paginate.current_page",
-      last_ayat_or_juz: "alquran_index.last_ayat_or_juz",
-      pilihan_ayat_player: "alquran_index.pilihan_ayat_player",
-      ayat_drawer: "alquran_index.ayat_drawer",
-      // loading: "alquran_detail.loading",
-    }),
-  },  
+    // ...mapFields({
+    //   expanded_items: "alquran_index.expanded_items", //"alquran_detail.data_1",
+    //   lengkap: "alquran_detail.lengkap",
+    //   ayat_deskripsi_dialog: "alquran_index.ayat_deskripsi_dialog",
+    //   data_1: "alquran_index.ayat", //"alquran_detail.data_1",
+    //   ayat_dialog: "alquran_index.ayat_dialog",
+    //   current_index: "alquran_index.current_index",
+    //   ayat_player_display: "alquran_index.ayat_player_display",
+    //   ayat_pilih_display: "alquran_index.ayat_pilih_display",
+    //   paginate: "alquran_index.paginate",
+    //   current_muratal: "alquran_index.current_muratal",
+    //   current_page: "alquran_index.paginate.current_page",
+    //   last_ayat_or_juz: "alquran_index.last_ayat_or_juz",
+    //   pilihan_ayat_player: "alquran_index.pilihan_ayat_player",
+    //   ayat_drawer: "alquran_index.ayat_drawer",
+    //   // loading: "alquran_detail.loading",
+    // }),
+  },
   data() {
     return {
       value: 0,
     }
-  },  
+  },
   watch: {
     loading() {
       // this.value = n == null ? 0 : n
@@ -154,31 +154,31 @@ export default {
       try {
         audio.play()
         this.dispatchVuex('alquran_index/is_muratal_play', true)
-      } catch (err) { } 
-    },    
+      } catch (err) { }
+    },
     async onAudioRefresh(index) {
 
       this.dispatchVuex('alquran_index/action_alquran_current_index', index)
       var audio = document.getElementById('audio-player');
       if(audio == undefined) return
-      
+
       // audio.load()
       audio.src = this.data_1[index].muratal[this.current_muratal.kode]
 
       this.onPlay(audio)
-    },    
+    },
     onSelect(index) {
       this.dispatchVuex('alquran_index/action_alquran_current_index', index)
       // this.action_alquran_index_current_index(index)
-    },  
+    },
     async onInput(val) {
       console.log(val)
       await this.dispatchVuex('alquran_index/action_alquran_current_index', 0)
-      await this.dispatchVuex('alquran_detail/action_payload', 
+      await this.dispatchVuex('alquran_detail/action_payload',
         { pull_refresh: true, id: this.$route.params.id, page: val }
       )
-    }      
-  }  
+    }
+  }
 };
 </script>
 

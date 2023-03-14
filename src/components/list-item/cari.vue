@@ -5,7 +5,7 @@
     name: 'cari_detail',
     params: {
       keyword: item.pencarian.replaceAll(' ','-')
-    } 
+    }
   }" clickable v-for="(item, index) in prop_data" :key="index" class="q-pa-none">
 
     <q-item-section class="q-pl-sm" v-ripple="{color: 'grey' }">
@@ -20,7 +20,7 @@
           <q-item-label>{{ item.pencarian }}</q-item-label>
         </q-item-section>
 
-      </q-item> 
+      </q-item>
 
     </q-item-section>
 
@@ -30,7 +30,7 @@
     </q-item-section>
 
   </q-item>
-</q-list>	
+</q-list>
 </template>
 
 <script type="text/javascript">
@@ -38,22 +38,22 @@ import { mapFields } from "vuex-map-fields"
 
 export default {
     computed: {
-      ...mapFields({
-        reset_prefetch: "cari.reset_prefetch",    
-        data_1: "cari.data_1",    
-        loading: "cari.loading",    
-        keyword: "cari.keyword",    
-      }),
-    },  
+      // ...mapFields({
+      //   reset_prefetch: "cari.reset_prefetch",
+      //   data_1: "cari.data_1",
+      //   loading: "cari.loading",
+      //   keyword: "cari.keyword",
+      // }),
+    },
     props: {
       prop_data: {
         default: () => ([]),
       }
-    },    
+    },
     methods: {
       onDelete(value, index) {
         this.dispatchVuex('cari/action_delete', { id: value, index: index })
-      },      
+      },
     }
   };
 </script>

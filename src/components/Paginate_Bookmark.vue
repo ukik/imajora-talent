@@ -4,14 +4,14 @@
 
     <q-pagination v-if="!is_mobile_size"
 		v-model="current_page" color="blue-4"
-		:max="last_page" unelevated 
+		:max="last_page" unelevated
 		:max-pages="3"
 		@update:model-value="onUpdate"
 		boundary-numbers
 		direction-links
 		boundary-links
 		active-color="blue-5"
-		active-text-color="white"       
+		active-text-color="white"
     />
 
     <q-pagination v-else
@@ -20,27 +20,27 @@
 		:max-pages="3"
 		@update:model-value="onUpdate"
 		input
-		input-class="text-orange-10"        
+		input-class="text-orange-10"
 		boundary-numbers
 		direction-links
 		boundary-links
 		active-color="blue-5"
-		active-text-color="white"       
+		active-text-color="white"
     />
 
-</div>	
+</div>
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields'
+//
 
 export default {
   computed: {
-    ...mapFields({
-			current_page: 'bookmark.index.data.payload.current_page',
-			last_page: 'bookmark.index.data.payload.last_page',
-    }),  
-  },   
+    // ...mapFields({
+		// 	current_page: 'bookmark.index.data.payload.current_page',
+		// 	last_page: 'bookmark.index.data.payload.last_page',
+    // }),
+  },
   watch: {
 		last_page(val) {
 			// console.log(val, this.route_name)
@@ -61,5 +61,5 @@ export default {
   		})
   	}
   }
-}; 
+};
 </script>

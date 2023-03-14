@@ -1,7 +1,7 @@
 <template>
   <q-toolbar>
 <!--   	<q-btn unelevated no-caps text-color="grey" color="grey-2" rounded label="Beri Komentar..." />
-    <q-toolbar-title class="q-pa-none" />      	
+    <q-toolbar-title class="q-pa-none" />
   	<q-btn flat color="grey-5" round icon="favorite_border" />
   	<div>2</div>
   	<q-btn flat color="grey-5" round icon="chat_bubble_outline" />
@@ -22,14 +22,14 @@
 
     <q-btn flat color="grey-5" round icon="chat_bubble_outline">
       <q-badge color="red" floating> {{ total_komentar }} </q-badge>
-    </q-btn>    
+    </q-btn>
 
     <!-- <q-btn flat color="grey-5" round icon="turned_in_not" /> -->
-    <q-btn @click="onSubmitFavorit" flat color="grey-7" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />    
+    <q-btn @click="onSubmitFavorit" flat color="grey-7" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />
 
     <q-btn flat color="grey-5" round icon="share" />
 
-  </q-toolbar>	
+  </q-toolbar>
 </template>
 
 
@@ -38,7 +38,7 @@
 // import { menyukai } from "src/mixins/menyukai"
 // import { favorit } from "src/mixins/favorit"
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 const menyukai = {
   data() {
@@ -47,7 +47,7 @@ const menyukai = {
       status_suka: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_suka = this.get_menyukai
     this.total_suka = this.get_total('suka')
   },
@@ -61,7 +61,7 @@ const menyukai = {
         id_pemilik_postingan: this.data_1.id_user,
         id_postingan: this.data_1.id,
         type: 'Artikel_Model',
-        label: 'artikel',            
+        label: 'artikel',
       }
 
       console.log(this.data_1)
@@ -98,7 +98,7 @@ const menyukai = {
 //   computed: {
 //     get_komentar() {
 //       if(this.get_total('komentar') == null) return 0
-//       return this.get_total('komentar') >= 99 ? '+99' : this.get_total('komentar') 
+//       return this.get_total('komentar') >= 99 ? '+99' : this.get_total('komentar')
 //     },
 //   }
 // }
@@ -109,7 +109,7 @@ const favorit = {
       status_favorit: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_favorit = this.get_favorit
   },
   methods: {
@@ -122,7 +122,7 @@ const favorit = {
           id_pemilik_postingan: this.data_1.id_user,
           id_postingan: this.data_1.id,
           type: 'Artikel_Model',
-          label: 'artikel',             
+          label: 'artikel',
         }
 
       const request = await this.dispatchVuex('aggregator/set_favorit', form)
@@ -138,19 +138,19 @@ const favorit = {
     },
   }
 }
-  
+
 
 export default {
     computed: {
-      ...mapFields({
-          dialog: "artikel_detail.dialog",
-          id_komentar: "artikel_detail.id_komentar",
-          text_komentar: "artikel_detail.text_komentar",
+      // ...mapFields({
+      //     dialog: "artikel_detail.dialog",
+      //     id_komentar: "artikel_detail.id_komentar",
+      //     text_komentar: "artikel_detail.text_komentar",
 
-          total_komentar: "artikel_detail.total_komentar",
+      //     total_komentar: "artikel_detail.total_komentar",
 
-          data_1: "artikel_detail.data_1",
-      }),
+      //     data_1: "artikel_detail.data_1",
+      // }),
       // komentar() {
       //   if(this.data_1.komentar_count == null) return 0
       //   return this.data_1.komentar_count >= 99 ? '+99' : this.data_1.komentar_count
@@ -159,7 +159,7 @@ export default {
       //   if(this.data_1.suka_count == null) return 0
       //   return this.data_1.suka_count >= 99 ? '+99' : this.data_1.suka_count
       // }
-    },  
+    },
     mixins: [menyukai, favorit],
 };
 </script>

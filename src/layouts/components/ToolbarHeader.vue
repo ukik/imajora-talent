@@ -15,12 +15,12 @@
   </q-item-section>
   <q-item-section side>
     <q-item-label>
-      <q-btn :to="{ name: 'riwayat', 
-		          params: { 
-		            page: riwayat_page 
-		          } 
+      <q-btn :to="{ name: 'riwayat',
+		          params: {
+		            page: riwayat_page
+		          }
 		        }"
-            color="grey" 
+            color="grey"
             flat
             round
             icon="o_assignment">
@@ -34,15 +34,15 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields'
+
 
 export default {
 	computed: {
-	    ...mapFields({
-			leftDrawerOpen: 'layout.local.leftDrawerOpen',
+	    // ...mapFields({
+			// leftDrawerOpen: 'layout.local.leftDrawerOpen',
 
-            riwayat_page: 'riwayat.index.data.payload.current_page',
-	    }),  
+      //       riwayat_page: 'riwayat.index.data.payload.current_page',
+	    // }),
   	},
 };
 

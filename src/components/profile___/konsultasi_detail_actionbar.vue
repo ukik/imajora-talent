@@ -1,5 +1,5 @@
 <template>
-  <q-toolbar v-ripple="{color:'grey'}" class="relative-position q-pa-none text-black">  
+  <q-toolbar v-ripple="{color:'grey'}" class="relative-position q-pa-none text-black">
     <q-item-section avatar style="padding:0px;">
         <q-avatar size="lg">
           <img loading="lazy" :src="img_checker(user.foto)" @error="handleError" v-lazy-src="img_checker(user.foto)">
@@ -17,23 +17,23 @@
     </q-item-section>
     <q-item-section side v-else>
       <q-btn @click="onSubmit" outline class="flex flex-center" icon="person" size="sm" color="red" no-caps rounded unelevated />
-    </q-item-section>  
+    </q-item-section>
 
-  </q-toolbar>	
+  </q-toolbar>
 </template>
 
 <script type="text/javascript">
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
   computed: {
-    ...mapFields({
-      user: "konsultasi_detail.data_1.user", 
-      mengikuti: "konsultasi_detail.data_1.mengikuti", 
-    }),
+    // ...mapFields({
+    //   user: "konsultasi_detail.data_1.user",
+    //   mengikuti: "konsultasi_detail.data_1.mengikuti",
+    // }),
   },
-  methods: {   
+  methods: {
     async onSubmit() {
 
       const form = {
@@ -43,7 +43,7 @@ export default {
       const request = await this.dispatchVuex('aggregator/set_teman', form)
       this.dispatchVuex('konsultasi_detail/set_mengikuti', request.data)
       console.log(request)
-    } 
+    }
   }
 };
 </script>

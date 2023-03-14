@@ -157,7 +157,7 @@
 
 <script type="text/javascript">
 
-import { mapFields } from 'vuex-map-fields'
+
 
 import { demo } from "src/modal.js"
 

@@ -64,7 +64,7 @@
 
 <script type="text/javascript">
 
-import { mapFields } from 'vuex-map-fields';
+;
 import { Vue3Lottie } from 'vue3-lottie'
 import 'vue3-lottie/dist/style.css'
 
@@ -72,11 +72,11 @@ import AstronautJSON from 'src/assets/lotties/5483-loading-circle.json'
 
 export default {
   computed: {
-    ...mapFields({
-      // user: "profile.profile",
-      // mengikuti: "profile.profile.mengikuti",
-      // loading: "aggregator.loading",
-    }),
+    // ...mapFields({
+    //   // user: "profile.profile",
+    //   // mengikuti: "profile.profile.mengikuti",
+    //   // loading: "aggregator.loading",
+    // }),
   },
   components: {
     Vue3Lottie,

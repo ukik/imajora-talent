@@ -14,9 +14,39 @@ export const default_footer_mark = `${new Date().getFullYear()} © CUBIX - All R
 
 import { boot } from "quasar/wrappers";
 
-import { mapGetters } from "vuex";
+// import { mapGetters } from "vuex";
+import { useRouterStore } from 'src/stores/router-store'
+let onGoto = null;
 
 export default boot(async ({ app, ssrContext, router, store }) => {
+
+  const routerStore = useRouterStore()
+
+  router.beforeEach((ctx1) => {
+    console.log(ctx1)
+    app.config.globalProperties.$route_meta = ctx1.meta;
+    app.config.globalProperties.$route_path = ctx1.path;
+    app.config.globalProperties.$route_params = ctx1.params;
+    app.config.globalProperties.$route_query = ctx1.query;
+    app.config.globalProperties.$route_name = ctx1.name;
+  })
+  console.log(app.config.globalProperties.$route_name)
+  // console.log(ctx.router, ctx.store.state.value?.lang?.locale, ctx.store.state.value?.routerStore?.route);
+
+  onGoto = (routes) => {
+    const { query } = routes
+    return {
+      ...routes,
+      query: {
+        ...query,
+        lang: routerStore.getQuery?.lang
+          ? routerStore.getQuery?.lang
+          : store.state.value?.lang?.locale //langStore.getLocale,
+      },
+    };
+  }
+  app.config.globalProperties.$onGoto = onGoto;
+
 
 
   app.config.globalProperties.$is_mobile_size = () => Screen.width <= 425;
@@ -45,15 +75,15 @@ export default boot(async ({ app, ssrContext, router, store }) => {
       };
     },
     computed: {
-      ...mapGetters({
-        is_verified: "auth/is_verified",
-        is_logged: "auth/is_logged",
-        role_name: "auth/role_name",
-        auth: "auth/auth",
-        user: "auth/user",
-        is_admin: "auth/is_admin",
-        is_user: "auth/is_user",
-      }),
+      // ...mapGetters({
+      //   is_verified: "auth/is_verified",
+      //   is_logged: "auth/is_logged",
+      //   role_name: "auth/role_name",
+      //   auth: "auth/auth",
+      //   user: "auth/user",
+      //   is_admin: "auth/is_admin",
+      //   is_user: "auth/is_user",
+      // }),
 
       DIALOG_OPEN() {
         return this.$store.getters.DIALOG_OPEN;

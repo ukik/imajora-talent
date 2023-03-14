@@ -67,7 +67,7 @@
   // import Tab1 from './riwayat/Screen_Konsultasi'
   import Screen1 from './PencarianPage.vue'
 
-  import { mapFields } from 'vuex-map-fields'
+
 
   // import { riwayat } from 'src/api/prefetch'
 

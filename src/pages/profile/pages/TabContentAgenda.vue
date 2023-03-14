@@ -116,7 +116,7 @@
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
-import { mapFields } from "vuex-map-fields";
+
 import AgendaTimeline from './AgendaTimeline.vue'
 import AgendaDate from './AgendaDate.vue'
 import { ref } from 'vue'

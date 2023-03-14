@@ -12,11 +12,11 @@
           color="blue"
           icon="arrow_back_ios"
         />
-        <q-toolbar-title>Balasan 
+        <q-toolbar-title>Balasan
           <q-badge v-if="paginate.total" align="top" color="cyan">{{ paginate.total }}</q-badge>
         </q-toolbar-title>
         <q-space />
-        <ActionbarMenu /> 
+        <ActionbarMenu />
       </q-toolbar>
     </q-header>
 
@@ -24,15 +24,15 @@
 
       <div v-if="!komentar.id && loading" class="text-center" :style="'min-height'+($q.screen.height - 50) + 'px'" >
         <SkeletonTwitter />
-      </div>  
+      </div>
 
-      <Konten v-if="komentar.id" 
+      <Konten v-if="komentar.id"
           :form="{
             id_pemilik_postingan: komentar.id_user,
             id_postingan: komentar.id,
             type: get_type,
-            label: 'komentar',                
-          }" 
+            label: 'komentar',
+          }"
           :prop_total="komentar.user_totals_komentar_balasan"
           :menyukai="komentar.menyukai"
           :prop_data="komentar" />
@@ -45,7 +45,7 @@
           <q-btn unelevated disabled color="grey-2" round class="q-pa-xl">
             <q-avatar size="75px" square>
               <img style="" src="~assets/blank/komentar.png" loading="lazy" />
-            </q-avatar>     
+            </q-avatar>
           </q-btn>
           <div class="text-grey text-subtitle2 q-mt-md">Tidak ada konten tersedia</div>
         </div>
@@ -53,32 +53,32 @@
 
       <!-- <Komentar v-if="komentar_balasan.length > 0" :prop_data="komentar_balasan" /> -->
       <div v-if="is_desktop && komentar_balasan.length > 0" v-for="(item, index) in komentar_balasan" :key="index" >
-        <Balasan           
+        <Balasan
           :form="{
             id_pemilik_postingan: item.id_user,
             id_postingan: item.id,
             type: get_type,
             label: 'komentar',
-          }" 
+          }"
           :prop_total="item.user_totals_komentar_balasan"
-          :menyukai="item.menyukai" 
+          :menyukai="item.menyukai"
           :prop_data="item"/>
 
-         <q-separator color="grey-3" />               
+         <q-separator color="grey-3" />
       </div>
       <div v-if="!is_desktop && MOUNTED && komentar_balasan.length > 0" v-for="(item, index) in komentar_balasan" :key="index" >
-        <Balasan           
+        <Balasan
           :form="{
             id_pemilik_postingan: item.id_user,
             id_postingan: item.id,
             type: get_type,
             label: 'komentar',
-          }" 
+          }"
           :prop_total="item.user_totals_komentar_balasan"
-          :menyukai="item.menyukai" 
+          :menyukai="item.menyukai"
           :prop_data="item"/>
 
-         <q-separator color="grey-3" />               
+         <q-separator color="grey-3" />
       </div>
 
 
@@ -90,7 +90,7 @@
         </template>
       </q-infinite-scroll>
 
-    </q-pull-to-refresh>      
+    </q-pull-to-refresh>
 
     <transition name="fade-global" v-if="MOUNTED" >
       <q-footer v-if="is_not_player_real_closed" unelevated class="bg-white text-black">
@@ -107,7 +107,7 @@
           />
         </q-toolbar>
 
-        <Toolbar @onBubbleEvent="dialog = true" v-if="komentar.id" /> 
+        <Toolbar @onBubbleEvent="dialog = true" v-if="komentar.id" />
       </q-footer>
     </transition>
 
@@ -115,31 +115,31 @@
 
       <q-list class="bg-white">
         <q-item>
-         
+
           <q-item-section>
-            <q-input 
+            <q-input
              :disable="is_loading"
               ref="komentar"
               v-model="text_komentar"
               bg-color="grey-4"
-              standout="bg-grey-2 text-black"        
-              dense 
+              standout="bg-grey-2 text-black"
+              dense
               autofocus
               rounded
               borderless
               autogrow
               hint="Wajib diisi"
-              class="full-width bevel-radius" 
+              class="full-width bevel-radius"
               placeholder="Tuliskan komentar anda..."
               input-class="q-pl-sm"
-              maxlength="200" 
+              maxlength="200"
               counter :rules="[val => !!val || 'komentar kosong']" lazy-rules
               >
 
               <template v-slot:append>
                 <q-icon v-if="text_komentar !== ''" name="close" @click="text_komentar = ''" class="cursor-pointer q-mr-sm" />
               </template>
-         
+
             </q-input>
           </q-item-section>
 
@@ -168,18 +168,18 @@
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
   computed: {
-    ...mapFields({
-      komentar: "komentar_balasan.komentar",     
-      komentar_balasan: "komentar_balasan.komentar_balasan",     
-      loading: "komentar_balasan.loading",     
-      paginate: "komentar_balasan.paginate",     
-      current_page: "komentar_balasan.paginate.current_page",     
-      is_not_player_real_closed: "alquran_index.is_not_player_real_closed",      
-    }),  
+    // ...mapFields({
+    //   komentar: "komentar_balasan.komentar",
+    //   komentar_balasan: "komentar_balasan.komentar_balasan",
+    //   loading: "komentar_balasan.loading",
+    //   paginate: "komentar_balasan.paginate",
+    //   current_page: "komentar_balasan.paginate.current_page",
+    //   is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
+    // }),
     get_type() {
       let tipe = null
       switch(this.$route.params.segment) {
@@ -201,11 +201,11 @@ export default {
         case 'video':
           tipe =  'Video_Model'
           break
-      }      
+      }
 
       return tipe
     }
-  },  
+  },
   async preFetch ({ store, currentRoute }) {
 
     let pull_refresh = false
@@ -220,12 +220,12 @@ export default {
 
     await store.dispatch('komentar_balasan/segment', currentRoute.params.segment)
 
-    return store.dispatch('komentar_balasan/action_payload', { 
-      pull_refresh: pull_refresh, 
+    return store.dispatch('komentar_balasan/action_payload', {
+      pull_refresh: pull_refresh,
       segment: currentRoute.params.segment,
-      id_komentar: currentRoute.params.id, 
-    }) 
-  }, 
+      id_komentar: currentRoute.params.id,
+    })
+  },
   data() {
     return {
       dialog: false,
@@ -233,7 +233,7 @@ export default {
       is_loading: false,
 
       is_paginate_ready: true,
-      MOUNTED: false,           
+      MOUNTED: false,
     }
   },
   components: {
@@ -258,12 +258,12 @@ export default {
         }, 2000)
       }
       this.is_paginate_ready = false
-    }         
+    }
   },
   mounted() {
     setTimeout(() => {
       this.MOUNTED = true
-    }, 2500)   
+    }, 2500)
   },
   activated(){
   },
@@ -276,10 +276,10 @@ export default {
         window.scrollTo({
           top: 0,
           left: 0,
-        });      
+        });
       }
-      await this.action_komentar_balasan_more({ page: val, segment: this.$route.params.segment, id_komentar: this.$route.params.id, tag: 'by_paginate' }) 
-    },     
+      await this.action_komentar_balasan_more({ page: val, segment: this.$route.params.segment, id_komentar: this.$route.params.id, tag: 'by_paginate' })
+    },
     onBack() {
       if(this.$router.back() == undefined) this.$router.push({ name: 'main' })
       console.log(this.$router.back());
@@ -299,7 +299,7 @@ export default {
       // const id_pemilik_postingan = this.$route.query.id_pemilik_postingan
       // // const id_postingan = this.$route.params.id
 
-      // if(!id_pemilik_postingan 
+      // if(!id_pemilik_postingan
       //   // || !id_postingan
       //   ) {
       //   this.$q.notify({
@@ -353,7 +353,7 @@ export default {
         'id_postingan': this.$route.params.id,
         'parent_id': this.$route.params.id,
         'type': tipe,
-        'text_komentar': this.text_komentar,            
+        'text_komentar': this.text_komentar,
         'label': this.$route.params.segment,
       }
 
@@ -367,7 +367,7 @@ export default {
         color: response.value == 1 ? 'positive' : 'orange',
         icon: 'done',
         position: 'top',
-      })    
+      })
 
       this.is_loading = false
 
@@ -378,11 +378,11 @@ export default {
     },
 
     async refresh (done) {
-      await this.action_komentar_balasan({ pull_refresh: true, segment: this.$route.params.segment, id_komentar: this.$route.params.id }) 
+      await this.action_komentar_balasan({ pull_refresh: true, segment: this.$route.params.segment, id_komentar: this.$route.params.id })
 
       if(this.$refs.infiniteScroll !== undefined) this.$refs.infiniteScroll.stop()
       done() // required
-    },    
+    },
     async onLoad (index, done) {
       const paginate = this.paginate
 
@@ -391,7 +391,7 @@ export default {
         return
       }
 
-      await this.action_komentar_balasan_more({ page: paginate.current_page + 1, segment: this.$route.params.segment, id_komentar: this.$route.params.id, tag: 'by_scroll' }) 
+      await this.action_komentar_balasan_more({ page: paginate.current_page + 1, segment: this.$route.params.segment, id_komentar: this.$route.params.id, tag: 'by_scroll' })
 
       if(paginate.next_page_url) {
         done(true) //= stop infinite-scroll

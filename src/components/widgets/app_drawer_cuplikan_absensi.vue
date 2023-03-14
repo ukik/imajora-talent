@@ -20,10 +20,10 @@
 	<q-item class="q-pl-sm q-pr-xs bg-white">
 
     <q-item-section v-if="data_sekarang">
-      <q-item-label class="weight-500"> 
+      <q-item-label class="weight-500">
         {{ data_sekarang["sholat"] | capitalize }}
       </q-item-label>
-      <q-item-label caption> 
+      <q-item-label caption>
         {{ data_sekarang["waktu_1"] }}
       </q-item-label>
     </q-item-section>
@@ -37,7 +37,7 @@
           color="pink"
           icon="alarm"
           :label="detik_ke_time"
-        />      
+        />
       </q-item-label>
 
 	  </q-item-section>
@@ -45,12 +45,12 @@
 	</q-item>
 
 
-</q-card>	
+</q-card>
 </template>
 
 <script type="text/javascript">
 
-import { mapFields } from "vuex-map-fields";
+
 
 const jadwal_misi = {
   async created() {
@@ -105,20 +105,20 @@ const jadwal_misi = {
     };
   },
   computed: {
-    ...mapFields({
-    	konten_index_8: "beranda.konten_index_8",
+    // ...mapFields({
+    // 	konten_index_8: "beranda.konten_index_8",
 
-  		// Sholat
-  		sholat: "sholat.sholat",
-  		jadwal_sholat: "sholat.jadwal_sholat",
-  		tanggal_hijriah: "sholat.tanggal_hijriah",
-  		koin_sholat: "sholat.koin_sholat",
-  		date: "sholat.date",
-  		hari: "sholat.hari",
-  		referensi_koin: "sholat.referensi_koin",
-  		data_sholat: "sholat.data_sholat",
-  		is_hari_ini: "sholat.is_hari_ini"
-    }),
+  	// 	// Sholat
+  	// 	sholat: "sholat.sholat",
+  	// 	jadwal_sholat: "sholat.jadwal_sholat",
+  	// 	tanggal_hijriah: "sholat.tanggal_hijriah",
+  	// 	koin_sholat: "sholat.koin_sholat",
+  	// 	date: "sholat.date",
+  	// 	hari: "sholat.hari",
+  	// 	referensi_koin: "sholat.referensi_koin",
+  	// 	data_sholat: "sholat.data_sholat",
+  	// 	is_hari_ini: "sholat.is_hari_ini"
+    // }),
     detik_ke_time() {
       // this.waktu_selisi = 300 = 5 menit
       if (this.waktu_selisih == undefined || isNaN(this.waktu_selisih)) return;
@@ -155,7 +155,7 @@ const jadwal_misi = {
             this.jadwal_selanjutnya["sholat"]
           );
         }
-      }    
+      }
     },
     onInit() {
       clearInterval(this.interval_5)

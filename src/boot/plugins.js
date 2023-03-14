@@ -38,6 +38,9 @@ export default boot( async ({ app, ssrContext, router, store }) => {
   app.component("SpinnerOrbit", () => import('src/components/widgets/spinner_orbit.vue'))
   app.component("ActionbarMenu", () => import('src/components/widgets/Actionbar_Menu.vue'))
 
+  app.component("Touch", () => import('src/components/Touch.vue'))
+
+
 	app.mixin({
 		data() {
 		    return {}

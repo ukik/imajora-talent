@@ -4,12 +4,12 @@
 		<q-checkbox size="24px" :value="tajweed"></q-checkbox>
 		<span class="q-ml-sm" style="padding-top: 5px;"> Tadjweed</span>
 	</div> -->
-	
+
 
 	<q-toolbar class="q-px-none">
 		<q-btn class="q-ml-sm" dense unelevated size="10px" color="teal" text-color="white" round icon="play_arrow" @click="onDialog('audio')"/>
 
-		<q-toolbar-title class="q-pa-none" />       
+		<q-toolbar-title class="q-pa-none" />
 
 		<q-btn dense flat @click="onSubmitFavorit" color="grey-5" round :icon="status_favorit ? 'turned_in' : 'turned_in_not'" />
 
@@ -18,14 +18,14 @@
 			flat
 			dense
 			round
-			
+
 			color="grey-5"
 			icon="list_alt"
         />
 
 		<q-checkbox class="q-mr-sm" style="margin-top:-4px;" size="30px" v-model="tajweed"></q-checkbox>
 
-	</q-toolbar>  
+	</q-toolbar>
 
 
 	<!-- <q-separator /> -->
@@ -67,11 +67,11 @@
 			<div class="text-subtitle1  q-pb-md q-pt-sm">Terjemahan (Muntakhab)</div>
 			<div class="text-grey-8 q-pb-md" v-html="kataDicari(prop_data.arti_id_muntakhab, keyword)" />
 
-			<q-separator />    
+			<q-separator />
 			<div class="text-subtitle1 q-py-md">Tafsir Indonesia</div>
 			<div class="text-grey-8 q-pb-md" v-html="kataDicari(prop_data.tafsir_id, keyword)" />
 
-			<q-separator />    
+			<q-separator />
 			<div class="text-subtitle1 q-py-md">Tafsir Al-Misbah</div>
 			<div class="text-grey-8 q-pb-md" v-html="kataDicari(prop_data.tafsir_id_panjang, keyword)" />
 		</div>
@@ -84,7 +84,7 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields';
+;
 
 const favorit = {
   data() {
@@ -92,7 +92,7 @@ const favorit = {
       status_favorit: false,
     }
   },
-  mounted() {   
+  mounted() {
     this.status_favorit = this.prop_data.favorit ? true : false
   },
   methods: {
@@ -101,7 +101,7 @@ const favorit = {
           id_pemilik_postingan: this.prop_data.id_user,
           id_postingan: this.prop_data.id,
           type: 'Alquran_Ayat_Model',
-          label: 'alquran',             
+          label: 'alquran',
         }
 
       const request = await this.dispatchVuex('aggregator/set_favorit', form)
@@ -119,12 +119,12 @@ const favorit = {
 
 export default {
   	computed: {
-	    ...mapFields({
-	      	// alquran_ditandai_dialog: "alquran_index.alquran_ditandai_dialog",
-	      	// ayat_deskripsi_dialog: "alquran_index.ayat_deskripsi_dialog",
+	    // ...mapFields({
+	    //   	// alquran_ditandai_dialog: "alquran_index.alquran_ditandai_dialog",
+	    //   	// ayat_deskripsi_dialog: "alquran_index.ayat_deskripsi_dialog",
 
-	    }),
-  	},  
+	    // }),
+  	},
   	mixins: [favorit],
 	props: ['prop_data', 'index', 'keyword'],
 	data() {
@@ -139,8 +139,8 @@ export default {
 	    	this.$emit('onBubbleEvent_Dialog', { index: this.index, alias: label })
 	      // this.action_alquran_index_ayat_deskripsi_dialog(true)
 	      // this.action_alquran_index_current_index(this.index)
-	    },   			
-		
+	    },
+
 	}
 };
 </script>

@@ -92,7 +92,7 @@
 
 
 <script>
-import { mapFields } from "vuex-map-fields";
+
 import Form_Foto from './profiles/Form_Foto.vue'
 export default {
   // computed: {

@@ -1,78 +1,88 @@
 <template>
 
-  <!-- <q-page-container> -->
-  <q-pull-to-refresh @refresh="refresh">
-
-    <!-- <div v-if="konten.length <= 0 && loading" class="text-center" :style="'min-height' + ($q.screen.height - 50) + 'px'">
+  <q-pull-to-refresh v-if="get_reply_data.length > 0" @refresh="refresh" class="scroll">
+    <q-scroll-area ref="scrollAreaRef" class="q-pa-md" style="height: calc(100vh - 50px - 80px)">
+    <!-- <div v-if="comment.length <= 0 && loading" class="text-center" :style="'min-height' + ($q.screen.height - 50) + 'px'">
       <SkeletonTwitter />
+
+      https://assets8.lottiefiles.com/packages/lf20_z9ed2jna.json
     </div> -->
 
-    <!-- <SpinnerOrbit v-if="loading && konten.length > 0" /> -->
+    <!-- <SpinnerOrbit v-if="loading && comment.length > 0" /> -->
 
-    <!-- <q-page v-if="konten.length <= 0 && !loading" class="flex flex-center">
+    <!-- <q-page v-if="comment.length <= 0 && !loading" class="flex flex-center">
       <BlankKomentar />
     </q-page> -->
 
     <q-item-label lines="1" class="q-py-lg">Komentar</q-item-label>
 
-    <Komentar :item="get_comment" />
+    <Komentar :item="get_comment" class="q-mb-md" />
 
-    <q-item-label lines="1" class="q-py-lg">Komentar Balasan</q-item-label>
+    <q-separator color="grey-3" />
 
-    <q-list bordered v-if="get_reply_data.length > 0">
-      <template v-for="(item, index) in get_reply_data" :key="index">
-        <Komentar :item="item" />
-        <q-separator color="grey-3" />
+    <q-item-label ref="replyRef" lines="1" class="q-py-lg">Komentar Balasan</q-item-label>
 
-      </template>
+    <q-list>
+      <q-slide-item @left="onSlideReset" @right="onSlideReset" v-for="(item, index) in get_reply_data" :key="item.id" left-color="red" right-color="purple">
+        <template v-slot:left>
+          <q-btn @click="onDelete(index, item.id)" round outline icon="delete" />
+        </template>
 
-      <!-- <q-infinite-scroll v-if="is_desktop && MOUNTED && $route.name == 'komentar'" :debounce="200" ref="infiniteScroll" @load="onLoad" :offset="250">
-    <template v-slot:loading>
-      <div class="row justify-center q-my-md">
-        <q-spinner-dots color="primary" size="40px" />
-      </div>
-    </template>
-  </q-infinite-scroll> -->
+        <transition name="fade-global">
+          <Komentar @onDelete="onDelete(index, item.id)" :index="index" :item="item" />
+        </transition>
+        <!-- <q-separator color="grey-3" /> -->
+
+      </q-slide-item>
+
+      <q-infinite-scroll :debounce="200" ref="infiniteScroll" @load="onLoad" :offset="250">
+        <template v-slot:loading>
+          <div class="row justify-center q-my-md">
+            <q-spinner-dots color="primary" size="40px" />
+          </div>
+        </template>
+      </q-infinite-scroll>
 
     </q-list>
+
+  </q-scroll-area>
   </q-pull-to-refresh>
 
-  <!-- </q-page-container> -->
+  <q-no-ssr>
+    <q-header bordered unelevated class="bg-white text-black text-center">
+      <q-toolbar>
+        <q-btn flat dense round @click="onGotoBack" color="blue" icon="arrow_back_ios" />
+        <q-toolbar-title>
+          Komentar Balasan
+          <q-badge align="top" color="cyan">
+            {{ get_reply_total }}
+          </q-badge>
+        </q-toolbar-title>
+        <q-btn dense style="height:30px;" flat round icon="more_vert" color="dark" />
+        <!-- <q-space /> -->
+        <!-- <ActionbarMenu /> -->
+      </q-toolbar>
+    </q-header>
+  </q-no-ssr>
 
-
-  <q-header bordered unelevated class="bg-white text-black text-center">
-    <q-toolbar>
-      <q-btn flat dense round @click="onGotoBack" color="blue" icon="arrow_back_ios" />
-      <q-toolbar-title>
-        Komentar
-        <q-badge align="top" color="cyan">
-          {{ get_reply_paginate_total }}
-        </q-badge>
-
-      </q-toolbar-title>
-      <q-space />
-      <!-- <ActionbarMenu /> -->
-    </q-toolbar>
-  </q-header>
-
-
-
-  <transition name="fade-global" >
-    <q-footer class="bg-transparent text-black row flex flex-center">
-      <q-list bordered class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 bg-white q-pt-md">
-        <q-item dense>
-          <q-item-section>
-            <q-input dense outlined :disable="get_reply_data.length > 0" v-model="text" maxlength="2500" counter autogrow placeholder="Add a comment">
-              <template v-if="text" v-slot:append>
-                <q-btn dense label="post" flat color="primary" />
-              </template>
-            </q-input>
-          </q-item-section>
-        </q-item>
-      </q-list>
-    </q-footer>
-  </transition>
-
+  <q-no-ssr>
+    <transition name="fade-global">
+      <q-footer class="bg-transparent text-black row flex flex-center">
+        <q-list bordered class="col-xl-9 col-lg-9 col-md-9 col-sm-12 col-xs-12 bg-white q-pt-md">
+          <q-item dense>
+            <q-item-section>
+              <q-input :loading="loading_post" dense outlined :disable="get_comment.id || loading_post || loading ? false : true" v-model="text_komentar" maxlength="2500" counter
+                placeholder="Add a comment" autogrow input-style="min-height: unset; max-height: 200px;">
+                <template v-if="text_komentar" v-slot:after>
+                  <q-btn :disable="loading_post" :loading="loading_post" @click="onSubmitComment" dense label="post" flat color="primary" />
+                </template>
+              </q-input>
+            </q-item-section>
+          </q-item>
+        </q-list>
+      </q-footer>
+    </transition>
+  </q-no-ssr>
   <!-- <q-dialog v-model="dialog" v-if="MOUNTED" position="bottom" class="q-pa-sm" full-width maximized>
 
     <q-list class="bg-white">
@@ -100,209 +110,102 @@
     </q-list>
 
   </q-dialog> -->
-
 </template>
 
 <script>
 
-import { mapFields } from 'vuex-map-fields';
 import { mapState, mapWritableState, mapActions } from 'pinia'
 import { useKomentarBalasanStore } from 'src/stores/komentar-balasan-store.js'
+import { preFetch } from 'quasar/wrappers';
 
-import Toolbar from "./components/Toolbar.vue"
 import Komentar from "./components/Komentar.vue"
-
 
 export default {
   computed: {
-    ...mapFields({
-      get_comment:'komentar_balasan.comment',
-      get_reply_data:'komentar_balasan.reply.data',
-      get_reply_paginate_total:'komentar_balasan.reply.total',
-      get_loading:'komentar_balasan.loading',
-    }),
     ...mapState(useKomentarBalasanStore, {
-      // get_reply_data:'get_reply_data',
-      // get_comment:'get_comment',
-      // get_reply_paginate_total:'get_reply_paginate_total',
-    }),
-    ...mapWritableState(useKomentarBalasanStore, [
-      // "reset_prefetch",
-      // "komentar",
-      // "paginate",
-      // "loading",
-      // "last_id",
-      // "init",
-    ]),
-  },
-  async preFetch({ store, currentRoute, previousRoute, redirect, ssrContext, urlPath, publicPath }) {
-    return store.dispatch('komentar_balasan/request')
-  },
-  components: {
-    Toolbar,
-    Komentar,
+      get_comment: 'get_comment',
+      get_reply_current_page: 'get_reply_current_page',
+      get_reply_data: 'get_reply_data',
+      get_reply_first_page_url: 'get_reply_first_page_url',
+      get_reply_from: 'get_reply_from',
+      get_reply_last_page: 'get_reply_last_page',
+      get_reply_last_page_url: 'get_reply_last_page_url',
+      get_reply_links: 'get_reply_links',
+      get_reply_next_page_url: 'get_reply_next_page_url',
+      get_reply_path: 'get_reply_path',
+      get_reply_per_page: 'get_reply_per_page',
+      get_reply_prev_page_url: 'get_reply_prev_page_url',
+      get_reply_to: 'get_reply_to',
+      get_reply_total: 'get_reply_total',
 
+      loading: 'loading',
+      loading_post: 'loading_post',
+    }),
+    ...mapWritableState(useKomentarBalasanStore, {
+      text_komentar: "text_komentar",
+    }),
+  },
+  preFetch: preFetch(async ({ store, currentRoute }) => {
+    const mystore = useKomentarBalasanStore(store);
+    await mystore.request({
+      post_id: currentRoute.params.post_id,
+      parent_id: currentRoute.params.parent_id });
+  }),
+  components: {
+    Komentar,
   },
   data() {
     return {
-      text:'',
       dialog: false,
-      text_komentar: '',
-      is_loading: false,
-
-      is_paginate_ready: true,
-      MOUNTED: false,
     }
   },
-  watch: {
-    paginate: {
-      deep: true,
-      handler(val) {
-        setTimeout(() => {
-          if (this.$refs.infiniteScroll !== undefined) this.$refs.infiniteScroll.resume()
-        }, 250)
-      }
-    },
-    loading(val) {
-      if (!val) {
-        setTimeout(() => {
-          this.is_paginate_ready = true
-          return
-        }, 2000)
-      }
-      this.is_paginate_ready = false
-    }
-  },
-  async deactivated() {
-    // this.dispatchVuex('komentar/clean')
-  },
-  mounted() {
-    // console.log(this.$store)
-
-    setTimeout(() => {
-      this.MOUNTED = true
-    }, 2500)
-  },
-  // activated(){
-  // },
-  // deactivated(){
-  //   window.clearInterval()
-  // },
   methods: {
     ...mapActions(useKomentarBalasanStore, [
-      // 'request',
+      'request',
+      'request_more',
+      'request_reset',
+      'request_delete',
+      'request_input',
       // 'clean',
       // 'paginate_total',
       // 'update',
     ]),
-
-    onInput(val) {
-      if (this.is_desktop) {
-        window.scrollTo({
-          top: 0,
-          left: 0,
-        });
-      }
-      this.action_komentar_more({ page: val, segment: this.$route.params.segment, id: this.$route.params.id, tag: 'by_paginate' }) // artikel|gambar|jawaban_konsultasi|konsultasi|status|video
+    onDelete(index = null, id = null) {
+      // this.reply.data.splice(index, 1)
+      this.request_delete({index, id})
     },
-    async onSubmit() {
-
-      if (!this.$refs.komentar.validate()) {
-        this.$q.notify({
-          message: 'Wajib isi komentar',
-          icon: 'announcement',
-          color: 'red',
-          position: 'top',
-        })
-        return
-      }
-
-      const id_pemilik_postingan = this.$route.query.id_pemilik_postingan
-      const id_postingan = this.$route.params.id
-
-      if (
-        !id_pemilik_postingan ||
-        !id_postingan
-      ) {
-        this.$q.notify({
-          message: 'Data tidak lengkap',
-          icon: 'announcement',
-          color: 'red',
-          position: 'top',
-        })
-        return
-      }
-
-      this.is_loading = true
-
-
-      let tipe = ''
-      switch (this.$route.params.segment) {
-        case 'artikel':
-          tipe = 'Artikel_Model'
-          break
-        case 'gambar':
-          tipe = 'Gambar_Model'
-          break
-        case 'jawaban_konsultasi':
-          tipe = 'Jawaban_Konsultasi_Model'
-          break
-        case 'konsultasi':
-          tipe = 'Konsultasi_Model'
-          break
-        case 'status':
-          tipe = 'Status_Model'
-          break
-        case 'video':
-          tipe = 'Video_Model'
-          break
-      }
-
-      const form = {
-        'id_pemilik_postingan': id_pemilik_postingan,
-        'id_postingan': id_postingan,
-        'type': tipe,
-        'text_komentar': this.text_komentar,
-        'label': this.$route.params.segment,
-      }
-
-      const response = await this.dispatchVuex('aggregator/set_komentar', form)
-      if (!response.data) return
-      console.log(response.data)
-
-      this.$q.notify({
-        message: response.result,
-        // caption: res.data.data_1.updated_at,
-        color: response.value == 1 ? 'positive' : 'orange',
-        icon: 'done',
-        position: 'top',
-      })
-
-      this.is_loading = false
-
-      await this.dispatchVuex('komentar/update', response.data)
-
-      await this.dispatchVuex('komentar/paginate_total', response.total_komentar.total)
-
-      this.text_komentar = ''
+    async onSubmitComment() {
+      await this.request_input(this.text_komentar)
+      this.$refs.scrollAreaRef.setScrollPosition('vertical', this.$refs.replyRef.getScrollTarget, 300)
     },
-
+    onSlideReset({reset}) {
+      this.$q.notify('Left action triggered. Resetting in 1 second.')
+      setTimeout(() => {
+        try { reset() } catch (e) {}
+      }, 1500);
+    },
     async refresh(done) {
-      await this.action_komentar({ pull_refresh: true, segment: this.$route.params.segment, id: this.$route.params.id }) // artikel|gambar|jawaban_konsultasi|konsultasi|status|video
-      if (this.$refs.infiniteScroll !== undefined) this.$refs.infiniteScroll.stop()
+      await this.request_reset();
+      this.$refs.infiniteScroll.resume()
       done() // required
     },
+    alert() {
+      this.$q.notify({
+        message: "no more data"
+      })
+    },
     async onLoad(index, done) {
-      const paginate = this.paginate
 
-      if (!paginate.next_page_url) {
+      if (!this.get_reply_next_page_url) {
+        this.alert()
         done(true)
         return
       }
 
-      await this.action_komentar_more({ page: paginate.current_page + 1, segment: this.$route.params.segment, id: this.$route.params.id, tag: 'by_scroll' }) // artikel|gambar|jawaban_konsultasi|konsultasi|status|video
+      await this.request_more();
 
-      if (paginate.next_page_url) {
+      if (!this.get_reply_next_page_url) {
+        this.alert()
         done(true) //= stop infinite-scroll
       } else {
         done()

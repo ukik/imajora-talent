@@ -22,7 +22,7 @@
 import { scroll } from 'quasar'
 const { getScrollTarget, setVerticalScrollPosition } = scroll
 
-import { mapFields } from "vuex-map-fields";
+
 import Form_Video from './accounts/Form_Video.vue'
 export default {
   // computed: {

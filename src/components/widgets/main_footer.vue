@@ -1,7 +1,7 @@
 <style type="text/css">
 .gradient-1 {
-  background-image: linear-gradient(to right, rgb(0, 223, 142), rgb(88,151,255), rgb(88,151,255));  
-}   
+  background-image: linear-gradient(to right, rgb(0, 223, 142), rgb(88,151,255), rgb(88,151,255));
+}
 </style>
 <template>
   <q-footer bordered unelevated class="bg-white text-black">
@@ -14,7 +14,7 @@
         round
         color="blue"
         icon="image_search"
-      />      
+      />
     </q-toolbar>
 
     <q-toolbar v-show="ayat_player_display" class="bg-grey-2 q-py-sm">
@@ -36,28 +36,28 @@
 </template>
 
 <script type="text/javascript">
-import { mapFields } from 'vuex-map-fields';
+;
 
 export default {
   computed: {
-    ...mapFields({
-      data_1: "alquran_index.ayat", //"alquran_detail.data_1", 
-      ayat_dialog: "alquran_index.ayat_dialog", 
-      current_index: "alquran_index.current_index", 
-      current_muratal: "alquran_index.current_muratal", 
-      ayat_player_display: "alquran_index.ayat_player_display", 
-      pilihan_ayat_player: "alquran_index.pilihan_ayat_player", 
+    // ...mapFields({
+    //   data_1: "alquran_index.ayat", //"alquran_detail.data_1",
+    //   ayat_dialog: "alquran_index.ayat_dialog",
+    //   current_index: "alquran_index.current_index",
+    //   current_muratal: "alquran_index.current_muratal",
+    //   ayat_player_display: "alquran_index.ayat_player_display",
+    //   pilihan_ayat_player: "alquran_index.pilihan_ayat_player",
 
-      loading1: "alquran_detail.loading", 
-      loading2: "alquran_detail_juz.loading", 
+    //   loading1: "alquran_detail.loading",
+    //   loading2: "alquran_detail_juz.loading",
 
-      paginate: "alquran_index.paginate", 
-      tipe: "alquran_index.tipe", 
-      last_ayat_or_juz: "alquran_index.last_ayat_or_juz", 
+    //   paginate: "alquran_index.paginate",
+    //   tipe: "alquran_index.tipe",
+    //   last_ayat_or_juz: "alquran_index.last_ayat_or_juz",
 
-      is_not_player_real_closed: "alquran_index.is_not_player_real_closed", 
-    }),
-  },  
+    //   is_not_player_real_closed: "alquran_index.is_not_player_real_closed",
+    // }),
+  },
   watch: {
     async is_not_player_real_closed(val) {
       // alert(this.current_index +" = "+ this.last_ayat_or_juz)
@@ -118,12 +118,12 @@ export default {
         audio.load()
         audio.play()
         this.dispatchVuex('alquran_index/is_muratal_play', true)
-      } catch (err) { } 
+      } catch (err) { }
     },
     async onAudioRefresh(value1, value2) {
       // alert(123)
       // this.dispatchVuex('alquran_index/action_alquran_ayat_player_display', true)
-      
+
       const audio = document.getElementById('audio-player');
 
       if(audio == undefined) return
@@ -153,7 +153,7 @@ export default {
       }
 
       // UPADE table: alquran_ayat_terakhir_dibaca
-      const response = await this.dispatchVuex('alquran_index/ayat_terakhir_dibaca', { 
+      const response = await this.dispatchVuex('alquran_index/ayat_terakhir_dibaca', {
         id_alquran_ayat: this.data_1[this.current_index].id_ayat,
         pagination_page: this.paginate.current_page,
         current_index: this.current_index,
@@ -173,18 +173,18 @@ export default {
         top: 0,
         left: 0,
         behavior: 'smooth'
-      });           
+      });
 
-      await this.dispatchVuex('alquran_detail/action_payload', { 
-        pull_refresh: true, 
-        id: this.last_ayat_or_juz, 
-        page: Number(this.paginate.current_page)+1 
+      await this.dispatchVuex('alquran_detail/action_payload', {
+        pull_refresh: true,
+        id: this.last_ayat_or_juz,
+        page: Number(this.paginate.current_page)+1
       })
 
-      await this.dispatchVuex('alquran_index/action_alquran_current_index', 0)        
+      await this.dispatchVuex('alquran_index/action_alquran_current_index', 0)
 
     },
-  }  
+  }
 };
 
 </script>
