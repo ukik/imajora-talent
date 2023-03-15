@@ -14,7 +14,7 @@
       <q-list>
         <q-pull-to-refresh :disable="!is_mobile_size" v-if="index === 0" :key="index+'C'" ref="pullToRefresh" @refresh="refresh">
           <q-item class="q-pa-none q-ma-none q-mb-lg" dense>
-              <Card @onDelete="onDelete(index, item.id)" :index="index" :item="item" />
+              <Card :index="index" :item="item" />
           </q-item>
         </q-pull-to-refresh>
 
@@ -30,7 +30,7 @@
             </template> -->
 
             <transition name="fade-global">
-              <Card @onDelete="onDelete(index, item.id)" :index="index" :item="item" />
+              <Card :index="index" :item="item" />
             </transition>
 
             <!-- <q-separator color="grey-3" /> -->
@@ -155,23 +155,14 @@ export default {
         // console.log(messageText)
       });
     },
-    onMenu() {
-      console.log(123)
-    },
     async refresh(done) {
       await this.request({ page: this.route_param?.page });
       this.$refs.infiniteScroll.resume()
       done() // required
     },
-    // alert() {
-    //   this.$q.notify({
-    //     message: "no more data"
-    //   })
-    // },
     async onLoad(index, done) {
 
       if (!this.get_next_page_url) {
-        this.alert()
         done(true)
         return
       }

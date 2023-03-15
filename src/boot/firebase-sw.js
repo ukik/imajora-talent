@@ -18,8 +18,8 @@ export default boot(async({ app, ssrContext, router, store }) => {
             const messaging = firebase.messaging();
             messaging.useServiceWorker(registration);
         }).catch(err => {
-            console.log(err)
+            //console.log(err)
         })
     } catch (err) {}
 
-})  
+})

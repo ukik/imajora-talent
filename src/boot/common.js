@@ -23,15 +23,15 @@ export default boot(async ({ app, ssrContext, router, store }) => {
   const routerStore = useRouterStore()
 
   router.beforeEach((ctx1) => {
-    console.log(ctx1)
+    //console.log(ctx1)
     app.config.globalProperties.$route_meta = ctx1.meta;
     app.config.globalProperties.$route_path = ctx1.path;
     app.config.globalProperties.$route_params = ctx1.params;
     app.config.globalProperties.$route_query = ctx1.query;
     app.config.globalProperties.$route_name = ctx1.name;
   })
-  console.log(app.config.globalProperties.$route_name)
-  // console.log(ctx.router, ctx.store.state.value?.lang?.locale, ctx.store.state.value?.routerStore?.route);
+  //console.log(app.config.globalProperties.$route_name)
+  // //console.log(ctx.router, ctx.store.state.value?.lang?.locale, ctx.store.state.value?.routerStore?.route);
 
   onGoto = (routes) => {
     const { query } = routes
@@ -186,7 +186,7 @@ export default boot(async ({ app, ssrContext, router, store }) => {
     },
     methods: {
       img_checker(val) {
-        // ////console.log('img_checker', ifImageExist(val))
+        // //////console.log('img_checker', ifImageExist(val))
         // if(!ifImageExist(val)) return default_avatar
         try {
           if (val == null || val == undefined) {
@@ -222,7 +222,7 @@ export default boot(async ({ app, ssrContext, router, store }) => {
         return emailPattern.test(val) || ""; //'Invalid email';
       },
       handleError(e) {
-        // console.log(e)
+        // //console.log(e)
         e.target.src = default_avatar;
       },
       random_boolean() {
@@ -267,9 +267,9 @@ export default boot(async ({ app, ssrContext, router, store }) => {
           );
 
           // cordova.plugin.media.to.whatsapp.shareMedia(num,num,"com.whatsapp",function(){
-          //     console.log("Media To Whatsapp Success")
+          //     //console.log("Media To Whatsapp Success")
           // },function(e){
-          //     console.log("Media To Whatsapp Error" + e)
+          //     //console.log("Media To Whatsapp Error" + e)
           // });
           return;
         }
@@ -334,9 +334,9 @@ export default boot(async ({ app, ssrContext, router, store }) => {
             ""
           );
           // cordova.plugin.media.to.whatsapp.shareMedia(num,num,"com.whatsapp",function(){
-          //     console.log("Media To Whatsapp Success")
+          //     //console.log("Media To Whatsapp Success")
           // },function(e){
-          //     console.log("Media To Whatsapp Error" + e)
+          //     //console.log("Media To Whatsapp Error" + e)
           // });
           // return
         }

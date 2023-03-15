@@ -50,7 +50,6 @@ export default {
   methods: {
     ...mapActions(useVideoListStore, [
       'request',
-      'request_more',,
     ]),
     async refresh(done) {
       await this.request({ page: this.route_param?.page });

@@ -64,13 +64,14 @@ export const useKomentarBalasanStore = defineStore('komentar-balasan', {
   actions: {
 
     async request (payload = null) {
-      console.log(route.getParams)
+
+      // console.log(route.getParams)
       if(this.loading) return
 
       // const { parent_id } = route.getParams // gak support preFetch
 
       this.loading = true
-      const results = await axios.get(`http://localhost:8000/api/video/komentar-balasan/${payload.post_id}/${payload.parent_id}`)
+      const results = await axios.get(`http://localhost:8000/api/video/komentar-balasan/${payload.post_id}`)
 
       this.loading = false
       this.init = true
@@ -204,16 +205,16 @@ export const useKomentarBalasanStore = defineStore('komentar-balasan', {
     },
 
 
-    async clean () {
-      this.komentar = []
-    },
+    // async clean () {
+    //   this.komentar = []
+    // },
 
-    async paginate_total (payload) {
-      this.paginate.total = payload
-    },
+    // async paginate_total (payload) {
+    //   this.paginate.total = payload
+    // },
 
-    async update (payload) {
-      this.komentar.unshift(payload)
-    },
+    // async update (payload) {
+    //   this.komentar.unshift(payload)
+    // },
   },
 });

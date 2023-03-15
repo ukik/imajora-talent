@@ -108,9 +108,6 @@ const routes: RouteRecordRaw[] = [
       },
 
 
-
-
-
       {
         path: "/komentar",
         name: "komentar",
@@ -136,6 +133,13 @@ const routes: RouteRecordRaw[] = [
         }, component: () => import("pages/komentar-balasan/index.vue")
       },
 
+
+
+
+
+
+
+
       {
         path: "/video-list/:page?",
         name: "video-list",
@@ -153,13 +157,30 @@ const routes: RouteRecordRaw[] = [
         }, component: () => import("pages/video/komentar-semua/index.vue")
       },
       {
-        path: "/video-komentar-balasan/:post_id/:parent_id?",
+        path: "/video-komentar-balasan/:id/:page",
         name: "video-komentar-balasan",
         meta: {
           ssr: true,
           title: 'video-komentar-balasan',
-        }, component: () => import("pages/video/komentar-balasan/index.vue")
+        }, component: () => import("pages/video/komentar-balasan/index.vue"),
+        // beforeEnter: (to, from, next) => {
+        //   if(to.query?.parent_id === undefined) {
+        //     next({ name:'not_found' })
+        //   } else {
+        //     next()
+        //   }
+        // }
       },
+
+      // {
+      //   path: "/video-komentar-balasanx/:post_id?",
+      //   name: "video-komentar-balasanx",
+      //   meta: {
+      //     ssr: true,
+      //     title: 'video-komentar-balasan',
+      //   }, component: () => import("pages/video/komentar-balasan/index.vue")
+      // },
+
 
 
 
@@ -216,6 +237,7 @@ const routes: RouteRecordRaw[] = [
   // but you can also remove it
   {
     path: '/:catchAll(.*)*',
+    name: 'not_found',
     component: () => import('pages/ErrorNotFound.vue'),
   },
 ];

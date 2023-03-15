@@ -12,17 +12,17 @@ const firebaseConfig = {
   storageBucket: "cubix-0.appspot.com",
   messagingSenderId: "907739369245",
   appId: "1:907739369245:web:684363bd01b12bd5735bf4",
-  measurementId: "G-NK5F0JJDM9"  
+  measurementId: "G-NK5F0JJDM9"
 }
 
 firebase.initializeApp(firebaseConfig)
 
 const messaging = firebase.messaging()
 messaging.onMessage(function (payload) {
-  console.log('On message ' + payload)
+  //console.log('On message ' + payload)
 })
 
-export { 
+export {
   // remoteDB,
-  messaging 
+  messaging
 }

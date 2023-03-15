@@ -75,13 +75,13 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
     config.headers.post['Content-Type'] = 'application/json'
     // config.headers.post['Content-Type'] = 'application/pdf';
 
-    // console.log('axios.interceptors.response request', config)
+    // //console.log('axios.interceptors.response request', config)
 
     return config
 
   }, function (error) {
     Loading.hide()
-    console.log('axios.interceptors.response error1', error.response)
+    //console.log('axios.interceptors.response error1', error.response)
 
     return Promise.reject(error)
   })
@@ -92,13 +92,13 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
     return response
     Loading.hide()
 
-    console.log('axios.interceptors.response response status', response?.data?.meta?.status)
+    //console.log('axios.interceptors.response response status', response?.data?.meta?.status)
 
     csrf = response?.data?.payload?.csrf
     const status = response?.data?.meta?.status
 
     const requiresAuth = router?.currentRoute?.value?.meta?.requiresAuth
-    console.log('JWTMiddleware', requiresAuth)
+    //console.log('JWTMiddleware', requiresAuth)
 
     // JWTMiddleware.php
     switch (response?.data?.status) {
@@ -125,13 +125,13 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
 
     if(status == 'init') {
-      console.log('axios.interceptors.response response init', response.data)
+      //console.log('axios.interceptors.response response init', response.data)
 
       await cookies.set('cubix_csrf', response.data.payload.csrf, is_cookie_secure)
       await cookies.set('cubix_token_2', response.data.payload.token, is_cookie_secure)
       await cookies.set('cubix_type', response.data.payload.type, is_cookie_secure)
 
-      console.log('init')
+      //console.log('init')
 
       // await store.commit('auth/auth', {
       //   payload: response.data.payload
@@ -160,7 +160,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
       //   router.replace({ name: 'profile', params: { id: response.data.payload.user.id }, })
       // }
 
-      // console.log('login')
+      // //console.log('login')
 
       // await store.commit('auth/auth', {
       //   payload: response.data.payload
@@ -222,7 +222,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
         // cookies.remove('cubix_token_2')
         // cookies.remove('cubix_csrf')
         // cookies.remove('cubix_type')
-        // console.log('unauthorized', store.$router.currentRoute.value)
+        // //console.log('unauthorized', store.$router.currentRoute.value)
 
         cookies.remove('cubix_csrf', is_cookie_secure)
         cookies.remove('cubix_token_2', is_cookie_secure)
@@ -247,7 +247,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
           router.replace({ name: 'profile', params: { id: response.data.payload.user.id }, })
         }
 
-        console.log('login / init')
+        //console.log('login / init')
 
         store.commit('auth/auth', {
           payload: response.data.payload
@@ -271,7 +271,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
 }, function (error) {
   Loading.hide()
-  console.log('axios.interceptors.response error2', error.response)
+  //console.log('axios.interceptors.response error2', error.response)
 
   try {
     if(error.response.data) {

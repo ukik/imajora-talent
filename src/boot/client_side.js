@@ -138,8 +138,8 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 		},
 		methods: {
 			onToastBottom(text) {
-				window.plugins.toast.showLongBottom(text,
-					function(a){console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})
+				// window.plugins.toast.showLongBottom(text,
+				// 	function(a){ console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})
 			}
 		}
 	})

@@ -30,11 +30,14 @@ export const comment_list = {
   diblokir: '',
   created_at: '',
   updated_at: '',
+  pressed: false,
+  lines: 0,
   user: {
     id: 1,
     name: "admin",
     role: "admin",
-    avatar: null
+    avatar: null,
+    follow: null,
   },
   replied: {
     id: 27,

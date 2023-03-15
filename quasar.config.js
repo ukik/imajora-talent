@@ -38,10 +38,10 @@ module.exports = configure(function (/* ctx */) {
           server: false,
           path: 'client_side',
       },
-      {
-          server: false,
-          path: 'firebase-sw',
-      },
+      // {
+      //     server: false,
+      //     path: 'firebase-sw',
+      // },
     ],
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#css
     css: [

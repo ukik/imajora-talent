@@ -9,14 +9,14 @@ export default boot(({ app, ssrContext, router, store }) => {
         el.style.height = "80px";
       }
 
-      console.log(Screen.width)
+      //console.log(Screen.width)
     },
     update(el, binding, vnode) {
       if(Screen.width <= 425) {
         el.style.height = "80px";
       }
 
-      console.log(Screen.width)
+      //console.log(Screen.width)
     }
   });
 
@@ -91,24 +91,24 @@ export default boot(({ app, ssrContext, router, store }) => {
 
   // app.directive("pointer", {
   //   inserted(el, binding, vnode) {
-  //     // ////console.log(binding.value)
-  //     ////console.log(el.children)
+  //     // //////console.log(binding.value)
+  //     //////console.log(el.children)
   //     el.style.cursor = "pointer";
   //   },
   //   update(el, binding, vnode) {
-  //     // ////console.log(binding.value)
+  //     // //////console.log(binding.value)
   //     el.style.cursor = "pointer";
   //   }
   // });
 
   // app.directive("input-pointer", {
   //   inserted(el, binding, vnode) {
-  //     // ////console.log(binding.value)
-  //     // ////console.log(el.childNodes[0])
+  //     // //////console.log(binding.value)
+  //     // //////console.log(el.childNodes[0])
   //     el.childNodes[0].style.cursor = "pointer";
   //   },
   //   update(el, binding, vnode) {
-  //     // ////console.log(binding.value)
+  //     // //////console.log(binding.value)
   //     el.childNodes[0].style.cursor = "pointer";
   //   }
   // });

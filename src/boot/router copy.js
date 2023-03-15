@@ -20,7 +20,7 @@
 //       let logged = store.getters['auth/is_logged']
 //       const id = store.getters['auth/user'].id
 
-//       console.log('xxxxxxxxxx 2', logged, to.meta.requiresAuth, from.meta.requiresAuth)
+//       //console.log('xxxxxxxxxx 2', logged, to.meta.requiresAuth, from.meta.requiresAuth)
 
 
 //       if(to.meta.requiresAuth) {

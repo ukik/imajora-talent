@@ -194,15 +194,15 @@ export default defineComponent({
     }
   },
   mounted() {
-    console.log(this.komentar, 'xxxxxxxxxxx')
-    this.$global.$on('audioplayer', (event) => {
-      this.dialog = true;
-      this.audio = event
-      this.$nextTick(() => {
-        this.$refs.audio.src = event
-        this.$refs.audio.play()
-      })
-    });
+    // console.log(this.komentar, 'xxxxxxxxxxx')
+    // this.$global.$on('audioplayer', (event) => {
+    //   this.dialog = true;
+    //   this.audio = event
+    //   this.$nextTick(() => {
+    //     this.$refs.audio.src = event
+    //     this.$refs.audio.play()
+    //   })
+    // });
   },
   setup () {
     const leftDrawerOpen = ref(false)
