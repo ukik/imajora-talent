@@ -141,16 +141,16 @@ const routes: RouteRecordRaw[] = [
 
 
       {
-        path: "/video-list/:page?",
-        name: "video-list",
+        path: "/video-list/:page",
+        name: "video_list",
         meta: {
           ssr: true,
           title: 'video-list',
         }, component: () => import("pages/video/list/index.vue")
       },
       {
-        path: "/video-komentar-semua/:id?",
-        name: "video-komentar-semua",
+        path: "/video-komentar-semua/:id/:page",
+        name: "video_komentar_semua",
         meta: {
           ssr: true,
           title: 'video-komentar-semua',
@@ -158,7 +158,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: "/video-komentar-balasan/:id/:page",
-        name: "video-komentar-balasan",
+        name: "video_komentar_balasan",
         meta: {
           ssr: true,
           title: 'video-komentar-balasan',

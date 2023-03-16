@@ -33,7 +33,7 @@
       </q-btn>
     </q-item>
 
-    <video @canplay="oncanply" :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
+    <video :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
       :style="is_mobile_size ? 'height:250px' : 'height:300px'" :src="item.file" id="video-preview" class="col-12"
       controls autoplay muted>
       Your browser does not support HTML video.
@@ -90,94 +90,6 @@
       </q-item-section>
     </q-item>
 
-    <q-item v-if="item.commented_total?.total" class="col-auto" clickable dense>
-      <q-item-section>
-        <q-item-label caption lines="1">View all {{ item.commented_total?.total }} comments</q-item-label>
-      </q-item-section>
-    </q-item>
-
-    <template v-for="(value, index) in item.comments">
-      <q-item v-touch-hold.mouse="() => onHold(index)" class="col-12 q-pr-sm" :class="[ value.pressed ? 'bg-red' : '']" clickable>
-        <q-item-section @click="() => onCollapse(index)">
-          <q-item-label class="text-caption" lines="1"></q-item-label>
-          <q-item-label class="text-caption" :ref="`comment${index}`" :lines="value.lines">
-            <span v-if="value.replied">
-              <span class="text-bold">@{{ value.user?.name }}</span> membalas <span class="text-bold">@{{ value.replied?.name }}</span>:
-            </span>
-            <span v-else-if="!value.replied" class="text-bold">@{{ value.user?.name }}: </span>
-            <span>{{ value.comment }}</span>
-
-            <!-- OPSI 1 -->
-            <q-menu
-            :touch-position="!loading_delete_comment"
-            :context-menu="!loading_delete_comment"
-            >
-              <q-list style="min-width: 100px">
-                <q-item @click="() => onDeleteComment({
-                  index,
-                  post_id: value.id
-                })" clickable v-close-popup>
-                  <q-item-section avatar><q-icon name="delete"></q-icon></q-item-section>
-                  <q-item-section>Delete</q-item-section>
-                </q-item>
-              </q-list>
-            </q-menu>
-          </q-item-label>
-        </q-item-section>
-
-        <!-- OPSI 2 -->
-        <q-item-section side />
-        <q-btn :disable="loading_delete_comment" :loading="loading_delete_comment" dense style="height:30px;" flat round icon="more_vert" color="dark">
-          <q-menu>
-            <q-list style="min-width: 100px">
-              <q-item @click="() => onDeleteComment({
-                index,
-                post_id: value.id
-              })" clickable v-close-popup>
-                <q-item-section avatar><q-icon name="delete"></q-icon></q-item-section>
-                <q-item-section>Delete</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu>
-        </q-btn>
-      </q-item>
-
-      <div class="col-12 row flex justify-start">
-        <q-item @click="reply = value" class="col-auto" clickable dense>
-          <q-item-section>
-            <q-item-label caption lines="1">Balas</q-item-label>
-          </q-item-section>
-        </q-item>
-      </div>
-
-    </template>
-
-
-    <q-item class="col-12 q-pb-md q-pt-lg" dense>
-      <q-item-section>
-        <q-item-label v-if="reply">
-          <q-item-label caption lines="1">Membalas</q-item-label>
-          <q-chip size="12px" :disable="loading_comment" class="q-mx-none" @remove="reply = null" removable color="red" text-color="white">
-            <q-avatar>
-              <img :src="img_checker(reply?.user?.avatar)" :placeholder-src="default_avatar">
-            </q-avatar>
-            <div class="ellipsis">
-              @{{ reply?.user?.name }}
-            </div>
-          </q-chip>
-        </q-item-label>
-        <q-item-label>
-          <q-input dense :disable="loading_comment" v-model="input_comment" maxlength="2500" counter autogrow placeholder="Add a comment">
-            <template v-if="input_comment" v-slot:append>
-              <q-btn :disable="loading_comment" :loading="loading_comment" @click="onComment" dense label="POST" flat color="primary" />
-            </template>
-            <template v-if="input_comment && !loading_comment" v-slot:after>
-              <q-btn @click="input_comment = ''" dense flat color="red" icon="close" round />
-            </template>
-          </q-input>
-        </q-item-label>
-      </q-item-section>
-    </q-item>
   </q-list>
 </template>
 
@@ -233,20 +145,20 @@ export default {
   },
   data() {
     return {
-      input_comment: '',
+      // input_comment: '',
       reply: null,
       collapsible: false,
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
-      'follow',
-      'liked',
-      'bookmarked',
-      'comment',
-      'delete',
-      'delete_comment',
-    ]),
+    ...mapActions(useVideoListStore, {
+      follow:'komentar_semua_follow',
+      liked:'komentar_semua_liked',
+      bookmarked:'komentar_semua_bookmarked',
+      // 'comment',
+      // 'delete',
+      // 'delete_comment',
+    }),
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:
@@ -269,29 +181,22 @@ export default {
         post_id: this.item.id,
       })
     },
-    onDeleteComment(value) {
-      this.delete_comment({
-        parent_index: this.index,
-        parent_id: this.item.id,
-        ...value
-      })
-    },
-    async onComment() {
-      const response = await this.comment({
-        index: this.index,
-        post_id: this.item?.id,
-        parent_id: this.reply?.id == undefined ? '' : this.reply?.id,
+    // async onComment() {
+    //   const response = await this.comment({
+    //     index: this.index,
+    //     post_id: this.item?.id,
+    //     parent_id: this.reply?.id == undefined ? '' : this.reply?.id,
 
-        replied_id: this.reply?.user_id == undefined ? '' : this.reply?.user_id,
+    //     replied_id: this.reply?.user_id == undefined ? '' : this.reply?.user_id,
 
-        input_comment: this.input_comment,
-      })
-      console.log('onComment', response)
-      if(response) {
-        this.reply = null
-        this.input_comment = ''
-      }
-    },
+    //     input_comment: this.input_comment,
+    //   })
+    //   console.log('onComment', response)
+    //   if(response) {
+    //     this.reply = null
+    //     this.input_comment = ''
+    //   }
+    // },
     onHold(index) {
       switch (this.item.comments[index].pressed) {
         case 0:
@@ -303,24 +208,6 @@ export default {
       }
       console.log('on hold')
     },
-    oncanply() {
-      // WARNING!!!!
-      // ERROR: Uncaught (in promise) : DOMException: play() failed because the user didn't interact with the document first in console
-      // SOLUTION: https://stackoverflow.com/questions/49930680/how-to-handle-uncaught-in-promise-domexception-play-failed-because-the-use
-      // SOLUTION: https://stackoverflow.com/questions/70403305/uncaught-in-promise-domexception-play-failed-because-the-user-didnt-inte
-      // EXPLAINATION:
-      // 1. pasang "autoplay muted" di html video/audio
-      // 2. pasang code ini di html video/audio
-
-      // POLICY Unmuting failed and the element was paused instead because the user didn't interact with the document before. https://goo.gl/xX8pDD
-      // gak ada solusi kecuali user melakukan scroll/tapi/etc
-      // this.$nextTick(() => { document.getElementById(`video${this.index}`).muted = false })
-
-      // PERCUMA
-      // setTimeout(() => {
-      //   this.$nextTick(() => { document.getElementById(`video${this.index}`).muted = false })
-      // }, 1000);
-    }
   },
 }
 </script>

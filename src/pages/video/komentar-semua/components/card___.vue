@@ -9,16 +9,12 @@
       <q-item-section>
         <q-item-label lines="1">{{ item.user?.name }}</q-item-label>
         <q-item-label caption lines="1">
-          <!-- contact.email -->
           <q-chip :disable="loading_follow" clickable @click="onFollow" class="q-ma-none" :color="!item.user.follow ? 'positive' : 'primary'"
             size="11px" text-color="white" icon="check">
             {{ !item.user.follow ? 'Mengikuti' : 'Berhenti Mengikuti' }}
           </q-chip>
-          <!-- <router-link to="/">Follow</router-link> -->
         </q-item-label>
-        <!-- <router-link class="absolute-full"  to="/"></router-link> -->
       </q-item-section>
-
       <q-item-section side>
       </q-item-section>
       <q-btn :disable="loading_delete" :loading="loading_delete" dense style="height:30px;" flat round icon="more_vert" color="dark">
@@ -34,7 +30,7 @@
     </q-item>
 
     <video @canplay="oncanply" :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
-      :style="is_mobile_size ? 'height:250px' : 'height:300px'" :src="item.file" id="video-preview" class="col-12"
+      :style="is_mobile_size ? 'height:250px' : 'height:350px'" :src="item.file" id="video-preview" class="col-12"
       controls autoplay muted>
       Your browser does not support HTML video.
     </video>
