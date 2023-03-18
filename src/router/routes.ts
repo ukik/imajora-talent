@@ -171,7 +171,22 @@ const routes: RouteRecordRaw[] = [
         //   }
         // }
       },
-
+      {
+        path: "/video-create/:id?",
+        name: "video_create",
+        meta: {
+          ssr: true,
+          title: 'video-create',
+        }, component: () => import("pages/video/create/index.vue")
+      },
+      // {
+      //   path: "/video-edit/:id",
+      //   name: "video_edit",
+      //   meta: {
+      //     ssr: true,
+      //     title: 'video-edit',
+      //   }, component: () => import("pages/video/create/index.vue")
+      // },
       // {
       //   path: "/video-komentar-balasanx/:post_id?",
       //   name: "video-komentar-balasanx",

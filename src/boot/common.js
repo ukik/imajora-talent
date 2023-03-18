@@ -2,7 +2,7 @@ import { scroll, date, Notify, Platform, Screen, Cookies } from "quasar";
 
 var default_avatar = "https://secure.gravatar.com/avatar?d=wavatar";
 
-export const host = "https://api.properti.labsnip.com/"; // 'http://properti-backend.local/'; //
+export const host = "http://localhost:8000/"; // 'http://properti-backend.local/'; //
 
 export const default_title =
   "Cubix - Marketing & Agency | wujudkan impianmu - miliki aset idaman";
