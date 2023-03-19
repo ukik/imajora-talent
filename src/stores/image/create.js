@@ -28,57 +28,18 @@ function successNotify() {
 const route = useRouterStore()
 
 
-// const detail = {
-//   id: '',
-//   user_id: '',
-//   file: '',
-//   description: '',
-//   created_at: '',
-//   updated_at: '',
-//   liked_total: null,
-//   visited_total: null,
-//   shared_total: null,
-//   commented_total: null,
-//   bookmarked_total: null,
-//   liked: null,
-//   visited: null,
-//   shared: null,
-//   commented: null,
-//   bookmarked: null,
-//   follow: null,
-//   comments: [],
-//   user: {
-//     id: "",
-//     name: "",
-//     role: "",
-//     avatar: null,
-//     follow: null,
-//   },
-// }
-
-
-
-export const useVideoListStore = defineStore('video-create', {
+export const useImageListStore = defineStore('image-create', {
   state: () => ({
     id: '',
-
     description: '',
-
-    media: null,
-    cover: null,
-
-    file_media: null,
-    file_cover: null,
-
+    cover: [],
+    file_cover: [],
     status: '0',
-
+    max: 5,
     loading: false,
     loading_create: false,
 
   }),
-  // getters: {
-  //   get_detail: (state) => state.detail,
-  // },
   actions: {
 
     async form_edit (payload = null) {
@@ -90,7 +51,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       this.loading = true
 
-      const results = await axios.get(`api/video/form/${payload.id}`)
+      const results = await axios.get(`api/image/form/${payload.id}`)
       .catch(err => {
         errorNotify()
         return null
@@ -102,18 +63,26 @@ export const useVideoListStore = defineStore('video-create', {
 
       if(!results) return
       if(!results.data.payload.detail) {
-        this.router.replace({ name:'video_create' })
+        this.router.replace({ name:'image_create' })
         return false
       }
 
-      const file = results.data.payload.detail.file
-      const cover = results.data.payload.detail.cover
+      // const file = results.data.payload.detail.file
+      const images = results.data.payload.detail.images
       const description = results.data.payload.detail.description
       const id = results.data.payload.detail.id
       const status = results.data.payload.detail.status
 
-      this.media = file ? host+file : null
-      this.cover = cover ? host+cover : null
+      let arr = []
+      images.forEach(element => {
+        arr.push({
+          file: host+element.file,
+          id: element.id
+        })
+      });
+
+      // this.media = file ? host+file : null
+      this.cover = images.length > 0 ? arr : []
       this.description = description ? description : null
       this.id = id ? id : null
       this.status = status ? status : '0'
@@ -124,15 +93,18 @@ export const useVideoListStore = defineStore('video-create', {
       if(this.loading_create) return
 
       let formData = new FormData();
-      formData.append('media', this.file_media)
-      formData.append('cover', this.file_cover)
+      // formData.append('media', this.file_media)
+
+      for (let i = 0; i < this.file_cover.length; i++) {
+        formData.append('cover[]', this.file_cover[i]);
+      }
       formData.append('description', this.description)
 
       this.loading_create = true
 
       const results = await axios({
         method: 'post',
-        url: `api/video/form/create/${payload.id}`,
+        url: `api/image/form/create/${payload.id}`,
         data: formData
       })
       .catch(err => {
@@ -151,13 +123,10 @@ export const useVideoListStore = defineStore('video-create', {
 
     async form_delete_single (payload = null) {
       if(!this.id) { // form CREATE
-        if(payload.type == 'media') {
-          this.media = null
-          this.file_media = null
-        } else if (payload.type == 'cover') {
-          this.cover = null
-          this.file_cover = null
-        }
+        // console.log(this.cover)
+        // console.log(this.file_cover)
+        this.cover.splice(payload.index, 1)
+        this.file_cover.splice(payload.index, 1)
         return true
       }
 
@@ -165,9 +134,13 @@ export const useVideoListStore = defineStore('video-create', {
 
       this.loading_create = true
 
+      let formData = new FormData();
+      formData.append('user_image_file_id', payload?.selected?.id)
+
       const results = await axios({
         method: 'post',
-        url: `api/video/form/delete-${payload.type}/${payload.id}`,
+        url: `api/image/form/delete-cover/${payload.id}`,
+        data: formData,
       })
       .catch(err => {
         errorNotify()
@@ -178,13 +151,8 @@ export const useVideoListStore = defineStore('video-create', {
 
       if(!results) return
 
-      if(payload.type == 'media') {
-        this.media = null
-        this.file_media = null
-      } else if (payload.type == 'cover') {
-        this.cover = null
-        this.file_cover = null
-      }
+      this.cover.splice(payload.index, 1)
+      this.file_cover.splice(payload.index, 1)
 
       successNotify()
 
@@ -199,7 +167,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/form/delete/${payload.id}`,
+        url: `http://localhost:8000/api/image/form/delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -212,13 +180,11 @@ export const useVideoListStore = defineStore('video-create', {
 
       this.id = null
       this.description = null
-      this.media = null
       this.cover = null
-      this.file_media = null
       this.file_cover = null
 
       this.router.replace({
-        name:'video_create'
+        name:'image_create'
       })
 
       successNotify()

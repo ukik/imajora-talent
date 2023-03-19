@@ -199,6 +199,120 @@ const routes: RouteRecordRaw[] = [
 
 
 
+
+
+
+      {
+        path: "/youtube-list/:page",
+        name: "youtube_list",
+        meta: {
+          ssr: true,
+          title: 'youtube-list',
+        }, component: () => import("pages/youtube/list/index.vue")
+      },
+      {
+        path: "/youtube-komentar-semua/:id/:page",
+        name: "youtube_komentar_semua",
+        meta: {
+          ssr: true,
+          title: 'youtube-komentar-semua',
+        }, component: () => import("pages/youtube/komentar-semua/index.vue")
+      },
+      {
+        path: "/youtube-komentar-balasan/:id/:page",
+        name: "youtube_komentar_balasan",
+        meta: {
+          ssr: true,
+          title: 'youtube-komentar-balasan',
+        }, component: () => import("pages/youtube/komentar-balasan/index.vue"),
+      },
+      {
+        path: "/youtube-create/:id?",
+        name: "youtube_create",
+        meta: {
+          ssr: true,
+          title: 'youtube-create',
+        }, component: () => import("pages/youtube/create/index.vue")
+      },
+
+
+
+      {
+        path: "/audio-list/:page",
+        name: "audio_list",
+        meta: {
+          ssr: true,
+          title: 'audio-list',
+        }, component: () => import("pages/audio/list/index.vue")
+      },
+      {
+        path: "/audio-komentar-semua/:id/:page",
+        name: "audio_komentar_semua",
+        meta: {
+          ssr: true,
+          title: 'audio-komentar-semua',
+        }, component: () => import("pages/audio/komentar-semua/index.vue")
+      },
+      {
+        path: "/audio-komentar-balasan/:id/:page",
+        name: "audio_komentar_balasan",
+        meta: {
+          ssr: true,
+          title: 'audio-komentar-balasan',
+        }, component: () => import("pages/audio/komentar-balasan/index.vue"),
+      },
+      {
+        path: "/audio-create/:id?",
+        name: "audio_create",
+        meta: {
+          ssr: true,
+          title: 'audio-create',
+        }, component: () => import("pages/audio/create/index.vue")
+      },
+
+
+      {
+        path: "/image-list/:page",
+        name: "image_list",
+        meta: {
+          ssr: true,
+          title: 'image-list',
+        }, component: () => import("pages/image/list/index.vue")
+      },
+      {
+        path: "/image-komentar-semua/:id/:page",
+        name: "image_komentar_semua",
+        meta: {
+          ssr: true,
+          title: 'image-komentar-semua',
+        }, component: () => import("pages/image/komentar-semua/index.vue")
+      },
+      {
+        path: "/image-komentar-balasan/:id/:page",
+        name: "image_komentar_balasan",
+        meta: {
+          ssr: true,
+          title: 'image-komentar-balasan',
+        }, component: () => import("pages/image/komentar-balasan/index.vue"),
+      },
+      {
+        path: "/image-create/:id?",
+        name: "image_create",
+        meta: {
+          ssr: true,
+          title: 'image-create',
+        }, component: () => import("pages/image/create/index.vue")
+      },
+
+
+
+
+
+
+
+
+
+
       {
         path: "/account",
         name: "account",

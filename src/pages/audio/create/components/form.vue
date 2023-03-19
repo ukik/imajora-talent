@@ -108,6 +108,8 @@ import axios from 'axios'
         cover: 'cover',
         file_media: 'file_media',
         file_cover: 'file_cover',
+
+        get_detail: 'get_detail',
         loading: 'loading',
         loading_create: 'loading_create',
       }),
@@ -136,10 +138,6 @@ import axios from 'axios'
       ...mapActions(useVideoListStore, [
         'form_delete_single',
       ]),
-      onClearInput() {
-        this.$refs.cover.value = null;
-        this.$refs.media.value = null;
-      },
       async onConfirm() {
         const response = await this.form_delete_single({
           type: this.type,
@@ -149,15 +147,15 @@ import axios from 'axios'
         if(response) {
 
           if(this.type == 'cover') {
-            this.$refs.cover.value = null;
+            this.cover = null; this.$refs.cover.value = null;
           }
           if(this.type == 'media') {
-            this.$refs.media.value = null;
+            this.media = null; this.$refs.media.value = null;
           }
 
+          this.confirm = false
           this.type = ''
         }
-        this.confirm = false
       },
       onFileChangeCover(event) {
         const vm = this
@@ -186,6 +184,29 @@ import axios from 'axios'
         });
 
         vm.file_media = media
+
+
+
+
+
+        // let currentObj = this;
+
+        // const config = {
+        //     headers: { 'content-type': 'multipart/form-data' }
+        // }
+
+        // let formData = new FormData();
+        // formData.append('file', media);
+
+        // axios.post('http://localhost:8000/api/video/create', formData, config)
+        // .then(function (response) {
+        //     currentObj.success = response.data.success;
+        // })
+        // .catch(function (error) {
+        //     currentObj.output = error;
+        // });
+
+
 			},
 			onDialogOption() {
 				if(this.is_cordova) {

@@ -2,7 +2,7 @@
   <!-- <q-layout view="lHh Lpr lFf" > -->
   <q-layout view="hHr lpR lFr">
     <q-no-ssr>
-    <q-header elevated>
+    <q-header unelevated>
       <q-toolbar>
         <q-btn
           flat

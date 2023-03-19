@@ -33,7 +33,7 @@
         class="scroll">
         <q-tab-panel name="tab0">
           <div class="full-width row flex justify-center">
-            <Form_Video ref="myform" />
+            <Form_Video />
           </div>
         </q-tab-panel>
         <q-tab-panel name="tab1">
@@ -93,14 +93,14 @@
         <q-list  class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-xs-12 bg-white">
 
           <q-banner flat class="bg-grey-2">
-            <template v-slot:avatar>
+            <template v-if="!media" v-slot:avatar>
               <q-icon name="info" color="blue-4" />
             </template>
-            <div class="row flex items-center">
-              <span>Upload 1 video</span>
-              <q-space />
-              <q-btn :disable="loading" :loading="loading" @click="onSubmit" dense label="post" flat color="primary" />
-            </div>
+            <span v-if="!media">Please complete this form by upload 1 video</span>
+
+
+            <q-btn v-if="media" :disable="loading" :loading="loading" @click="onSubmit" dense label="post" flat color="primary" />
+
           </q-banner>
 
           <!-- <q-toolbar v-if="id" class="bg-blue text-white">
@@ -178,20 +178,6 @@ export default {
       id: currentRoute.params?.id
     })
   }),
-  watch: {
-    route_name(val) {
-      if(val == 'video_create') {
-        this.description = ''
-        this.file_cover = null
-        this.file_media = null
-        this.id = ''
-        this.media = null
-        this.cover = null
-        this.status = '0'
-        this.$refs.myform.onClearInput()
-      }
-    }
-  },
   data() {
     return {
       confirm:false,
@@ -235,15 +221,15 @@ export default {
         id: this.route_param?.id
       })
 
-      // this.cover = null;
-      // this.$refs.cover.value = null;
-      // this.media = null;
-      // this.$refs.media.value = null;
+      this.cover = null;
+      this.$refs.cover.value = null;
+      this.media = null;
+      this.$refs.media.value = null;
     },
     async onSubmit() {
       // this.allValidate(this.$refs)
-      // console.log(this.description)
-      // if (!this.description) return;
+      console.log(this.description)
+      if (!this.description) return;
 
       if(!this.route_param?.id) {
         if (!this.file_media) return;
@@ -263,6 +249,23 @@ export default {
         })
       }
 
+      // if (!this.email) return;
+      // if (!this.gender) return;
+      // if (!this.phone) return;
+      // if (!this.password) return;
+
+      // const telp = this.phone.indexOf('+62') > -1 ? this.phone : ('+62'+this.phone)
+      // const telp =
+      //   this.phone.indexOf(this.country_selected) > -1
+      //     ? this.phone
+      //     : this.country_selected + this.phone;
+
+      // this.$store.dispatch("auth/register", {
+      //   country_selected: this.country_selected,
+      //   phone: telp,
+      //   password: this.password,
+      //   password_confirmation: this.password_confirmation,
+      // });
     },
   },
 };

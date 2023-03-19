@@ -13,37 +13,19 @@
         </q-tabs>
       </div>
       <q-separator color="primary" />
-      <!-- <div>Please complete this content to able to show public</div> -->
-
-      <!-- <q-toolbar v-if="id" class="bg-red text-white">
-        Delete this content?
-        <q-space />
-        <q-btn @click="onDelete" flat round dense icon="delete" />
-      </q-toolbar> -->
-
-      <!-- <q-banner class="bg-grey-2 q-mx-md q-mt-md">
-        <template v-slot:avatar>
-          <q-icon name="info" color="blue-4" />
-        </template>
-        Please complete this form by upload 1 video
-      </q-banner> -->
 
       <q-tab-panels keep-alive v-model="tab" animated
-        :style="media ? 'height: calc(100vh - 50px - 108px)' : 'height: calc(100vh - 50px - 108px)'"
+        :style="cover.length > 0 ? 'height: calc(100vh - 50px - 108px)' : 'height: calc(100vh - 50px - 108px)'"
         class="scroll">
         <q-tab-panel name="tab0">
           <div class="full-width row flex justify-center">
-            <Form_Video ref="myform" />
+            <Form_Image ref="myform" />
           </div>
         </q-tab-panel>
         <q-tab-panel name="tab1">
           <q-input class="q-pb-xl" input-class="q-pr-sm" :loading="loading" dense  :disable="loading || loading" v-model="description" maxlength="2500" counter clearable
             placeholder="Add description" autogrow>
-            <!-- <template v-if="description" v-slot:after>
-              <q-btn :disable="loading" :loading="loading" @click="onSubmit" dense label="post" flat color="primary" />
-            </template> -->
           </q-input>
-          <!-- <q-item-label class="q-pa-md">{{ description }}</q-item-label> -->
         </q-tab-panel>
         <q-tab-panel name="tab2">
           <q-option-group
@@ -72,21 +54,16 @@
       </q-card>
     </q-dialog>
 
-
     <q-header bordered unelevated class="bg-white text-black text-center">
       <q-toolbar class="row">
         <q-btn flat dense round @click="onGotoBack" color="blue" icon="arrow_back_ios" />
         <q-toolbar-title class="col text-left">
-          Tambah Video
+          Tambah Gambar
         </q-toolbar-title>
         <q-btn dense style="height:30px;" flat round icon="more_vert" color="dark" />
         <q-btn @click="onDelete" flat round dense color="red" icon="delete" />
       </q-toolbar>
     </q-header>
-
-    <!-- <q-page-sticky position="bottom-right" :offset="[18, 18]">
-      <q-btn fab icon="save" color="blue" />
-    </q-page-sticky> -->
 
     <transition name="fade-global">
       <q-footer class="bg-transparent text-black row flex flex-center">
@@ -97,17 +74,11 @@
               <q-icon name="info" color="blue-4" />
             </template>
             <div class="row flex items-center">
-              <span>Upload 1 video</span>
+              <span>Upload up to 5 images</span>
               <q-space />
-              <q-btn :disable="loading" :loading="loading" @click="onSubmit" dense label="post" flat color="primary" />
+              <q-btn v-if="cover.length > 0" :disable="loading" :loading="loading" @click="onSubmit" dense label="post" flat color="primary" />
             </div>
           </q-banner>
-
-          <!-- <q-toolbar v-if="id" class="bg-blue text-white">
-            Delete this content?
-            <q-space />
-            <q-btn @click="onDelete" flat round dense icon="delete" />
-          </q-toolbar> -->
 
           <q-item v-if="false" dense class="q-pt-md">
             <q-item-section>
@@ -137,56 +108,45 @@
 
 <script>
 import { scroll } from 'quasar'
-const { getScrollTarget, setVerticalScrollPosition } = scroll
 
-import Form_Video from './components/form.vue'
+import Form_Image from './components/form.vue'
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/create.js'
+import { useImageListStore } from 'src/stores/image/create.js'
 import { preFetch } from 'quasar/wrappers';
 
 export default {
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useImageListStore, {
       description: 'description',
-      media: 'media',
       cover: 'cover',
       id: 'id',
-
-      file_media: 'file_media',
       file_cover: 'file_cover',
-
       status: 'status',
-
       loading: 'loading',
       loading_create: 'loading_create',
     }),
-    ...mapWritableState(useVideoListStore, {
+    ...mapWritableState(useImageListStore, {
       description: 'description',
-
-      file_media: 'file_media',
       file_cover: 'file_cover',
-
-      media: 'media',
+      id:'',
       cover: 'cover',
       status: 'status',
     }),
   },
   preFetch: preFetch(async ({ store, currentRoute }) => {
-    const mystore = useVideoListStore(store);
+    const mystore = useImageListStore(store);
     await mystore.form_edit({
       id: currentRoute.params?.id
     })
   }),
   watch: {
     route_name(val) {
-      if(val == 'video_create') {
+      if(val == 'image_create') {
         this.description = ''
-        this.file_cover = null
-        this.file_media = null
+        this.file_cover = []
         this.id = ''
-        this.media = null
-        this.cover = null
+        this.cover = []
         this.status = '0'
         this.$refs.myform.onClearInput()
       }
@@ -205,49 +165,26 @@ export default {
     }
   },
   components: {
-    Form_Video
+    Form_Image
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useImageListStore, [
       'form_create',
       'form_edit',
       'form_delete',
     ]),
-    allValidate(value = this.$refs) {
-      let keys = []
-      setTimeout(() => {
-        for (let [key, value] of Object.entries(this.$refs)) {
-          try {
-            console.log('auto validate')
-            value.validate();
-          } catch (e) { }
-          // console.log(key)
-          // keys.push(value)
-          // if (/^tenure/.test(key)) {
-          //     keys.push({ key: value })
-          // }
-        }
-      }, 2500)
-      // console.log('all refs', this.$refs)
-    },
     async onDelete() {
       const response = await this.form_delete({
         id: this.route_param?.id
       })
-
-      // this.cover = null;
-      // this.$refs.cover.value = null;
-      // this.media = null;
-      // this.$refs.media.value = null;
     },
     async onSubmit() {
-      // this.allValidate(this.$refs)
       // console.log(this.description)
       // if (!this.description) return;
 
       if(!this.route_param?.id) {
-        if (!this.file_media) return;
-        // if (!this.file_cover) return;
+        // if (!this.file_media) return;
+        if (this.file_cover.length <= 0) return;
       }
 
       const response = await this.form_create({
@@ -256,7 +193,7 @@ export default {
 
       if(response?.id) {
         this.$router.replace({
-          name:'video_create',
+          name:'image_create',
           params: {
             id: response.id
           }

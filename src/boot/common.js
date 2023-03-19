@@ -187,7 +187,6 @@ export default boot(async ({ app, ssrContext, router, store }) => {
     methods: {
       img_checker(val) {
         // //////console.log('img_checker', ifImageExist(val))
-        // if(!ifImageExist(val)) return default_avatar
         try {
           if (val == null || val == undefined) {
             return default_avatar;

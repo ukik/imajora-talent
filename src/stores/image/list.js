@@ -93,7 +93,8 @@ const comment = {
 const detail = {
   id: '',
   user_id: '',
-  file: '',
+  // file: '',
+  images: [],
   description: '',
   created_at: '',
   updated_at: '',
@@ -120,7 +121,7 @@ const detail = {
 
 
 
-export const useVideoListStore = defineStore('video-list', {
+export const useImageListStore = defineStore('image-list', {
   state: () => ({
     text_komentar_balasan:'',
     text_komentar_semua: '',
@@ -210,7 +211,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading = true
 
-      const results = await axios.get(`api/video?page=${payload.page}`)
+      const results = await axios.get(`api/image?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -229,7 +230,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading = true
 
-      const results = await axios.get(`api/video?page=${next_page}`)
+      const results = await axios.get(`api/image?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -267,7 +268,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/follow/${payload.user_id}`,
+        url: `api/image/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -300,7 +301,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/bookmarked/${payload.post_id}`,
+        url: `api/image/bookmarked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -323,7 +324,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/liked/${payload.post_id}`,
+        url: `api/image/liked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -352,7 +353,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/comment`,
+        url: `api/image/comment`,
         data: formData
       })
       .catch(err => {
@@ -378,7 +379,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/delete/${payload.post_id}`,
+        url: `api/image/delete/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -405,7 +406,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/delete-comment/${payload.post_id}`,
+        url: `api/image/delete-comment/${payload.post_id}`,
         data: formData
       })
       .catch(err => {
@@ -436,7 +437,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading_komentar_balasan = true
 
-      const results = await axios.get(`api/video/komentar-balasan/${payload.id}?page=${payload.page}`)
+      const results = await axios.get(`api/image/komentar-balasan/${payload.id}?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -455,7 +456,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading_komentar_balasan_more = true
 
-      const results = await axios.get(`api/video/komentar-balasan-more/${payload.id}?page=${next_page}`)
+      const results = await axios.get(`api/image/komentar-balasan-more/${payload.id}?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -493,7 +494,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/follow/${payload.user_id}`,
+        url: `api/image/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -545,7 +546,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/komentar-balasan-comment`,
+        url: `api/image/komentar-balasan-comment`,
         data: formData
       })
       .catch(err => {
@@ -572,7 +573,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/komentar-balasan-delete/${payload.id}`,
+        url: `api/image/komentar-balasan-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -595,7 +596,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/komentar-balasan-delete/${payload.id}`,
+        url: `api/image/komentar-balasan-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -624,7 +625,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/follow/${payload.user_id}`,
+        url: `api/image/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -670,7 +671,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/bookmarked/${payload.post_id}`,
+        url: `api/image/bookmarked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -693,7 +694,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/liked/${payload.post_id}`,
+        url: `api/image/liked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -716,7 +717,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading_komentar_semua = true
 
-      const results = await axios.get(`api/video/komentar-semua/${payload.id}?page=${payload.page}`)
+      const results = await axios.get(`api/image/komentar-semua/${payload.id}?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -735,7 +736,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       this.loading_komentar_semua_more = true
 
-      const results = await axios.get(`api/video/komentar-semua/${payload.id}?page=${next_page}`)
+      const results = await axios.get(`api/image/komentar-semua/${payload.id}?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -766,38 +767,7 @@ export const useVideoListStore = defineStore('video-list', {
         total: response.total,
       }
     },
-    // async komentar_semua_follow (payload = null) {
-    //   if(this.loading_komentar_semua_follow) return
 
-    //   this.loading_komentar_semua_follow = true
-
-    //   const results = await axios({
-    //     method: 'post',
-    //     url: `api/video/follow/${payload.user_id}`,
-    //   })
-    //   .catch(err => {
-    //     errorNotify()
-    //     return null
-    //   })
-
-    //   this.loading_komentar_semua_follow = false
-
-    //   if(!results) return
-
-    //   const content = this.comments.data
-
-    //   for (let i = 0; i < content.length; i++) {
-    //     const element = content[i];
-    //     if(element.user_id == results.data.payload.check.user_id) {
-    //       if(results.data.payload.status == 'add') {
-    //         element.user.follow = true
-    //       }
-    //       if(results.data.payload.status == 'remove') {
-    //         element.user.follow = false
-    //       }
-    //     }
-    //   }
-    // },
     async komentar_semua_comment (payload = null) {
 
       if(this.loading_komentar_semua_comment) return
@@ -812,7 +782,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/komentar-semua-comment`,
+        url: `api/image/komentar-semua-comment`,
         data: formData
       })
       .catch(err => {
@@ -840,7 +810,7 @@ export const useVideoListStore = defineStore('video-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/komentar-semua-delete/${payload.id}`,
+        url: `api/image/komentar-semua-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -858,24 +828,5 @@ export const useVideoListStore = defineStore('video-list', {
 
 
 
-
-
-
-
-
-
-
-
-    // async clean () {
-    //   this.komentar = []
-    // },
-
-    // async paginate_total (payload) {
-    //   this.paginate.total = payload
-    // },
-
-    // async update (payload) {
-    //   this.komentar.unshift(payload)
-    // },
   },
 });

@@ -34,7 +34,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
   var is_cookie_secure = { secure: false }
 
-  axios.defaults.baseURL = host + 'api/v1/' //host+'/api' // 'http://192.168.1.8:8000/api' // 'https://api.hiqma.labsnip.com' //'http://localhost:8000' // 'http://192.168.1.7:8000' // 'http://192.168.1.4:8000' //  "http://192.168.1.4:8000" //
+  axios.defaults.baseURL = host // 'http://192.168.1.8:8000/api' // 'https://api.hiqma.labsnip.com' //'http://localhost:8000' // 'http://192.168.1.7:8000' // 'http://192.168.1.4:8000' //  "http://192.168.1.4:8000" //
   // axios.defaults.params = {};
 
   if(process.env.CLIENT) {
@@ -53,9 +53,9 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
   axios.interceptors.request.use(function (config) {
     // default options
 
-    if(config.method == "post") {
-        Loading.show()
-    }
+    // if(config.method == "post") {
+    //     Loading.show()
+    // }
 
     cookies = process.env.SERVER
       ? Cookies.parseSSR(ssrContext)
@@ -68,7 +68,7 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
     // axios.defaults.params = { 'csrf': csrf };
 
     // config.headers.common['Authorization'] = `${type} ${token}`
-    // config.headers.common['cubix_csrf'] = csrf
+    config.headers.common['cubix_csrf'] = 'csrf'
 
     config.headers.post['Content-Type'] = 'application/x-www-form-urlencoded'
     config.headers.post['Content-Type'] = 'multipart/form-data'

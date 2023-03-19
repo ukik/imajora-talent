@@ -58,7 +58,7 @@ const route = useRouterStore()
 
 
 
-export const useVideoListStore = defineStore('video-create', {
+export const useYoutubeListStore = defineStore('youtube-create', {
   state: () => ({
     id: '',
 
@@ -90,7 +90,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       this.loading = true
 
-      const results = await axios.get(`api/video/form/${payload.id}`)
+      const results = await axios.get(`http://localhost:8000/api/video/form/${payload.id}`)
       .catch(err => {
         errorNotify()
         return null
@@ -132,7 +132,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/form/create/${payload.id}`,
+        url: `http://localhost:8000/api/video/form/create/${payload.id}`,
         data: formData
       })
       .catch(err => {
@@ -150,16 +150,6 @@ export const useVideoListStore = defineStore('video-create', {
     },
 
     async form_delete_single (payload = null) {
-      if(!this.id) { // form CREATE
-        if(payload.type == 'media') {
-          this.media = null
-          this.file_media = null
-        } else if (payload.type == 'cover') {
-          this.cover = null
-          this.file_cover = null
-        }
-        return true
-      }
 
       if(this.loading_create) return
 
@@ -167,7 +157,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/form/delete-${payload.type}/${payload.id}`,
+        url: `http://localhost:8000/api/video/form/delete-${payload.type}/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -199,7 +189,7 @@ export const useVideoListStore = defineStore('video-create', {
 
       const results = await axios({
         method: 'post',
-        url: `api/video/form/delete/${payload.id}`,
+        url: `http://localhost:8000/api/video/form/delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
