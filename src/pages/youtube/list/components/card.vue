@@ -33,11 +33,13 @@
       </q-btn>
     </q-item>
 
-    <video @canplay="oncanply" :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
-      :style="is_mobile_size ? 'height:250px' : 'height:300px'" :src="item.file" id="video-preview" class="col-12"
-      controls autoplay muted>
-      Your browser does not support HTML video.
-    </video>
+
+    <YouTube :height="is_mobile_size ? 250 : 350" :width="clientWidth"
+      :src="item.file"
+      @ready="onReady"
+      :id="`video${index}`" :ref="`video${index}`" />
+
+
     <i class=""></i>
     <q-item class="col-12 q-pa-sm" dense>
       <q-item-section>
@@ -185,10 +187,13 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 
 export default {
   props: {
+    clientWidth: {
+      default: 100,
+    },
     index: {
       default: null
     },
@@ -217,7 +222,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
 
       loading_follow: 'loading_follow',
       loading_liked: 'loading_liked',
@@ -236,10 +241,14 @@ export default {
       input_comment: '',
       reply: null,
       collapsible: false,
+
+      is_youtube_ready: false,
     }
   },
+  mounted() {
+  },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'follow',
       'liked',
       'bookmarked',
@@ -247,6 +256,20 @@ export default {
       'delete',
       'delete_comment',
     ]),
+    onReady() {
+      this.is_youtube_ready = true
+    },
+    onPlay() {
+      if(!this.is_youtube_ready) return
+      if(this.index == 0) console.log('onPlay',`video${this.index}`)
+      this.$refs[`video${this.index}`].playVideo()
+    },
+    onPause() {
+      if(!this.is_youtube_ready) return
+      if(this.index == 0) console.log('onPause',`video${this.index}`)
+      this.$refs[`video${this.index}`].pauseVideo()
+    },
+
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:

@@ -17,7 +17,11 @@ import 'vue3-tour/dist/vue3-tour.css'
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
+import YouTube from 'vue3-youtube'
+
 export default boot( async ({ app, ssrContext, router, store }) => {
+
+  app.component('YouTube', YouTube)
 
 	app.mixin({
 		data() {
@@ -155,9 +159,9 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 	app.use(Vue3Tour)
 	// app.use(VueEasyLightbox)
 
-	// app.component('Banner',
-	// 	defineAsyncComponent(() => import('src/components/Banner.vue'))
-	// )
+	app.component('Tags',
+		defineAsyncComponent(() => import('src/components/Tags.vue'))
+	)
 
 	// app.component('Regency',
 	// 	defineAsyncComponent(() => import('src/components/Regency.vue'))

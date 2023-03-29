@@ -37,18 +37,18 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
   axios.defaults.baseURL = host // 'http://192.168.1.8:8000/api' // 'https://api.hiqma.labsnip.com' //'http://localhost:8000' // 'http://192.168.1.7:8000' // 'http://192.168.1.4:8000' //  "http://192.168.1.4:8000" //
   // axios.defaults.params = {};
 
-  if(process.env.CLIENT) {
-    if(Platform.is.cordova) {
-      axios.defaults.params = {
-        'cordova': true,
-      };
-      is_cookie_secure = { secure: false }
-    } else {
-      axios.defaults.params = {
-        'cordova': false,
-      };
-    }
-  }
+  // if(process.env.CLIENT) {
+  //   if(Platform.is.cordova) {
+  //     axios.defaults.params = {
+  //       'cordova': true,
+  //     };
+  //     is_cookie_secure = { secure: false }
+  //   } else {
+  //     axios.defaults.params = {
+  //       'cordova': false,
+  //     };
+  //   }
+  // }
 
   axios.interceptors.request.use(function (config) {
     // default options
@@ -80,8 +80,9 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
     return config
 
   }, function (error) {
-    Loading.hide()
+    // Loading.hide()
     //console.log('axios.interceptors.response error1', error.response)
+    console.log(error.response.data)
 
     return Promise.reject(error)
   })
@@ -270,12 +271,12 @@ export default boot(async ({ app, ssrContext, router, store, urlPath }) => {
 
 
 }, function (error) {
-  Loading.hide()
+  // Loading.hide()
   //console.log('axios.interceptors.response error2', error.response)
+  console.log(error?.response?.data)
 
   try {
     if(error.response.data) {
-
     }
   } catch (err) {
 

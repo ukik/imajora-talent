@@ -26,7 +26,8 @@
     "vue-virtual-scroll-grid": "^1.10.1",
     "vue3-lottie": "^2.5.0",
     "vue3-tour": "^0.3.4",
-    "vue3-virtual-scroller": "^0.2.3"
+    "vue3-virtual-scroller": "^0.2.3",
+    "vue3-youtube": "^0.1.9"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^3.3.1",

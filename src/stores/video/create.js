@@ -27,51 +27,17 @@ function successNotify() {
 
 const route = useRouterStore()
 
-
-// const detail = {
-//   id: '',
-//   user_id: '',
-//   file: '',
-//   description: '',
-//   created_at: '',
-//   updated_at: '',
-//   liked_total: null,
-//   visited_total: null,
-//   shared_total: null,
-//   commented_total: null,
-//   bookmarked_total: null,
-//   liked: null,
-//   visited: null,
-//   shared: null,
-//   commented: null,
-//   bookmarked: null,
-//   follow: null,
-//   comments: [],
-//   user: {
-//     id: "",
-//     name: "",
-//     role: "",
-//     avatar: null,
-//     follow: null,
-//   },
-// }
-
-
-
 export const useVideoListStore = defineStore('video-create', {
   state: () => ({
     id: '',
-
     description: '',
-
     media: null,
     cover: null,
-
     file_media: null,
     file_cover: null,
-
     status: '0',
-
+    tags: null,
+    genre: null,
     loading: false,
     loading_create: false,
 
@@ -112,6 +78,21 @@ export const useVideoListStore = defineStore('video-create', {
       const id = results.data.payload.detail.id
       const status = results.data.payload.detail.status
 
+      const tags = results.data.payload.detail.tagged
+      let arr = []
+      tags.forEach(element => {
+        arr.push(element.tag_name.toLowerCase())
+      });
+      this.tags = arr.length > 0 ? arr : []
+
+      const genre = results.data.payload.detail.music_genre_tagged
+      let genres = []
+      genre.forEach(element => {
+        genres.push(element.tag_name.toLowerCase())
+      });
+      this.genre = genres.length > 0 ? genres : []
+
+
       this.media = file ? host+file : null
       this.cover = cover ? host+cover : null
       this.description = description ? description : null
@@ -121,12 +102,16 @@ export const useVideoListStore = defineStore('video-create', {
 
     async form_create (payload = null) {
 
+      if(!this.file_media) return
+
       if(this.loading_create) return
 
       let formData = new FormData();
-      formData.append('media', this.file_media)
-      formData.append('cover', this.file_cover)
-      formData.append('description', this.description)
+      formData.append('media', !this.file_media ? '' : this.file_media)
+      formData.append('cover', !this.file_cover ? '' : this.file_cover)
+      formData.append('description', !this.description ? '' : this.description)
+      formData.append('tags', !this.tags ? [] : this.tags)
+      formData.append('genre', !this.genre ? [] : this.genre)
 
       this.loading_create = true
 
@@ -146,7 +131,21 @@ export const useVideoListStore = defineStore('video-create', {
 
       successNotify()
 
-      return results.data.payload?.content
+      // this.id = null
+      // this.description = null
+      // this.media = null
+      // this.cover = null
+      // this.file_media = null
+      // this.file_cover = null
+
+      this.router.replace({
+        name:'video_create',
+        params: {
+          id: results.data.payload?.content.id
+        }
+      })
+
+      // return results.data.payload?.content
     },
 
     async form_delete_single (payload = null) {
@@ -216,6 +215,8 @@ export const useVideoListStore = defineStore('video-create', {
       this.cover = null
       this.file_media = null
       this.file_cover = null
+      this.tags = null
+      this.genre = null
 
       this.router.replace({
         name:'video_create'

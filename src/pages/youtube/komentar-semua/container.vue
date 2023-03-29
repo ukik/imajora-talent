@@ -1,10 +1,9 @@
 <template>
 
-  <div class="col-12 bg-white" v-if="get_comments_data.length <= 0">
-    <!-- <q-item-label lines="1" class="q-py-lg q-pl-md">Konten</q-item-label> -->
+  <div id="virtualListRef" ref="virtualListRef" class="col-12 bg-white" v-if="get_comments_data.length <= 0">
 
     <q-item v-if="get_detail?.id" class="q-pa-none q-ma-none q-mb-lg q-pl-md" dense>
-      <Card :index="get_detail?.id" :item="get_detail" />
+      <Card :clientWidth="clientWidth" :index="get_detail?.id" :item="get_detail" />
     </q-item>
 
     <q-separator color="grey-3" />
@@ -12,21 +11,15 @@
     <q-item-label lines="1" class="q-py-lg q-pl-md">Semua Komentar</q-item-label>
   </div>
 
-  <!-- <q-item-label lines="1" class="q-py-lg q-pl-md">Komentar semua</q-item-label> -->
-
-  <q-virtual-scroll ref="virtualListRef" @virtual-scroll="onscroll" style="height: calc(100vh - 50px - 80px)"
+  <q-virtual-scroll id="virtualListRef" ref="virtualListRef" @virtual-scroll="onscroll" style="height: calc(100vh - 50px - 80px)"
     class="col-12 bg-white" :items="get_comments_data" separator v-slot="{ item, index }">
     <q-list>
       <q-pull-to-refresh class="bg-white" :disable="!is_mobile_size" v-if="index === 0" :key="index + 'C'" ref="pullToRefresh"
         @refresh="refresh">
 
-        <!-- <q-item-label lines="1" class="q-py-lg q-pl-md">Komentar</q-item-label> -->
-
         <q-item class="q-pa-none q-ma-none" dense>
-          <Card :index="index" :item="get_detail" />
+          <Card :clientWidth="clientWidth" :index="index" :item="get_detail" />
         </q-item>
-
-        <!-- <q-separator color="grey-3" /> -->
 
         <q-item-label lines="1" class="q-pt-lg q-pl-md">Semua Komentar</q-item-label>
 
@@ -101,7 +94,7 @@
 <script>
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 
 import Komentar from "./components/komentar.vue"
 import Card from "./components/card.vue"
@@ -123,7 +116,7 @@ export default {
     Card,
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       get_detail: 'get_detail',
 
       get_comments_current_page: 'get_comments_current_page',
@@ -145,35 +138,37 @@ export default {
       loading_komentar_semua: 'loading_komentar_semua',
       loading_komentar_semua_comment: 'loading_komentar_semua_comment',
     }),
-    ...mapWritableState(useVideoListStore, {
+    ...mapWritableState(useYoutubeListStore, {
       text_komentar_semua: "text_komentar_semua",
     }),
   },
   data() {
     return {
       reply: null,
+      clientWidth: 100,
     }
   },
+  watch: {
+    screen_width() {
+      this.$nextTick(() => {
+        if(!document.getElementById('virtualListRef')) return
+        this.clientWidth = document.getElementById('virtualListRef').clientWidth
+      })
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if(document.getElementById('virtualListRef')) this.clientWidth = document.getElementById('virtualListRef').clientWidth
+    })
+  },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'komentar_semua',
       'komentar_semua_more',
       'komentar_semua_comment',
     ]),
     onscroll(event) {
     },
-    // async onComment() {
-    //   const response = await this.komentar_semua_comment({
-    //     index: this.index,
-    //     post_id: this.get_comment?.post_id,
-    //     parent_id: this.route_param?.id,
-    //     replied_id: this.get_comment?.user_id,
-    //   })
-    //   console.log('response', response)
-    //   if(response) {
-    //     this.reply = null
-    //   }
-    // },
     async onComment() {
       const response = await this.komentar_semua_comment({
         index: this.index,

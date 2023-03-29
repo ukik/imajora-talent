@@ -1,10 +1,6 @@
 <template>
-  <!-- <q-no-ssr> -->
-  <!-- <q-pull-to-refresh ref="pullToRefresh" :disable="is_mobile_size" v-if="get_data.length > 0" @refresh="refresh" class="scroll"> -->
 
-    <!-- <q-scroll-area @scroll="onscroll" id="scrollAreaRef" ref="scrollAreaRef" style="height: calc(100vh - 50px - 80px)"> -->
-
-    <q-virtual-scroll ref="virtualListRef" @virtual-scroll="onscroll"
+    <q-virtual-scroll id="virtualListRef" ref="virtualListRef" @virtual-scroll="onscroll"
       style="height: calc(100vh - 50px - 0px)"
       class="bg-grey-1"
       :items="get_data"
@@ -14,7 +10,7 @@
       <q-list>
         <q-pull-to-refresh :disable="!is_mobile_size" v-if="index === 0" :key="index+'C'" ref="pullToRefresh" @refresh="refresh">
           <q-item class="q-pa-none q-ma-none q-mb-lg" dense>
-              <Card :index="index" :item="item" />
+              <Card :ref="`card${index}`" :clientWidth="clientWidth" :index="index" :item="item" />
           </q-item>
         </q-pull-to-refresh>
 
@@ -22,21 +18,9 @@
           :key="index" v-if="index > 0"
           dense
         >
-          <!-- @left="onSlideReset" @right="onSlideReset"  -->
-          <!-- <q-slide-item v-for="(item, index) in get_data" :key="item.id" left-color="red" right-color="purple"> -->
-
-            <!-- <template v-slot:left>
-              <q-btn @click="onDelete(index, item.id)" round outline icon="delete" />
-            </template> -->
-
             <transition name="fade-global">
-              <Card :index="index" :item="item" />
+              <Card :ref="`card${index}`" :clientWidth="clientWidth" :index="index" :item="item" />
             </transition>
-
-            <!-- <q-separator color="grey-3" /> -->
-            <!-- <div class="q-mt-md bg-grey-1" style="height:20px;"></div> -->
-
-          <!-- </q-slide-item> -->
         </q-item>
         <q-item class="q-pa-none q-ma-none" v-if="index === get_data.length-1"
             :key="index+'A'"
@@ -55,17 +39,12 @@
 
     </q-virtual-scroll>
 
-    <!-- </q-scroll-area> -->
-
-  <!-- </q-pull-to-refresh> -->
-
-  <!-- </q-no-ssr> -->
 </template>
 
 <script>
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 import { preFetch } from 'quasar/wrappers';
 
 import Card from "./components/card.vue"
@@ -73,7 +52,7 @@ import Card from "./components/card.vue"
 function isInViewport(el) {
     const rect = el.getBoundingClientRect();
     return (
-        rect.top >= 0 &&
+        rect.top >= 50 &&
         rect.left >= 0 &&
         rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
@@ -86,7 +65,7 @@ export default {
     Card
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       get_comment: 'get_comment',
       get_current_page: 'get_current_page',
       get_data: 'get_data',
@@ -104,12 +83,12 @@ export default {
 
       loading: 'loading',
     }),
-    // ...mapWritableState(useVideoListStore, {
+    // ...mapWritableState(useYoutubeListStore, {
     // }),
   },
   // preFetch is ROOT only
   preFetch: preFetch(async ({ store, currentRoute }) => {
-    const mystore = useVideoListStore(store);
+    const mystore = useYoutubeListStore(store);
     await mystore.request({
       page: currentRoute.params.page
     });
@@ -117,42 +96,42 @@ export default {
   data() {
     return {
       text: '',
+      clientWidth: 100,
     }
   },
+  watch: {
+    screen_width() {
+      this.$nextTick(() => {
+        if(!document.getElementById('virtualListRef')) return
+        this.clientWidth = document.getElementById('virtualListRef').clientWidth
+      })
+    }
+  },
+  mounted() {
+    this.$nextTick(() => {
+      if(document.getElementById('virtualListRef')) this.clientWidth = document.getElementById('virtualListRef').clientWidth
+    })
+  },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'request',
       'request_more',
-      // 'request_reset',
-      // 'request_delete',
-      // 'request_input',
-      // 'clean',
-      // 'paginate_total',
-      // 'update',
     ]),
     onscroll(event) {
-      // console.log(event)
-      // if(event.index <= 0) {
-      //   this.$refs.pullToRefresh.disable = false
-      //   this.is_disable_pull_to_refresh = false
-      // } else {
-      //   this.$refs.pullToRefresh.disable = true
-      //   this.is_disable_pull_to_refresh = true
-      // }
 
       if(this.get_data.length <= 0) return
       this.get_data.forEach((element, index) => {
         const media = document.querySelector(`#video${index}`);
+        // console.log(this.$refs[`video${index}`])
         if(media) {
           if(isInViewport(media)) {
-            media.play()
+            // media.playVideo()
+            this.$refs[`card${index}`].onPlay()
           } else {
-            media.pause()
+            // this.$refs[`video${index}`].pauseVideo()
+            this.$refs[`card${index}`].onPause()
           }
         }
-            // `The box is visible in the viewport #video${index}` :
-            // `The box is not visible in the viewport #video${index}`;
-        // console.log(messageText)
       });
     },
     async refresh(done) {

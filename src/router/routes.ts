@@ -227,12 +227,20 @@ const routes: RouteRecordRaw[] = [
         }, component: () => import("pages/youtube/komentar-balasan/index.vue"),
       },
       {
-        path: "/youtube-create/:id?",
+        path: "/youtube-create",
         name: "youtube_create",
         meta: {
           ssr: true,
           title: 'youtube-create',
         }, component: () => import("pages/youtube/create/index.vue")
+      },
+      {
+        path: "/youtube-create/:id",
+        name: "youtube_edit",
+        meta: {
+          ssr: true,
+          title: 'youtube-edit',
+        }, component: () => import("pages/youtube/create/edit.vue")
       },
 
 
@@ -308,7 +316,58 @@ const routes: RouteRecordRaw[] = [
 
 
 
+      {
+        path: "/forms/accounts/profile/:id",
+        name: "form_accounts_profile",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-profile',
+        }, component: () => import("pages/forms/accounts/profile/index.vue")
+      },
+      {
+        path: "/forms/accounts/password/:id",
+        name: "form_accounts_password",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-password',
+        }, component: () => import("pages/forms/accounts/password/index.vue")
+      },
+      {
+        path: "/forms/accounts/biodata/:id",
+        name: "form_accounts_biodata",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-biodata',
+        }, component: () => import("pages/forms/accounts/biodata/index.vue")
+      },
+      {
+        path: "/forms/accounts/social/:id",
+        name: "form_accounts_social",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-social',
+        }, component: () => import("pages/forms/accounts/social/index.vue")
+      },
+      {
+        path: "/forms/accounts/avatar/:id",
+        name: "form_accounts_avatar",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-avatar',
+        }, component: () => import("pages/forms/accounts/avatar/index.vue")
+      },
+      {
+        path: "/forms/accounts/banner/:id",
+        name: "form_accounts_banner",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-banner',
+        }, component: () => import("pages/forms/accounts/banner/index.vue")
+      },
 
+
+
+      // ORANG KALO NGOMONG MUTER-MUTER, WAJAH-WAJAH KENCING DI CELANA, AUTO KETAR-KETIR
 
 
 

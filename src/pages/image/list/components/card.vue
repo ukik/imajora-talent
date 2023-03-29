@@ -31,9 +31,8 @@
     </q-item>
 
     <q-carousel class="col-12" :style="[is_mobile_size ? 'height:250px;' : 'height:350px;']" swipeable animated v-model="slide"  arrows navigation infinite>
-        <!-- <q-carousel-slide v-for="(el, index) in item.images" :key="index" :name="index" :img-src="img_checker(el.file)" /> -->
         <q-carousel-slide class="no-scroll q-pa-none" v-for="(el, index) in item.images" :key="index" :name="index">
-            <q-img no-spinner :src="el.file" alt="mountains" class="fit" style="object-fit: cover;">
+            <q-img :src="imageSync(el.file)" alt="mountains" class="fit" style="object-fit: cover;">
               <template v-slot:error>
                 <div class="absolute-full flex flex-center bg-negative text-white">
                   Cannot load image
@@ -252,6 +251,9 @@ export default {
       'delete',
       'delete_comment',
     ]),
+    imageSync(val) {
+      return val.includes('http') ? val : this.server_host+val
+    },
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:

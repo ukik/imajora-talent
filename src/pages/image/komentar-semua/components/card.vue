@@ -1,4 +1,5 @@
 <template>
+
   <q-list class="row bg-white">
     <q-item class="col-12 q-px-sm">
       <q-item-section avatar>
@@ -30,11 +31,24 @@
       </q-btn>
     </q-item>
 
-    <video :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
+    <!-- <video :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
       :style="is_mobile_size ? 'height:250px' : 'height:300px'" :src="item.file" id="video-preview" class="col-12"
       controls autoplay muted>
       Your browser does not support HTML video.
-    </video>
+    </video> -->
+
+    <q-carousel class="col-12" :style="[is_mobile_size ? 'height:250px;' : 'height:350px;']" swipeable animated v-model="slide"  arrows navigation infinite>
+        <q-carousel-slide class="no-scroll q-pa-none" v-for="(el, index) in item.images" :key="index" :name="index">
+            <q-img @click="() => $emit('onZoom', index)" :src="imageSync(el.file)" alt="mountains" class="fit" style="object-fit: cover;">
+              <template v-slot:error>
+                <div class="absolute-full flex flex-center bg-negative text-white">
+                  Cannot load image
+                </div>
+              </template>
+            </q-img>
+        </q-carousel-slide>
+    </q-carousel>
+
     <i class=""></i>
     <q-item class="col-12 q-pa-sm" dense>
       <q-item-section>
@@ -103,7 +117,8 @@ export default {
       default: () => ({
         id: '',
         user_id: '',
-        file: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        // file: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+        images: [],
         description: '',
         created_at: '',
         updated_at: '',
@@ -142,6 +157,7 @@ export default {
     return {
       reply: null,
       collapsible: false,
+      slide: 0,
     }
   },
   methods: {
@@ -150,6 +166,9 @@ export default {
       liked:'komentar_semua_liked',
       bookmarked:'komentar_semua_bookmarked',
     }),
+    imageSync(val) {
+      return val.includes('http') ? val : this.server_host+val
+    },
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:

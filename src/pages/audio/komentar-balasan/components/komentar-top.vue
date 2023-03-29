@@ -37,27 +37,7 @@
       <q-item-section>
         <q-item-label class="text-caption" lines="1"></q-item-label>
         <q-item-label class="text-caption">
-          <!-- <span v-if="item.replied">
-            <span class="text-bold">@{{ item.user?.name }}</span> membalas <span class="text-bold">@{{ item.replied?.name }}</span>:
-          </span>
-          <span v-else-if="!item.replied" class="text-bold">@{{ item.user?.name }}: </span> -->
           <span>{{ item.comment }}</span>
-
-          <!-- OPSI 1 -->
-          <!-- <q-menu
-          :touch-position="!loading_komentar_balasan_delete"
-          :context-menu="!loading_komentar_balasan_delete"
-          >
-            <q-list style="min-width: 100px">
-              <q-item @click="() => onDeleteComment({
-                index,
-                post_id: item.id
-              })" clickable v-close-popup>
-                <q-item-section avatar><q-icon name="delete"></q-icon></q-item-section>
-                <q-item-section>Delete</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu> -->
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -70,7 +50,7 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useAudioListStore } from 'src/stores/audio/list.js'
 
 export default {
   props: {
@@ -82,7 +62,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useAudioListStore, {
       loading_komentar_balasan_follow: 'loading_komentar_balasan_follow',
       loading_komentar_balasan_delete: 'loading_komentar_balasan_delete',
     }),
@@ -97,7 +77,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useAudioListStore, [
       'komentar_balasan_follow',
       'komentar_balasan_delete',
     ]),

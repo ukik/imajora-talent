@@ -11,7 +11,7 @@
 import Container from "./container.vue"
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 import { preFetch } from 'quasar/wrappers';
 
 export default {
@@ -19,7 +19,7 @@ export default {
     Container,
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       // get_comment: 'get_comment',
       // comment:'balasan_comment',
       // get_comment: 'get_comment',
@@ -41,14 +41,14 @@ export default {
     }),
   },
   preFetch: preFetch(async ({ store, currentRoute }) => {
-    const mystore = useVideoListStore(store);
+    const mystore = useYoutubeListStore(store);
     await mystore.komentar_balasan({
       id: currentRoute.params.id,
       page: currentRoute.params.page,
     });
   }),
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'komentar_balasan',
     ]),
     async refresh(done) {

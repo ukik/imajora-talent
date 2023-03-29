@@ -11,7 +11,7 @@
 import Container from "./container.vue"
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useAudioListStore } from 'src/stores/audio/list.js'
 import { preFetch } from 'quasar/wrappers';
 
 import Card from "./components/card.vue"
@@ -22,33 +22,17 @@ export default {
     Container,
   },
   computed: {
-    ...mapState(useVideoListStore, {
-      // get_comment: 'get_comment',
-      // get_current_page: 'get_current_page',
-      // get_data: 'get_data',
-      // get_first_page_url: 'get_first_page_url',
-      // get_from: 'get_from',
-      // get_last_page: 'get_last_page',
-      // get_last_page_url: 'get_last_page_url',
-      // get_links: 'get_links',
-      // get_next_page_url: 'get_next_page_url',
-      // get_path: 'get_path',
-      // get_per_page: 'get_per_page',
-      // get_prev_page_url: 'get_prev_page_url',
-      // get_to: 'get_to',
-      // get_total: 'get_total',
-
-      // loading: 'loading',
+    ...mapState(useAudioListStore, {
     }),
   },
   preFetch: preFetch(async ({ store, currentRoute }) => {
-    const mystore = useVideoListStore(store);
+    const mystore = useAudioListStore(store);
     await mystore.request({
       page: currentRoute.params.page
     });
   }),
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useAudioListStore, [
       'request',
     ]),
     async refresh(done) {

@@ -9,19 +9,17 @@
       <q-item-section>
         <q-item-label lines="1">{{ item.user?.name }}</q-item-label>
         <q-item-label caption lines="1">
-          <!-- contact.email -->
           <q-chip :disable="loading_follow" clickable @click="onFollow" class="q-ma-none" :color="!item.user.follow ? 'positive' : 'primary'"
             size="11px" text-color="white" icon="check">
             {{ !item.user.follow ? 'Mengikuti' : 'Berhenti Mengikuti' }}
           </q-chip>
-          <!-- <router-link to="/">Follow</router-link> -->
         </q-item-label>
-        <!-- <router-link class="absolute-full"  to="/"></router-link> -->
       </q-item-section>
 
       <q-item-section side>
       </q-item-section>
-      <q-btn :disable="loading_delete" :loading="loading_delete" dense style="height:30px;" flat round icon="more_vert" color="dark">
+
+      <q-btn :disable="loading_delete" :loading="loading_delete" dense style="height:30px;" flat round icon="more_vert" color="dark" :class="[ is_mobile_size ? '' : 'q-mr-md']">
         <q-menu>
           <q-list style="min-width: 100px">
             <q-item @click="onDeletePost" clickable v-close-popup>
@@ -33,17 +31,17 @@
       </q-btn>
     </q-item>
 
-    <video :id="`video${index}`" ref="video" :height="is_mobile_size ? 250 : 350"
-      :style="is_mobile_size ? 'height:250px' : 'height:300px'" :src="item.file" id="video-preview" class="col-12"
-      controls autoplay muted>
-      Your browser does not support HTML video.
-    </video>
-    <i class=""></i>
+
+    <YouTube :height="is_mobile_size ? 250 : 350" :width="clientWidth"
+      :src="item.file"
+      @ready="onReady"
+      id="video" ref="video" />
+
+
     <q-item class="col-12 q-pa-sm" dense>
       <q-item-section>
         <q-item-label class="row q-gutter-col-sm">
           <div class="col-auto">
-            <!-- {{ item.liked }} ||| {{ item.liked_total }} -->
             <q-btn :disable="loading_liked" :loading="loading_liked" @click="liked({ post_id: item.id, index })" flat round
               :icon="item.liked ? 'fa-solid fa-heart' : 'fa-regular fa-heart'" :color="item.liked ? 'pink' : 'dark'">
               <q-badge align="top" color="red" floating v-if="item.liked_total?.total > 0">{{ item.liked_total?.total
@@ -57,7 +55,6 @@
             </q-btn>
           </div>
           <div class="col-auto">
-            <!-- fa-regular fa-paper-plane -->
             <q-btn flat round icon="fa-regular fa-share-from-square" color="dark">
               <q-badge align="top" color="orange" floating v-if="item.shared_total?.total > 0">{{ item.shared_total?.total
               }}</q-badge>
@@ -67,7 +64,7 @@
       </q-item-section>
 
       <q-item-section side>
-        <q-btn :disable="loading_bookmarked" :loading="loading_bookmarked" @click="bookmarked({ post_id: item.id, index })" flat round
+        <q-btn :disable="loading_bookmarked" :loading="loading_bookmarked" @click="bookmarked({ post_id: item.id, index })" flat round :class="[ is_mobile_size ? '' : 'q-mr-md']"
           :icon="item.bookmarked ? 'fa-solid fa-bookmark' : 'fa-regular fa-bookmark'"
           :color="item.bookmarked ? 'primary' : 'dark'">
           <q-badge align="top" color="cyan" floating v-if="item.bookmarked_total?.total > 0">{{
@@ -97,10 +94,13 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 
 export default {
   props: {
+    clientWidth: {
+      default: 100,
+    },
     index: {
       default: null
     },
@@ -129,7 +129,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
 
       loading_follow: 'loading_follow',
       loading_liked: 'loading_liked',
@@ -151,7 +151,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, {
+    ...mapActions(useYoutubeListStore, {
       follow:'komentar_semua_follow',
       liked:'komentar_semua_liked',
       bookmarked:'komentar_semua_bookmarked',
@@ -159,6 +159,10 @@ export default {
       // 'delete',
       // 'delete_comment',
     }),
+    async onReady() {
+      await this.$nextTick(() => {})
+      this.$refs.video.playVideo()
+    },
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:
@@ -181,22 +185,6 @@ export default {
         post_id: this.item.id,
       })
     },
-    // async onComment() {
-    //   const response = await this.comment({
-    //     index: this.index,
-    //     post_id: this.item?.id,
-    //     parent_id: this.reply?.id == undefined ? '' : this.reply?.id,
-
-    //     replied_id: this.reply?.user_id == undefined ? '' : this.reply?.user_id,
-
-    //     input_comment: this.input_comment,
-    //   })
-    //   console.log('onComment', response)
-    //   if(response) {
-    //     this.reply = null
-    //     this.input_comment = ''
-    //   }
-    // },
     onHold(index) {
       switch (this.item.comments[index].pressed) {
         case 0:

@@ -98,7 +98,7 @@
 <script>
 
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 import { preFetch } from 'quasar/wrappers';
 
 import Komentar from "./components/komentar.vue"
@@ -121,7 +121,7 @@ export default {
     KomentarTop,
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       get_comment: 'get_comment',
       get_reply_current_page: 'get_reply_current_page',
       get_reply_data: 'get_reply_data',
@@ -142,7 +142,7 @@ export default {
       loading_komentar_balasan: 'loading_komentar_balasan',
       loading_komentar_balasan_comment: 'loading_komentar_balasan_comment',
     }),
-    ...mapWritableState(useVideoListStore, {
+    ...mapWritableState(useYoutubeListStore, {
       text_komentar_balasan: "text_komentar_balasan",
     }),
   },
@@ -152,7 +152,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'komentar_balasan',
       'komentar_balasan_more',
       'komentar_balasan_comment',

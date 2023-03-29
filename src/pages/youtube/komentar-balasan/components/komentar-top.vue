@@ -70,7 +70,7 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 
 export default {
   props: {
@@ -82,7 +82,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       loading_komentar_balasan_follow: 'loading_komentar_balasan_follow',
       loading_komentar_balasan_delete: 'loading_komentar_balasan_delete',
     }),
@@ -97,7 +97,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'komentar_balasan_follow',
       'komentar_balasan_delete',
     ]),

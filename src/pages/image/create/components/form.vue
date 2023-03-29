@@ -37,17 +37,16 @@
   escDisabled
   moveDisabled
   :visible="zoom_visible"
-  :imgs="cover"
+  :imgs="get_lightbox"
   :index="zoom_index"
   @hide="handleHide"
 ></vue-easy-lightbox>
-
 
 <q-dialog v-model="confirm" persistent>
   <q-card>
     <q-card-section class="row items-center">
       <q-avatar icon="delete" color="red" text-color="white" />
-      <span class="q-ml-sm">Yakin menghapus file ini? {{ selected }}</span>
+      <span class="q-ml-sm">Yakin menghapus file ini?</span>
     </q-card-section>
 
     <q-card-actions align="right">
@@ -82,7 +81,7 @@
   <q-card class="col-12 q-pa-none q-ma-none text-center q-mb-md" flat bordered>
     <q-card-section class="q-py-xl flex flex-center">
       <q-chip class="absolute-top-left">{{ cover.length }}/5</q-chip>
-      <Vue3Lottie style="width:350px;" animationLink="https://assets6.lottiefiles.com/packages/lf20_bP3BLu.json" :loop="true" :autoPlay="true"></Vue3Lottie>
+      <Vue3Lottie style="" animationLink="https://assets6.lottiefiles.com/packages/lf20_8qbuaxlc.json" :loop="true" :autoPlay="true"></Vue3Lottie>
 
       <div class="full-width">
         <q-btn @click="onPickerImage" label="Ambil Gambar" no-caps rounded unelevated color="primary" icon="photo_camera" />
@@ -109,6 +108,7 @@ import axios from 'axios'
         max:'max',
         loading: 'loading',
         loading_create: 'loading_create',
+        get_lightbox: 'get_lightbox',
       }),
       ...mapWritableState(useImageListStore, {
         description: 'description',
@@ -155,7 +155,7 @@ import axios from 'axios'
         this.confirm = false
 
         if(response) {
-          console.log('this.$refs.cover.value',this.$refs.cover.value)
+          // console.log('this.$refs.cover.value',this.$refs.cover.value)
           // this.cover = null;
           this.$refs.cover.value = null;
           this.max++

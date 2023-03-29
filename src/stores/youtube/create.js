@@ -28,53 +28,18 @@ function successNotify() {
 const route = useRouterStore()
 
 
-// const detail = {
-//   id: '',
-//   user_id: '',
-//   file: '',
-//   description: '',
-//   created_at: '',
-//   updated_at: '',
-//   liked_total: null,
-//   visited_total: null,
-//   shared_total: null,
-//   commented_total: null,
-//   bookmarked_total: null,
-//   liked: null,
-//   visited: null,
-//   shared: null,
-//   commented: null,
-//   bookmarked: null,
-//   follow: null,
-//   comments: [],
-//   user: {
-//     id: "",
-//     name: "",
-//     role: "",
-//     avatar: null,
-//     follow: null,
-//   },
-// }
-
-
-
 export const useYoutubeListStore = defineStore('youtube-create', {
   state: () => ({
-    id: '',
-
-    description: '',
-
-    media: null,
-    cover: null,
-
-    file_media: null,
-    file_cover: null,
-
+    id: null,
+    file: '',
+    description: null,
     status: '0',
-
+    link: null,
+    is_error: true,
+    tags: null,
+    genre: null,
     loading: false,
     loading_create: false,
-
   }),
   // getters: {
   //   get_detail: (state) => state.detail,
@@ -90,7 +55,7 @@ export const useYoutubeListStore = defineStore('youtube-create', {
 
       this.loading = true
 
-      const results = await axios.get(`http://localhost:8000/api/video/form/${payload.id}`)
+      const results = await axios.get(`api/youtube/form/${payload.id}`)
       .catch(err => {
         errorNotify()
         return null
@@ -102,18 +67,33 @@ export const useYoutubeListStore = defineStore('youtube-create', {
 
       if(!results) return
       if(!results.data.payload.detail) {
-        this.router.replace({ name:'video_create' })
+        this.router.replace({ name:'youtube_create' })
         return false
       }
 
       const file = results.data.payload.detail.file
-      const cover = results.data.payload.detail.cover
       const description = results.data.payload.detail.description
       const id = results.data.payload.detail.id
       const status = results.data.payload.detail.status
 
-      this.media = file ? host+file : null
-      this.cover = cover ? host+cover : null
+      const tags = results.data.payload.detail.tagged
+      let arr = []
+      tags.forEach(element => {
+        arr.push(element.tag_name.toLowerCase())
+      });
+      this.tags = arr.length > 0 ? arr : []
+
+      const genre = results.data.payload.detail.music_genre_tagged
+      let genres = []
+      genre.forEach(element => {
+        genres.push(element.tag_name.toLowerCase())
+      });
+      this.genre = genres.length > 0 ? genres : []
+
+
+      this.file = file ? file : ''
+      this.link = file ? file : null
+      this.is_error = file ? false : true
       this.description = description ? description : null
       this.id = id ? id : null
       this.status = status ? status : '0'
@@ -121,18 +101,21 @@ export const useYoutubeListStore = defineStore('youtube-create', {
 
     async form_create (payload = null) {
 
+      if(!this.file) return
+
       if(this.loading_create) return
 
       let formData = new FormData();
-      formData.append('media', this.file_media)
-      formData.append('cover', this.file_cover)
-      formData.append('description', this.description)
+      formData.append('file', !this.file ? '' : this.file)
+      formData.append('description', !this.description ? '' : this.description)
+      formData.append('tags', !this.tags ? [] : this.tags)
+      formData.append('genre', !this.genre ? [] : this.genre)
 
       this.loading_create = true
 
       const results = await axios({
         method: 'post',
-        url: `http://localhost:8000/api/video/form/create/${payload.id}`,
+        url: `api/youtube/form/create/${payload.id}`,
         data: formData
       })
       .catch(err => {
@@ -146,39 +129,23 @@ export const useYoutubeListStore = defineStore('youtube-create', {
 
       successNotify()
 
-      return results.data.payload?.content
-    },
+      // this.id = null
+      // this.file = ''
+      // this.description = null
+      // this.status = '0'
+      // this.link = null
+      // this.is_error = true
 
-    async form_delete_single (payload = null) {
+      console.log('CREATE', results.data.payload?.content.id)
 
-      if(this.loading_create) return
-
-      this.loading_create = true
-
-      const results = await axios({
-        method: 'post',
-        url: `http://localhost:8000/api/video/form/delete-${payload.type}/${payload.id}`,
-      })
-      .catch(err => {
-        errorNotify()
-        return null
+      this.router.replace({
+        name:'youtube_edit',
+        params: {
+          id: results.data.payload?.content.id
+        }
       })
 
-      this.loading_create = false
-
-      if(!results) return
-
-      if(payload.type == 'media') {
-        this.media = null
-        this.file_media = null
-      } else if (payload.type == 'cover') {
-        this.cover = null
-        this.file_cover = null
-      }
-
-      successNotify()
-
-      return true
+      // return results.data.payload?.content
     },
 
     async form_delete (payload = null) {
@@ -189,7 +156,7 @@ export const useYoutubeListStore = defineStore('youtube-create', {
 
       const results = await axios({
         method: 'post',
-        url: `http://localhost:8000/api/video/form/delete/${payload.id}`,
+        url: `api/youtube/form/delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -201,14 +168,16 @@ export const useYoutubeListStore = defineStore('youtube-create', {
       if(!results) return
 
       this.id = null
+      this.file = ''
       this.description = null
-      this.media = null
-      this.cover = null
-      this.file_media = null
-      this.file_cover = null
+      this.status = '0'
+      this.link = null
+      this.is_error = true
+      this.tags = null
+      this.genre = null
 
       this.router.replace({
-        name:'video_create'
+        name:'youtube_create'
       })
 
       successNotify()

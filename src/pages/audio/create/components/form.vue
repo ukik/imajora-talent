@@ -47,12 +47,12 @@
 </q-dialog>
 
 <!-- max-file-size="5000000" capture -->
-<input v-show="false" type="file" accept="video/mp4,video/x-m4v,video/*" ref="media" id="media" @change="onFileChange">
+<input v-show="false" type="file" accept="audio/*" ref="media" id="media" @change="onFileChange">
 
 <input v-show="false" type="file" accept="image/*" ref="cover" id="cover" @change="onFileChangeCover">
 
 <q-card flat square v-if="cover && media" class="col-12 row q-mb-md">
-  <q-img ref="cover" style="object-fit: cover; height: auto;" :src="img_checker(cover)" @error="handleError" loading="lazy" />
+  <q-img ref="cover" style="object-fit: cover; height: auto; max-height: 500px;" :src="img_checker(cover)" @error="handleError" loading="lazy" />
   <q-btn @click="confirm = true; type = ('cover')" class="absolute-top-right q-ma-sm" round unelevated color="white" text-color="red" dense icon="close" />
   <div>
     <q-chip class="absolute-top-left q-pa-sm" color="primary" text-color="white">Cover</q-chip>
@@ -61,10 +61,15 @@
 
 <q-card flat v-if="media" class="col-12 row q-mb-md">
   <div>
-    <q-chip class="absolute-top-left q-pa-sm" color="red" text-color="white">Video</q-chip>
+    <q-chip class="absolute-top-left q-pa-sm" color="red" text-color="white">Audio</q-chip>
   </div>
-  <video ref="media" :src="media" id="video-preview" class="col-12" controls></video>
+  <audio style="height:100px;" ref="media" :src="media" id="video-preview" class="col-12" controls></audio>
   <q-btn @click="confirm = true; type = ('media')" class="absolute-top-right q-ma-sm" round unelevated color="white" text-color="red" dense icon="close" />
+
+  <q-input class="col-12 q-mt-md" input-class="q-pr-sm" :loading="loading" dense  :disable="loading || loading" v-model="title" maxlength="2500" counter clearable
+    placeholder="Add title" autogrow>
+  </q-input>
+
 </q-card>
 
 <div v-if="!cover && media" class="col-12">
@@ -83,10 +88,10 @@
   <q-card class="col-12 q-pa-none q-ma-none text-center" flat bordered>
     <q-card-section class="q-py-xl flex flex-center">
       <!-- https://assets4.lottiefiles.com/packages/lf20_bP3BLu.json -->
-      <Vue3Lottie style="" animationLink="https://assets1.lottiefiles.com/packages/lf20_yha8dld0.json" :loop="true" :autoPlay="true"></Vue3Lottie>
+      <Vue3Lottie style="" animationLink="https://assets3.lottiefiles.com/packages/lf20_fyilltcq.json" :loop="true" :autoPlay="true"></Vue3Lottie>
 
       <div class="full-width">
-        <q-btn @click="onDialogOption" label="Ambil Video" no-caps rounded unelevated color="red" icon="photo_camera" />
+        <q-btn @click="onDialogOption" label="Ambil Audio" no-caps rounded unelevated color="red" icon="photo_camera" />
       </div>
     </q-card-section>
   </q-card>
@@ -96,30 +101,33 @@
 
 <script>
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/create.js'
+import { useAudioListStore } from 'src/stores/audio/create.js'
 import { preFetch } from 'quasar/wrappers';
 import { Vue3Lottie } from 'vue3-lottie'
 import axios from 'axios'
 	export default {
 		computed: {
-      ...mapState(useVideoListStore, {
+      ...mapState(useAudioListStore, {
+        title: '',
         description: 'description',
         media: 'media',
         cover: 'cover',
         file_media: 'file_media',
         file_cover: 'file_cover',
-
         get_detail: 'get_detail',
         loading: 'loading',
         loading_create: 'loading_create',
       }),
-      ...mapWritableState(useVideoListStore, {
+      ...mapWritableState(useAudioListStore, {
+        title: '',
         description: 'description',
         media: 'media',
         cover: 'cover',
-
         file_media: 'file_media',
         file_cover: 'file_cover',
+        get_detail: 'get_detail',
+        loading: 'loading',
+        loading_create: 'loading_create',
       }),
 		},
     components: {
@@ -135,7 +143,7 @@ import axios from 'axios'
       }
     },
     methods: {
-      ...mapActions(useVideoListStore, [
+      ...mapActions(useAudioListStore, [
         'form_delete_single',
       ]),
       async onConfirm() {
@@ -185,28 +193,6 @@ import axios from 'axios'
 
         vm.file_media = media
 
-
-
-
-
-        // let currentObj = this;
-
-        // const config = {
-        //     headers: { 'content-type': 'multipart/form-data' }
-        // }
-
-        // let formData = new FormData();
-        // formData.append('file', media);
-
-        // axios.post('http://localhost:8000/api/video/create', formData, config)
-        // .then(function (response) {
-        //     currentObj.success = response.data.success;
-        // })
-        // .catch(function (error) {
-        //     currentObj.output = error;
-        // });
-
-
 			},
 			onDialogOption() {
 				if(this.is_cordova) {
@@ -223,14 +209,6 @@ import axios from 'axios'
 				this.onToastBottom('buka camera')
 
 				this.option = 'camera'
-				// this.$refs.file1.click()
-
-				// document.getElementById('file').setAttribute('capture', 'capture');
-				// setTimeout(() => {
-				// 	this.onPickerImage()
-				// }, 500)
-
-				// return
 
 				// capture callback
 				var captureSuccess = function(mediaFiles) {

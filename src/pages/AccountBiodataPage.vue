@@ -79,7 +79,7 @@ export default {
   data() {
     return {
       date: ref('2019/03/01'),
-    proxyDate: ref('2019/03/01'),
+      proxyDate: ref('2019/03/01'),
       uuid: null,
       name: null,
       email: null,

@@ -35,11 +35,22 @@ export const useImageListStore = defineStore('image-create', {
     cover: [],
     file_cover: [],
     status: '0',
+    tags: null,
+    genre: null,
     max: 5,
     loading: false,
     loading_create: false,
 
   }),
+  getters: {
+    get_lightbox: (state) => {
+      let imgs = []
+      state.cover.forEach(element => {
+        imgs.push(element.file)
+      });
+      return imgs
+    }
+  },
   actions: {
 
     async form_edit (payload = null) {
@@ -75,11 +86,33 @@ export const useImageListStore = defineStore('image-create', {
 
       let arr = []
       images.forEach(element => {
-        arr.push({
-          file: host+element.file,
-          id: element.id
-        })
+        if(element.file.includes("http")) {
+          arr.push({
+            file: element.file,
+            id: element.id
+          })
+        } else {
+          arr.push({
+            file: host+element.file,
+            id: element.id
+          })
+        }
       });
+
+      const tags = results.data.payload.detail.tagged
+      let arr1 = []
+      tags.forEach(element => {
+        arr1.push(element.tag_name.toLowerCase())
+      });
+      this.tags = arr1.length > 0 ? arr : []
+
+      const genre = results.data.payload.detail.music_genre_tagged
+      let genres = []
+      genre.forEach(element => {
+        genres.push(element.tag_name.toLowerCase())
+      });
+      this.genre = genres.length > 0 ? genres : []
+
 
       // this.media = file ? host+file : null
       this.cover = images.length > 0 ? arr : []
@@ -90,6 +123,8 @@ export const useImageListStore = defineStore('image-create', {
 
     async form_create (payload = null) {
 
+      if(this.file_cover.length <= 0) return
+
       if(this.loading_create) return
 
       let formData = new FormData();
@@ -98,7 +133,9 @@ export const useImageListStore = defineStore('image-create', {
       for (let i = 0; i < this.file_cover.length; i++) {
         formData.append('cover[]', this.file_cover[i]);
       }
-      formData.append('description', this.description)
+      formData.append('description', !this.description ? '' : this.description)
+      formData.append('tags', !this.tags ? [] : this.tags)
+      formData.append('genre', !this.genre ? [] : this.genre)
 
       this.loading_create = true
 
@@ -118,13 +155,23 @@ export const useImageListStore = defineStore('image-create', {
 
       successNotify()
 
-      return results.data.payload?.content
+      // this.id = null
+      // this.description = null
+      // this.cover = null
+      // this.file_cover = null
+
+      this.router.replace({
+        name:'image_create',
+        params: {
+          id: results.data.payload?.content.id
+        }
+      })
+
+      // return results.data.payload?.content
     },
 
     async form_delete_single (payload = null) {
       if(!this.id) { // form CREATE
-        // console.log(this.cover)
-        // console.log(this.file_cover)
         this.cover.splice(payload.index, 1)
         this.file_cover.splice(payload.index, 1)
         return true
@@ -167,7 +214,7 @@ export const useImageListStore = defineStore('image-create', {
 
       const results = await axios({
         method: 'post',
-        url: `http://localhost:8000/api/image/form/delete/${payload.id}`,
+        url: `api/image/form/delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -182,6 +229,8 @@ export const useImageListStore = defineStore('image-create', {
       this.description = null
       this.cover = null
       this.file_cover = null
+      this.tags = null
+      this.genre = null
 
       this.router.replace({
         name:'image_create'

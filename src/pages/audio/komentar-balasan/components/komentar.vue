@@ -37,10 +37,7 @@
       <q-item-section>
         <q-item-label class="text-caption" lines="1"></q-item-label>
         <q-item-label class="text-caption">
-          <!-- <span v-if="item.replied">
-            <span class="text-bold">@{{ item.user?.name }}</span> membalas <span class="text-bold">@{{ item.replied?.name }}</span>:
-          </span>
-          <span v-else-if="!item.replied" class="text-bold">@{{ item.user?.name }}: </span> -->
+
           <span>{{ item.comment }}</span>
 
           <!-- OPSI 1 -->
@@ -74,7 +71,7 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useAudioListStore } from 'src/stores/audio/list.js'
 
 export default {
   props: {
@@ -86,7 +83,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useAudioListStore, {
       loading_komentar_balasan_follow: 'loading_komentar_balasan_follow',
       loading_komentar_balasan_delete_comment: 'loading_komentar_balasan_delete_comment',
     }),
@@ -101,7 +98,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useAudioListStore, [
       'komentar_balasan_follow',
       'komentar_balasan_delete_comment',
     ]),

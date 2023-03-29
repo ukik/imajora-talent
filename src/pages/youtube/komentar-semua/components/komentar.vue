@@ -37,27 +37,7 @@
       <q-item-section>
         <q-item-label class="text-caption" lines="1"></q-item-label>
         <q-item-label class="text-caption">
-          <!-- <span v-if="item.replied">
-            <span class="text-bold">@{{ item.user?.name }}</span> membalas <span class="text-bold">@{{ item.replied?.name }}</span>:
-          </span>
-          <span v-else-if="!item.replied" class="text-bold">@{{ item.user?.name }}: </span> -->
           <span>{{ item.comment }}</span>
-
-          <!-- OPSI 1 -->
-          <!-- <q-menu
-          :touch-position="!loading_komentar_semua_delete_comment"
-          :context-menu="!loading_komentar_semua_delete_comment"
-          >
-            <q-list style="min-width: 100px">
-              <q-item @click="() => onDeleteComment({
-                index,
-                post_id: item.id
-              })" clickable v-close-popup>
-                <q-item-section avatar><q-icon name="delete"></q-icon></q-item-section>
-                <q-item-section>Delete</q-item-section>
-              </q-item>
-            </q-list>
-          </q-menu> -->
         </q-item-label>
       </q-item-section>
     </q-item>
@@ -74,7 +54,7 @@
 
 import { user_list, comment_list } from "src/models/video.js"
 import { mapState, mapWritableState, mapActions } from 'pinia'
-import { useVideoListStore } from 'src/stores/video/list.js'
+import { useYoutubeListStore } from 'src/stores/youtube/list.js'
 
 export default {
   props: {
@@ -86,7 +66,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(useVideoListStore, {
+    ...mapState(useYoutubeListStore, {
       loading_komentar_semua_follow: 'loading_komentar_semua_follow',
       loading_komentar_semua_delete_comment: 'loading_komentar_semua_delete_comment',
     }),
@@ -100,7 +80,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(useVideoListStore, [
+    ...mapActions(useYoutubeListStore, [
       'komentar_semua_follow',
       'komentar_semua_delete',
     ]),

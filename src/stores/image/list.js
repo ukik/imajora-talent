@@ -200,6 +200,14 @@ export const useImageListStore = defineStore('image-list', {
     get_comments_prev_page_url: (state) => state.comments?.prev_page_url,
     get_comments_to: (state) => state.comments?.to,
     get_comments_total: (state) => state.comments?.total,
+
+    get_lightbox: (state) => {
+      let imgs = []
+      state.detail.images.forEach(element => {
+        imgs.push(element.file)
+      });
+      return imgs
+    }
   },
   actions: {
 

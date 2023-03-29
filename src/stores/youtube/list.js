@@ -210,7 +210,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading = true
 
-      const results = await axios.get(`api/audio?page=${payload.page}`)
+      const results = await axios.get(`api/youtube?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -229,7 +229,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading = true
 
-      const results = await axios.get(`api/audio?page=${next_page}`)
+      const results = await axios.get(`api/youtube?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -267,7 +267,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/follow/${payload.user_id}`,
+        url: `api/youtube/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -300,7 +300,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/bookmarked/${payload.post_id}`,
+        url: `api/youtube/bookmarked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -323,7 +323,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/liked/${payload.post_id}`,
+        url: `api/youtube/liked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -352,7 +352,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/comment`,
+        url: `api/youtube/comment`,
         data: formData
       })
       .catch(err => {
@@ -378,7 +378,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/delete/${payload.post_id}`,
+        url: `api/youtube/delete/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -405,7 +405,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/delete-comment/${payload.post_id}`,
+        url: `api/youtube/delete-comment/${payload.post_id}`,
         data: formData
       })
       .catch(err => {
@@ -436,7 +436,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading_komentar_balasan = true
 
-      const results = await axios.get(`api/audio/komentar-balasan/${payload.id}?page=${payload.page}`)
+      const results = await axios.get(`api/youtube/komentar-balasan/${payload.id}?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -455,7 +455,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading_komentar_balasan_more = true
 
-      const results = await axios.get(`api/audio/komentar-balasan-more/${payload.id}?page=${next_page}`)
+      const results = await axios.get(`api/youtube/komentar-balasan-more/${payload.id}?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -493,7 +493,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/follow/${payload.user_id}`,
+        url: `api/youtube/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -545,7 +545,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/komentar-balasan-comment`,
+        url: `api/youtube/komentar-balasan-comment`,
         data: formData
       })
       .catch(err => {
@@ -572,7 +572,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/komentar-balasan-delete/${payload.id}`,
+        url: `api/youtube/komentar-balasan-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -595,7 +595,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/komentar-balasan-delete/${payload.id}`,
+        url: `api/youtube/komentar-balasan-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()
@@ -624,7 +624,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/follow/${payload.user_id}`,
+        url: `api/youtube/follow/${payload.user_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -670,7 +670,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/bookmarked/${payload.post_id}`,
+        url: `api/youtube/bookmarked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -693,7 +693,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/liked/${payload.post_id}`,
+        url: `api/youtube/liked/${payload.post_id}`,
       })
       .catch(err => {
         errorNotify()
@@ -716,7 +716,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading_komentar_semua = true
 
-      const results = await axios.get(`api/audio/komentar-semua/${payload.id}?page=${payload.page}`)
+      const results = await axios.get(`api/youtube/komentar-semua/${payload.id}?page=${payload.page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -735,7 +735,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       this.loading_komentar_semua_more = true
 
-      const results = await axios.get(`api/audio/komentar-semua/${payload.id}?page=${next_page}`)
+      const results = await axios.get(`api/youtube/komentar-semua/${payload.id}?page=${next_page}`)
       .catch(err => {
         errorNotify()
         return null
@@ -781,7 +781,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/komentar-semua-comment`,
+        url: `api/youtube/komentar-semua-comment`,
         data: formData
       })
       .catch(err => {
@@ -809,7 +809,7 @@ export const useYoutubeListStore = defineStore('youtube-list', {
 
       const results = await axios({
         method: 'post',
-        url: `api/audio/komentar-semua-delete/${payload.id}`,
+        url: `api/youtube/komentar-semua-delete/${payload.id}`,
       })
       .catch(err => {
         errorNotify()

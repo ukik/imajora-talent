@@ -1,9 +1,8 @@
 <template>
-
-  <div class="col-12 bg-white" v-if="get_comments_data.length <= 0">
+  <div ref="virtualListRef" class="col-12 bg-white" v-if="get_comments_data.length <= 0">
 
     <q-item v-if="get_detail?.id" class="q-pa-none q-ma-none q-mb-lg q-pl-md" dense>
-      <Card :index="get_detail?.id" :item="get_detail" />
+      <Card @onZoom="onLightBox($event)" :index="get_detail?.id" :item="get_detail" />
     </q-item>
 
     <q-separator color="grey-3" />
@@ -18,7 +17,7 @@
         @refresh="refresh">
 
         <q-item class="q-pa-none q-ma-none" dense>
-          <Card :index="index" :item="get_detail" />
+          <Card @onZoom="onLightBox($event)" :index="index" :item="get_detail" />
         </q-item>
 
         <q-item-label lines="1" class="q-pt-lg q-pl-md">Semua Komentar</q-item-label>
@@ -44,6 +43,17 @@
   </q-virtual-scroll>
 
   <q-no-ssr>
+
+    <vue-easy-lightbox
+      scrollDisabled
+      escDisabled
+      moveDisabled
+      :visible="zoom_visible"
+      :imgs="get_lightbox"
+      :index="zoom_index"
+      @hide="handleHide"
+    ></vue-easy-lightbox>
+
     <q-header bordered unelevated class="bg-white text-black text-center">
       <q-toolbar class="row">
         <q-btn flat dense round @click="onGotoBack" color="blue" icon="arrow_back_ios" />
@@ -126,6 +136,8 @@ export default {
 
       loading_komentar_semua: 'loading_komentar_semua',
       loading_komentar_semua_comment: 'loading_komentar_semua_comment',
+
+      get_lightbox: 'get_lightbox',
     }),
     ...mapWritableState(useImageListStore, {
       text_komentar_semua: "text_komentar_semua",
@@ -133,6 +145,9 @@ export default {
   },
   data() {
     return {
+      zoom_visible: false,
+      zoom_index: 0, // default: 0,
+
       reply: null,
     }
   },
@@ -142,6 +157,13 @@ export default {
       'komentar_semua_more',
       'komentar_semua_comment',
     ]),
+    onLightBox(val) {
+      this.zoom_index = val;
+      this.zoom_visible = true;
+    },
+    handleHide() {
+      this.zoom_visible = false
+    },
     onscroll(event) {
     },
     async onComment() {
