@@ -144,7 +144,24 @@ export default boot( async ({ app, ssrContext, router, store }) => {
 			onToastBottom(text) {
 				// window.plugins.toast.showLongBottom(text,
 				// 	function(a){ console.log('toast success: ' + a)}, function(b){alert('toast error: ' + b)})
-			}
+			},
+      allValidate(value = this.$refs) {
+        let keys = []
+        setTimeout(() => {
+          for (let [key, value] of Object.entries(this.$refs)) {
+            try {
+              console.log('auto validate')
+              value.validate();
+            } catch (e) { }
+            // console.log(key)
+            // keys.push(value)
+            // if (/^tenure/.test(key)) {
+            //     keys.push({ key: value })
+            // }
+          }
+        }, 0)
+        // console.log('all refs', this.$refs)
+      },
 		}
 	})
 

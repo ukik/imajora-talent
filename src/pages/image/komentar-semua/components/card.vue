@@ -4,7 +4,7 @@
     <q-item class="col-12 q-px-sm">
       <q-item-section avatar>
         <q-avatar>
-          <img :src="img_checker(item.user?.avatar)" :placeholder-src="default_avatar">
+          <img :src="imageSync(item.user?.avatar)" @error="handleError" :placeholder-src="default_avatar">
         </q-avatar>
       </q-item-section>
       <q-item-section>
@@ -166,9 +166,6 @@ export default {
       liked:'komentar_semua_liked',
       bookmarked:'komentar_semua_bookmarked',
     }),
-    imageSync(val) {
-      return val.includes('http') ? val : this.server_host+val
-    },
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:

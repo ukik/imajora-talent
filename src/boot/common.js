@@ -185,6 +185,9 @@ export default boot(async ({ app, ssrContext, router, store }) => {
       },
     },
     methods: {
+      imageSync(val) {
+        return val?.includes('http') ? val : host+val
+      },
       img_checker(val) {
         // //////console.log('img_checker', ifImageExist(val))
         try {

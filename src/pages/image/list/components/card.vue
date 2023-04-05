@@ -3,7 +3,7 @@
     <q-item class="col-12 q-px-sm">
       <q-item-section avatar>
         <q-avatar>
-          <img :src="img_checker(item.user?.avatar)" :placeholder-src="default_avatar">
+          <img :src="imageSync(item.user?.avatar)" @error="handleError" :placeholder-src="default_avatar">
         </q-avatar>
       </q-item-section>
       <q-item-section>
@@ -161,7 +161,7 @@
           <q-item-label caption lines="1">Membalas</q-item-label>
           <q-chip size="12px" :disable="loading_comment" class="q-mx-none" @remove="reply = null" removable color="red" text-color="white">
             <q-avatar>
-              <img :src="img_checker(reply?.user?.avatar)" :placeholder-src="default_avatar">
+              <img :src="imageSync(reply?.user?.avatar)" @error="handleError" :placeholder-src="default_avatar">
             </q-avatar>
             <div class="ellipsis">
               @{{ reply?.user?.name }}
@@ -251,9 +251,6 @@ export default {
       'delete',
       'delete_comment',
     ]),
-    imageSync(val) {
-      return val.includes('http') ? val : this.server_host+val
-    },
     onCollapse(index) {
       switch (this.item.comments[index].lines) {
         case 0:

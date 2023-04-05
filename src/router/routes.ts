@@ -312,7 +312,38 @@ const routes: RouteRecordRaw[] = [
         }, component: () => import("pages/image/create/index.vue")
       },
 
-
+      {
+        path: "/agenda-list/:page",
+        name: "agenda_list",
+        meta: {
+          ssr: true,
+          title: 'agenda-list',
+        }, component: () => import("pages/agenda/list/index.vue")
+      },
+      {
+        path: "/agenda-komentar-semua/:id/:page",
+        name: "agenda_komentar_semua",
+        meta: {
+          ssr: true,
+          title: 'agenda-komentar-semua',
+        }, component: () => import("pages/agenda/komentar-semua/index.vue")
+      },
+      {
+        path: "/agenda-komentar-balasan/:id/:page",
+        name: "agenda_komentar_balasan",
+        meta: {
+          ssr: true,
+          title: 'agenda-komentar-balasan',
+        }, component: () => import("pages/agenda/komentar-balasan/index.vue"),
+      },
+      {
+        path: "/agenda-create/:id?",
+        name: "agenda_create",
+        meta: {
+          ssr: true,
+          title: 'agenda-create',
+        }, component: () => import("pages/agenda/create/index.vue")
+      },
 
 
 
@@ -364,8 +395,74 @@ const routes: RouteRecordRaw[] = [
           title: 'form-accounts-banner',
         }, component: () => import("pages/forms/accounts/banner/index.vue")
       },
+      {
+        path: "/forms/accounts/preview/:id",
+        name: "form_accounts_preview",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-preview',
+        }, component: () => import("pages/forms/accounts/preview/index.vue")
+      },
+      {
+        path: "/forms/accounts/career/:id",
+        name: "form_accounts_career",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-career',
+        }, component: () => import("pages/forms/accounts/career/index.vue")
+      },
+      {
+        path: "/forms/accounts/agenda/:id",
+        name: "form_accounts_agenda",
+        meta: {
+          ssr: true,
+          title: 'form-accounts-agenda',
+        }, component: () => import("pages/forms/accounts/agenda/index.vue")
+      },
 
 
+
+
+      {
+        path: "/auth/login/:id?",
+        name: "auth_login",
+        meta: {
+          ssr: true,
+          title: 'auth-login',
+        }, component: () => import("pages/auth/login/index.vue")
+      },
+      {
+        path: "/auth/signup/:id?",
+        name: "auth_signup",
+        meta: {
+          ssr: true,
+          title: 'auth-signup',
+        }, component: () => import("pages/auth/signup/index.vue")
+      },
+      {
+        path: "/auth/forget/:id?",
+        name: "auth_forget",
+        meta: {
+          ssr: true,
+          title: 'auth-forget',
+        }, component: () => import("pages/auth/forget/index.vue")
+      },
+      {
+        path: "/auth/sent/:id?",
+        name: "auth_sent",
+        meta: {
+          ssr: true,
+          title: 'auth-sent',
+        }, component: () => import("pages/auth/sent/index.vue")
+      },
+      {
+        path: "/auth/reset/:id?",
+        name: "auth_reset",
+        meta: {
+          ssr: true,
+          title: 'auth-reset',
+        }, component: () => import("pages/auth/reset/index.vue")
+      },
 
       // ORANG KALO NGOMONG MUTER-MUTER, WAJAH-WAJAH KENCING DI CELANA, AUTO KETAR-KETIR
 

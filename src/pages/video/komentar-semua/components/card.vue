@@ -3,7 +3,7 @@
     <q-item class="col-12 q-px-sm">
       <q-item-section avatar>
         <q-avatar>
-          <img :src="img_checker(item.user?.avatar)" :placeholder-src="default_avatar">
+          <img @error="handleError" :src="imageSync(item.user?.avatar)" :placeholder-src="default_avatar">
         </q-avatar>
       </q-item-section>
       <q-item-section>

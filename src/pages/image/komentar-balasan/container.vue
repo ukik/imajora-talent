@@ -70,7 +70,7 @@
                 <q-item-label caption lines="1">Membalas</q-item-label>
                 <q-chip size="12px" :disable="loading_komentar_balasan_comment" class="q-mx-none" @remove="reply = null" removable color="red" text-color="white">
                   <q-avatar>
-                    <img :src="img_checker(reply?.user?.avatar)" :placeholder-src="default_avatar">
+                    <img :src="imageSync(reply?.user?.avatar)" @error="handleError" :placeholder-src="default_avatar">
                   </q-avatar>
                   <div class="ellipsis">
                     @{{ reply?.user?.name }}

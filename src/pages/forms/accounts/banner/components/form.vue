@@ -49,25 +49,25 @@
   <div class="row text-center justify-center">
 
 
-  <q-card v-for="(item, i) in cover" flat square v-if="cover.length > 0" class="col-12 row q-mb-md">
+    <q-card v-for="(item, i) in cover" flat square v-if="cover.length > 0" class="col-12 row q-mb-md">
 
-    <q-img @click="() => onLightBox(i)" ref="cover" style="object-fit: cover; height: auto;" :src="item?.file"
-      loading="lazy">
-      <template v-slot:error>
-        <div class="absolute-full flex flex-center bg-negative text-white">
-          Cannot load image
-        </div>
-      </template>
+      <q-img @click="() => onLightBox(i)" ref="cover" style="object-fit: cover; height: auto;" :src="item?.file"
+        loading="lazy">
+        <template v-slot:error>
+          <div class="absolute-full flex flex-center bg-negative text-white">
+            Cannot load image
+          </div>
+        </template>
 
-    </q-img>
+      </q-img>
 
-    <q-btn @click="confirm = true; index = i; selected = item;" class="absolute-top-right q-ma-sm" round unelevated
-      color="white" text-color="red" dense icon="close" />
+      <q-btn @click="confirm = true; index = i; selected = item;" class="absolute-top-right q-ma-sm" round unelevated
+        color="white" text-color="red" dense icon="close" />
 
-    <div class="absolute-top-left q-pa-sm">
-      <q-avatar color="red" size="md" text-color="white">{{ i + 1 }}</q-avatar>
-    </div>
-  </q-card>
+      <div class="absolute-top-left q-pa-sm">
+        <q-avatar color="red" size="md" text-color="white">{{ i + 1 }}</q-avatar>
+      </div>
+    </q-card>
 
 
     <div v-if="cover.length < 5" class="col-11">
@@ -141,7 +141,7 @@ export default {
       // console.log(this.description)
       // if (!this.description) return;
 
-      if(!this.route_param?.id) {
+      if (!this.route_param?.id) {
         // if (!this.file_media) return;
         if (this.file_cover.length <= 0) return;
       }

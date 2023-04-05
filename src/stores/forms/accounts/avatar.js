@@ -163,7 +163,7 @@ export const useFormStore = defineStore('forms-accounts-avatar', {
     },
 
     async form_delete_single (payload = null) {
-      if(!this.id) { // form CREATE
+      if(!payload.id) { // form CREATE
         this.cover.splice(payload.index, 1)
         this.file_cover.splice(payload.index, 1)
         return true

@@ -52,7 +52,7 @@
 <input v-show="false" type="file" accept="image/*" ref="cover" id="cover" @change="onFileChangeCover">
 
 <q-card flat square v-if="cover && media" class="col-12 row q-mb-md">
-  <q-img ref="cover" style="object-fit: cover; height: auto; max-height: 500px;" :src="img_checker(cover)" @error="handleError" loading="lazy" />
+  <q-img ref="cover" style="object-fit: cover; height: auto; max-height: 500px;" :src="imageSync(cover)" @error="handleError" loading="lazy" />
   <q-btn @click="confirm = true; type = ('cover')" class="absolute-top-right q-ma-sm" round unelevated color="white" text-color="red" dense icon="close" />
   <div>
     <q-chip class="absolute-top-left q-pa-sm" color="primary" text-color="white">Cover</q-chip>
